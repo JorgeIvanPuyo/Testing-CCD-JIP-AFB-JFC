@@ -191,4 +191,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Kraken files
+Kraken/.kraken
+Kraken/reports
+
 # End of https://www.toptal.com/developers/gitignore/api/node,cypressio,windows,linux

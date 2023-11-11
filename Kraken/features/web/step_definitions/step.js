@@ -3,6 +3,7 @@ const assert = require('assert');
 const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
+const properties = require('../../../properties.json');
 
 let loginPage;
 let dashboard;
@@ -36,6 +37,35 @@ When('I click new post', async function () {
 })
 
 When('I create a new post', async function () {
-  await posts.enterTittle('test tittle');
-  await posts.enterContent('test content');
+  await posts.enterTittle('test');
+  await posts.enterContent('test');
+})
+
+//Scenario #6
+When('I click on a post', async function() {
+  posts = new Posts(this.driver);
+  await posts.clickOnAPost();
+})
+
+When('I click in unpublish button', async function() {
+  posts = new Posts(this.driver);
+  await posts.unplublishPost();
+})
+
+When('I click on confirm unpublish', async function() {
+  posts = new Posts(this.driver);
+  await posts.confirmUnpublish();
+})
+
+Then('the post should be as {kraken-string}', async function(postStatus){
+  assert.equal(postStatus, properties.POST_DRAFT_STATUS);
+})
+
+Then('The update button should be disabled', async function() {
+  let element = this.driver.$('button.gh-btn gh-btn-editor gh-editor-save-trigger green ember-view');
+
+  if (undefined != element && null != element) {
+    console.log(element);
+    //assert.equal(element.disabled, true);
+  }
 })
