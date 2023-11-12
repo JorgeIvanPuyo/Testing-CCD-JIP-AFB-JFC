@@ -103,6 +103,7 @@ Then('I should see Draft on the post', async function () {
 //Scenario #4
 
 When('I click edit post', async function () {
+  posts = new Posts(this.driver);
   await posts.clickEditPost();
 })
 
