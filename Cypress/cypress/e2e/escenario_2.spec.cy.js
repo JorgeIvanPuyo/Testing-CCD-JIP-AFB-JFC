@@ -8,7 +8,7 @@ import { PostPage } from "../units/post/postPage";
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
 describe("Como usuario quiero crear y publicar post para tener a mis seguidores actualizados", function () {
-  it("Sign in", function () {
+  it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 
@@ -21,7 +21,7 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       homePage.getUrl().should("contain", "/dashboard");
 
       // Given: el usuario haga click sobre post y crear un nuevo post
-      const posts = new CreatePostPage(cy, win);
+      const posts = new CreatePostPage(cy);
       posts.entryToPostListByIcon();
       // When: el usuario ingresa los datos del nuevos post y sigue hasta su publicación
       const title = faker.person.jobTitle();

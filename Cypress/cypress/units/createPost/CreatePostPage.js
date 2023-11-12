@@ -1,16 +1,15 @@
 import { PostPublishedPage } from "./PostPublishedPage";
 
 export class CreatePostPage {
-  constructor(cy, win) {
-    if (!cy || !win) {
+  constructor(cy) {
+    if (!cy) {
       throw new Error("Es requerida la instancia de cypress");
     }
     this.cy = cy;
-    this.win = win;
   }
 
-  $addLabel = cy.get("a[data-test-nav='posts']");
-  $addIcon = cy.get("a[data-test-nav='new-story']");
+  $addLabel;
+  $addIcon;
   $addPostButton;
   $postTitleInput;
   $postDescription;
@@ -23,6 +22,9 @@ export class CreatePostPage {
   $goToPostsListLink;
 
   entryToPostListByLabel() {
+    if (!this.$addLabel) {
+      this.$addLabel = cy.get("a[data-test-nav='posts']");
+    }
     this.$addLabel.click();
 
     if (!this.$addPostButton) {
@@ -32,6 +34,9 @@ export class CreatePostPage {
   }
 
   entryToPostListByIcon() {
+    if (!this.$addIcon) {
+      this.$addIcon = cy.get("a[data-test-nav='new-story']");
+    }
     this.$addIcon.click();
   }
 

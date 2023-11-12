@@ -5,7 +5,7 @@ import { SigninPage } from "../units/login/SignInPage";
 import { faker } from "@faker-js/faker";
 import { PostsListPage } from "../units/postsList/PostsListPage";
 
-describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como borrador y editarlo en otro momento", function () {
+describe("Como usuario quiero editar un post que no este publicado para actualizarlo y tenerlo como borrador", function () {
   it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
@@ -38,6 +38,28 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       const status = postList.getStatusPost(post);
       // Then: el usuario podra validar que esta como borrador es decir no se ha publicado
       status.should(($status) => {
+        if (!$status.length) return;
+        expect($status[0]).to.contain.text("Draft");
+      });
+
+      // Given: Dada la lista de post
+      const postList2 = new PostsListPage(cy);
+      // When: el usuario busca un post por titulo
+      const postToEdit = postList2.getPostByTitle(title);
+      // Then: el usuario podra editar el post haciendo click sobre el icono de editar
+      const postEditPage = postList2.goToEditPost(postToEdit);
+
+      // When: el usuario ingrese el nuevo titulo y descripción
+      const newTitle = faker.person.jobTitle();
+      const newDescription = faker.lorem.paragraph();
+      postEditPage.fillPostTitle(newTitle);
+      postEditPage.fillPostDescription(newDescription);
+      // Then: el usuario regresa al listado de post y vera el post con el nuevo titulo, descripción y aun como borrador
+      postEditPage.goToPostList();
+      const postList3 = new PostsListPage(cy);
+      const postEdited = postList3.getPostByTitle(title + newTitle);
+      const statusEdited = postList3.getStatusPost(postEdited);
+      statusEdited.should(($status) => {
         if (!$status.length) return;
         expect($status[0]).to.contain.text("Draft");
       });

@@ -1,3 +1,5 @@
+import { CreatePostPage } from "../createPost/CreatePostPage";
+
 export class PostsListPage {
   $postsListTitle = cy.get("li.gh-list-row");
 
@@ -8,7 +10,7 @@ export class PostsListPage {
     this.cy = cy;
   }
 
-  getPost(title) {
+  getPostByTitle(title) {
     return this.$postsListTitle
       .children("a")
       .children(".gh-content-entry-title")
@@ -22,5 +24,11 @@ export class PostsListPage {
       .children("a")
       .children(".gh-content-entry-status")
       .children("span");
+  }
+
+  goToEditPost($li) {
+    $li.children("a").children("span[title='Go to Editor']").click();
+
+    return new CreatePostPage(this.cy);
   }
 }
