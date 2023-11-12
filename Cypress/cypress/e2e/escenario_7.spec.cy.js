@@ -8,7 +8,7 @@ import { PostsListPage } from "../units/postsList/PostsListPage";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
-describe("Como usuario quiero unpublish un post", function () {
+describe("Como usuario quiero unpublish un post para no mostrar mas este contenido", function () {
   it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
@@ -46,9 +46,13 @@ describe("Como usuario quiero unpublish un post", function () {
           const $updateButton = editPostPage.getUpdateButton();
           $updateButton.should("be.disabled");
 
-          const postListPage3 = editPostPage.goToPostsListFromPostNotModified();
+          editPostPage.unpublishPost();
+          cy.wait(1000);
+          const postListPage3 = editPostPage.goToPostsList();
+
           postListPage.scrollBotton();
-          postListPage3.getPostByTitle(trimText).should("exist");
+          const postEdited = postListPage3.getPostByTitle(trimText);
+          postListPage3.getStatusPost(postEdited).should("contain", "Draft");
         });
     });
   });

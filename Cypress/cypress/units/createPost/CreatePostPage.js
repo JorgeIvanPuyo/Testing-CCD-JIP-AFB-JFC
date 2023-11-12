@@ -23,6 +23,8 @@ export class CreatePostPage {
   $goToPostsListLink;
   $updateButton;
   $goToPostsListFromPostModified;
+  $unpublishButton;
+  $unpublishAndRevertToDraftButton;
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
@@ -115,7 +117,40 @@ export class CreatePostPage {
     return this.$updateButton;
   }
 
-  unpublishPost() {}
+  unpublishPost() {
+    if (!this.$unpublishButton) {
+      this.$unpublishButton = cy.get("button[data-test-button='update-flow']");
+    }
+
+    this.$unpublishButton.click();
+    this.cy.wait(1000);
+
+    if (!this.$unpublishAndRevertToDraftButton) {
+      this.$unpublishAndRevertToDraftButton = cy.get(
+        "button[data-test-button='revert-to-draft']"
+      );
+    }
+
+    this.$unpublishAndRevertToDraftButton.click();
+  }
+
+  clickUnpublishPost() {
+    if (!this.$unpublishButton) {
+      this.$unpublishButton = cy.get("button[data-test-button='update-flow']");
+    }
+
+    this.$unpublishButton.click();
+  }
+
+  clickUnpublishPostAndRevertToDraft() {
+    if (!this.$unpublishAndRevertToDraftButton) {
+      this.$unpublishAndRevertToDraftButton = cy.get(
+        "button[data-test-button='revert-to-draft']"
+      );
+    }
+
+    this.$unpublishAndRevertToDraftButton.click();
+  }
 
   goToEdit() {
     if (!this.$goToEditoButton) {
@@ -127,7 +162,7 @@ export class CreatePostPage {
     this.$goToEditoButton.click();
   }
 
-  goToPostList() {
+  goToPostsList() {
     if (!this.$goToPostsListLink) {
       this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
     }

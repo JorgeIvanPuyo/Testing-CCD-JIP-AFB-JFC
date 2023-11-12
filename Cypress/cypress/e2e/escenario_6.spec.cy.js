@@ -36,7 +36,7 @@ describe("Como usuario quiero ingresar a editar un post publicado pero sin modif
 
       // Given: el usuario si no ha modificado nada del post
       // When: el usuario regresa al listado de posts
-      const postsListPage2 = createPostPage.goToPostList();
+      const postsListPage2 = createPostPage.goToPostsList();
       // Then: el usuario podra ver el listo de posts y el post seleccionado sin modificar
     });
   });
