@@ -19,6 +19,8 @@ export class CreatePostPage {
   $pusblishRightNowButton;
   $settingsButton;
   $slug;
+  $goToEditoButton;
+  $goToPostsListLink;
 
   entryToPostListByLabel() {
     this.$addLabel.click();
@@ -97,9 +99,23 @@ export class CreatePostPage {
     this.$settingsButton.click();
   }
 
-  // getSlug() {
-  //   return this.cy.get("input[name='post-setting-slug]").invoke("val");
-  // }
+  goToEdit() {
+    if (!this.$goToEditoButton) {
+      this.$goToEditoButton = cy.get(
+        "button[data-test-button='close-publish-flow']"
+      );
+    }
+
+    this.$goToEditoButton.click();
+  }
+
+  goToPostList() {
+    if (!this.$goToPostsListLink) {
+      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+    }
+
+    this.$goToPostsListLink.click();
+  }
 
   validatePostPublished() {
     return new PostPublishedPage(this.cy);
