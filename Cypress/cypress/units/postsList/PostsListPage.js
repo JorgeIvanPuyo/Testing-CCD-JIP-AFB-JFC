@@ -2,6 +2,7 @@ import { CreatePostPage } from "../createPost/CreatePostPage";
 
 export class PostsListPage {
   $postsListTitle = cy.get("li.gh-list-row");
+  $addPostButton = cy.get("a[data-test-new-post-button]");
 
   constructor(cy) {
     if (!cy) {
@@ -30,5 +31,9 @@ export class PostsListPage {
     $li.children("a").children("span[title='Go to Editor']").click();
 
     return new CreatePostPage(this.cy);
+  }
+
+  goToCreatePost() {
+    this.$addPostButton.click();
   }
 }
