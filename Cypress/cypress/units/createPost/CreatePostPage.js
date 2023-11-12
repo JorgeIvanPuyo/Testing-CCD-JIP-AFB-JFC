@@ -118,6 +118,14 @@ export class CreatePostPage {
     return this.$updateButton;
   }
 
+  clickUpDateButton() {
+    if (!this.$updateButton) {
+      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+    }
+
+    this.$updateButton.click();
+  }
+
   unpublishPost() {
     if (!this.$unpublishButton) {
       this.$unpublishButton = cy.get("button[data-test-button='update-flow']");
