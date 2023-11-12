@@ -4,6 +4,7 @@ const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
 const properties = require('../../../properties.json');
+const faker = require('@faker-js/faker');
 
 let loginPage;
 let dashboard;
@@ -61,6 +62,7 @@ Then('the post should be as {kraken-string}', async function(postStatus){
   assert.equal(postStatus, properties.POST_DRAFT_STATUS);
 })
 
+// Scenario 7
 Then('The update button should be disabled', async function() {
   let element = this.driver.$('button.gh-btn gh-btn-editor gh-editor-save-trigger green ember-view');
 
@@ -69,3 +71,14 @@ Then('The update button should be disabled', async function() {
     //assert.equal(element.disabled, true);
   }
 })
+
+// Scenario 8
+When('I modify the post title', async function() {
+  posts = new Posts(this.driver);
+  await posts.modifyPostTitle(`${Math.random()} Lorem ipsum dolor sit amet ${Math.random()}`);
+})
+
+/*When('I modify the post body', async function() {
+  posts = new Posts(this.driver);
+  await posts.modifyPostBody('Duis ante ligula, congue id ipsum ut, malesuada tincidunt massa.');
+})*/

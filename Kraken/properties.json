@@ -1,8 +1,6 @@
 {
-    "USERNAME1": "ji.puyo@uniandes.edu.co",
-    "PASSWORD1": "contraseña",
-    "USERNAME_ESC678910" : "lucka.mobile184@gmail.com",
-    "PASSWORD_ESC678910" : "2008152193",
+    "USERNAME1": "lucka.mobile184@gmail.com",
+    "PASSWORD1": "2008152193",
     "URL": "http://localhost:2368/ghost",
     "POST_PAGE_URL" : "http://localhost:2368/ghost/#/posts",
     "EXPECTED_URL_DASHBOARD": "http://localhost:2368/ghost/#/dashboard",
