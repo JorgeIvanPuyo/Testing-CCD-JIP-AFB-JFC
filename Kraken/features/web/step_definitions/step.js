@@ -37,9 +37,27 @@ When('I click new post', async function () {
 })
 
 When('I create a new post', async function () {
-  await posts.enterTittle('test');
-  await posts.enterContent('test');
+  await posts.enterTittle('TittleNewPost');
+  await posts.enterContent('Content for Test New Post Scenario.');
 })
+
+
+When('I publish the post', async function () {
+  await posts.clickPublishButton();
+  await posts.clickContinue();
+  await posts.clickPostNow();
+  await posts.clickPreview();
+})
+
+Then('The url should include {kraken-string}', async function (tittle) {
+  const currentUrl = await dashboard.getCurrentUrl();
+
+  assert.strictEqual(
+    currentUrl.includes(tittle.toLowerCase()),
+    true,
+    `URL does not include ${tittle}`
+  );
+});
 
 //Scenario #6
 When('I click on a post', async function() {
@@ -69,3 +87,7 @@ Then('The update button should be disabled', async function() {
     //assert.equal(element.disabled, true);
   }
 })
+
+
+
+

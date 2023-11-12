@@ -191,8 +191,15 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 # Kraken files
 Kraken/.kraken
 Kraken/reports
 
 # End of https://www.toptal.com/developers/gitignore/api/node,cypressio,windows,linux
+=======
+#kraken
+kraken/reports/*
+
+# End of https://www.toptal.com/developers/gitignore/api/node,cypressio,windows,linux
+>>>>>>> feature/Scenario-1
