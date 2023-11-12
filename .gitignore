@@ -10,6 +10,8 @@ cypress/reports/*
 cypress/screenshots/*
 cypress/videos/*
 
+2-advanced-examples/
+
 ### Linux ###
 *~
 
