@@ -1,6 +1,7 @@
 import { PostsListPage } from "../postsList/PostsListPage";
 import { AlertDialogExitPage } from "./AlertDialogExitPage";
 import { PostPublishedPage } from "./PostPublishedPage";
+import { SettingsPostPage } from "./SettingsPostPage";
 
 export class CreatePostPage {
   constructor(cy) {
@@ -100,6 +101,8 @@ export class CreatePostPage {
     }
 
     this.$settingsButton.click();
+
+    return new SettingsPostPage(this.cy);
   }
 
   closeSettings() {
