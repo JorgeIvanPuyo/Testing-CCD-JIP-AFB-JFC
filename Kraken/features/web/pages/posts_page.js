@@ -42,6 +42,31 @@ class Posts {
         return await this.driver.getUrl();
     }
 
+    async clickOnAPost() {
+        let element = await this.driver.$('.gh-list-data');
+        return await element.click();
+    }
+
+    async clickEditor() {
+        let element = await this.driver.$('[data-test-button="close-publish-flow"]');
+        return await element.click();
+    }
+
+    async clickPosts() {
+        let element = await this.driver.$('[data-test-link="posts"]');
+        return await element.click();
+    }
+
+    async countPosts() {
+        let element = await this.driver.$$('.gh-list-row');
+        return await element.length;
+    }
+
+    async getDraftFirstPost() {
+        let firstPost = await this.driver.$('.gh-list-row:first-child');
+        return await firstPost.getText();
+    }
+
 }
 
 module.exports = Posts;
