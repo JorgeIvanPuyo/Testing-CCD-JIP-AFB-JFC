@@ -22,7 +22,7 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
 
       // Given: el usuario haga click sobre post y crear un nuevo post
       const posts = new CreatePostPage(cy, win);
-      posts.entryToPostListByLabel();
+      posts.entryToPostListByIcon();
       // When: el usuario ingresa los datos del nuevos post y sigue hasta su publicación
       const title = faker.person.jobTitle();
       const description = faker.lorem.paragraph();

@@ -10,6 +10,7 @@ export class CreatePostPage {
   }
 
   $addLabel = cy.get("a[data-test-nav='posts']");
+  $addIcon = cy.get("a[data-test-nav='new-story']");
   $addPostButton;
   $postTitleInput;
   $postDescription;
@@ -19,13 +20,17 @@ export class CreatePostPage {
   $settingsButton;
   $slug;
 
-  entryToPost() {
+  entryToPostListByLabel() {
     this.$addLabel.click();
 
     if (!this.$addPostButton) {
       this.$addPostButton = cy.get("a[data-test-new-post-button]");
     }
     this.$addPostButton.click();
+  }
+
+  entryToPostListByIcon() {
+    this.$addIcon.click();
   }
 
   #getForm() {
