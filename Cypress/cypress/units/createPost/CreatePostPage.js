@@ -1,4 +1,5 @@
 import { PostsListPage } from "../postsList/PostsListPage";
+import { AlertDialogExitPage } from "./AlertDialogExitPage";
 import { PostPublishedPage } from "./PostPublishedPage";
 
 export class CreatePostPage {
@@ -170,6 +171,15 @@ export class CreatePostPage {
     this.$goToPostsListLink.click();
 
     return new PostsListPage(this.cy);
+  }
+
+  goToPostsListWithOutSave() {
+    if (!this.$goToPostsListLink) {
+      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+    }
+
+    this.$goToPostsListLink.click();
+    return new AlertDialogExitPage(this.cy);
   }
 
   goToPostsListFromPostNotModified() {
