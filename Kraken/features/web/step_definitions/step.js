@@ -100,6 +100,25 @@ Then('I should see Draft on the post', async function () {
   assert.strictEqual(draftPost.includes('Draft'),true, `Post does not include Draft`);
 })
 
+//Scenario #4
+
+When('I click edit post', async function () {
+  await posts.clickEditPost();
+})
+
+When('I edit a draft post', async function () {
+  posts = new Posts(this.driver);
+  await posts.deleteTittle();
+  await posts.deleteContent();
+  await posts.enterTittle('TittleEditedPost');
+  await posts.enterContent('Content for Test Edited Post Scenario.');
+})
+
+Then('The list of posts should be the same', async function () {
+  newCount = await posts.countPosts();
+  assert.equal(newCount, count);
+})
+
 //Scenario #6
 When('I click on a post', async function() {
   posts = new Posts(this.driver);
