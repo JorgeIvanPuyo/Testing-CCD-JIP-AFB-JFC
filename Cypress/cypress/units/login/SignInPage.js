@@ -1,4 +1,4 @@
-import { LoginPage } from "./LoginPage";
+import { HomePage } from "./LoginPage";
 
 export class SigninPage {
   constructor(cy) {
@@ -17,13 +17,13 @@ export class SigninPage {
    *
    * @param {string} username - The username of the user.
    * @param {string} password - The password of the user.
-   * @return {LoginPage} - The new LoginPage object.
+   * @return {HomePage} - The new LoginPage object.
    */
   loginValidUser(username, password) {
     this.$email.type(username);
     this.$password.type(password);
     this.$submitButton.click();
 
-    return new LoginPage(this.cy);
+    return new HomePage(this.cy);
   }
 }

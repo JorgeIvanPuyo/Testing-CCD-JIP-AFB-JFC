@@ -1,3 +1,4 @@
+import { PostsListPage } from "../postsList/PostsListPage";
 import { PostPublishedPage } from "./PostPublishedPage";
 
 export class CreatePostPage {
@@ -20,6 +21,7 @@ export class CreatePostPage {
   $slug;
   $goToEditoButton;
   $goToPostsListLink;
+  $updateButton;
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
@@ -104,6 +106,14 @@ export class CreatePostPage {
     this.$settingsButton.click();
   }
 
+  getUpdateButton() {
+    if (!this.$updateButton) {
+      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+    }
+
+    return this.$updateButton;
+  }
+
   goToEdit() {
     if (!this.$goToEditoButton) {
       this.$goToEditoButton = cy.get(
@@ -120,6 +130,8 @@ export class CreatePostPage {
     }
 
     this.$goToPostsListLink.click();
+
+    return new PostsListPage(this.cy);
   }
 
   validatePostPublished() {
