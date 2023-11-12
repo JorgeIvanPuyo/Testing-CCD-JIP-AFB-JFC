@@ -4,5 +4,5 @@
     "URL": "http://localhost:2368/ghost",
     "EXPECTED_URL_DASHBOARD": "http://localhost:2368/ghost/#/dashboard",
     "EXPECTED_URL_POSTS": "http://localhost:2368/ghost/#/posts",
-    "EXPECTED_TITLE": "Dashboard"
+    "EXPECTED_TITLE_NEW_POST": "TittleNewPost"
 }
