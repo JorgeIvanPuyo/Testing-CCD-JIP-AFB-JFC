@@ -7,6 +7,7 @@
     "POST_PAGE_URL" : "http://localhost:2368/ghost/#/posts",
     "EXPECTED_URL_DASHBOARD": "http://localhost:2368/ghost/#/dashboard",
     "EXPECTED_URL_POSTS": "http://localhost:2368/ghost/#/posts",
+    "EXPECTED_URL_EDITOR_POSTS": "http://localhost:2368/ghost/#/editor/post",
     "EXPECTED_TITLE_NEW_POST": "TittleNewPost",
 
     "EXPECTED_CONFIRM_UNPUBLISH_TEXT" : "Unpublish and revert to private draft →",
