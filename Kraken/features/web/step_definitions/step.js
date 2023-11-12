@@ -78,7 +78,7 @@ When('I modify the post title', async function() {
   await posts.modifyPostTitle(`${Math.random()} Lorem ipsum dolor sit amet ${Math.random()}`);
 })
 
-/*When('I modify the post body', async function() {
+When('I modify the post body', async function() {
   posts = new Posts(this.driver);
   await posts.modifyPostBody('Duis ante ligula, congue id ipsum ut, malesuada tincidunt massa.');
-})*/
+})

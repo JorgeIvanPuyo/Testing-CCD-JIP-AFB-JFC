@@ -11,4 +11,4 @@ Scenario: Escenario No. 8. Verificar que se puede actualizar la información de 
   And I wait for 2 seconds
   When I modify the post title
   # When I modify the post body
-  And I wait for 15 seconds
+  And I wait for 2 seconds
