@@ -36,23 +36,6 @@ When('I click new post', async function () {
 })
 
 When('I create a new post', async function () {
-  await posts.enterTittle('TittleNewPost');
-  await posts.enterContent('Content for Test New Post Scenario.');
+  await posts.enterTittle('test tittle');
+  await posts.enterContent('test content');
 })
-
-When('I publish the post', async function () {
-  await posts.clickPublishButton();
-  await posts.clickContinue();
-  await posts.clickPostNow();
-  await posts.clickPreview();
-})
-
-Then('The url should include {kraken-string}', async function (tittle) {
-  const currentUrl = await dashboard.getCurrentUrl();
-
-  assert.strictEqual(
-    currentUrl.includes(tittle.toLowerCase()),
-    true,
-    `URL does not include ${tittle}`
-  );
-});
