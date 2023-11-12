@@ -26,6 +26,11 @@ When('I click posts', async function () {
   await dashboard.clickPostsButton();
 })
 
+When('I click posts icon', async function () {
+  dashboard = new Dashboard(this.driver);
+  await dashboard.clickPostsIcon();
+})
+
 Then('the URL should be posts {kraken-string}', async function (expectedUrl) {
   const currentUrl = await dashboard.getCurrentUrl();
   assert.strictEqual(currentUrl, expectedUrl, 'URL did not match the expected URL');
@@ -37,6 +42,7 @@ When('I click new post', async function () {
 })
 
 When('I create a new post', async function () {
+  posts = new Posts(this.driver);
   await posts.enterTittle('TittleNewPost');
   await posts.enterContent('Content for Test New Post Scenario.');
 })
