@@ -29,7 +29,7 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       posts.clickPublishButton();
       posts.clickContinueAndReviewButton();
       posts.goToEdit();
-      posts.goToPostList();
+      posts.goToPostsList();
 
       // Given: a list of posts
       const postList = new PostsListPage(cy);
