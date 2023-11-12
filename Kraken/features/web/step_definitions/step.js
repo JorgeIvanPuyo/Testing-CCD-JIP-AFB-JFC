@@ -8,7 +8,9 @@ const properties = require('../../../properties.json');
 let loginPage;
 let dashboard;
 let posts;
-
+let count = 0;
+let newCount = 0;
+//Login
 When('I login ghost {kraken-string} and {kraken-string}', async function (email, password) {
   loginPage = new LoginPage(this.driver);
   await loginPage.enterEmail(email);
@@ -16,6 +18,7 @@ When('I login ghost {kraken-string} and {kraken-string}', async function (email,
   await loginPage.clickSignInButton();
 });
 
+//Scenario #1, #2
 Then('the URL should be dashboard {kraken-string}', async function (expectedUrl) {
   const currentUrl = await loginPage.getCurrentUrl();
   assert.strictEqual(currentUrl, expectedUrl, 'URL did not match the expected URL');
@@ -64,6 +67,38 @@ Then('The url should include {kraken-string}', async function (tittle) {
     `URL does not include ${tittle}`
   );
 });
+
+//Scenario #3
+When('I click publish', async function () {
+  await posts.clickPublishButton();
+})
+
+When('I click continue', async function () {
+  await posts.clickContinue();
+})
+
+When('I click Editor', async function () {
+  await posts.clickEditor();
+})
+
+When('I click Posts', async function () {
+  await posts.clickPosts();
+})
+
+When('I count posts', async function () {
+  posts = new Posts(this.driver);
+  count = await posts.countPosts();
+})
+
+Then('The list of posts should increment', async function () {
+  newCount = await posts.countPosts();
+  assert.equal(newCount, count +1);
+})
+
+Then('I should see Draft on the post', async function () {
+  const draftPost = await posts.getDraftFirstPost();
+  assert.strictEqual(draftPost.includes('Draft'),true, `Post does not include Draft`);
+})
 
 //Scenario #6
 When('I click on a post', async function() {
