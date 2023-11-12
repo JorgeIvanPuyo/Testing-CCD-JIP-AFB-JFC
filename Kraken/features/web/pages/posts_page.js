@@ -13,9 +13,19 @@ class Posts {
         return await element.setValue(tittle);
     }
 
+    async deleteTittle() {
+        let element = await this.driver.$('[data-test-editor-title-input]');
+        return await element.setValue("");
+    }
+
     async enterContent(content) {
         let element = await this.driver.$('[role="textbox"]');
         return await element.setValue(content);
+    }
+
+    async deleteContent() {
+        let element = await this.driver.$('[role="textbox"]');
+        return await element.setValue("");
     }
 
     async clickPublishButton() {
@@ -67,6 +77,12 @@ class Posts {
         return await firstPost.getText();
     }
 
+    async clickEditPost() {
+        let element = await this.driver.$('.gh-list-data:first-child');
+        return await element.click();
+    }
+
+    
 }
 
 module.exports = Posts;
