@@ -22,6 +22,7 @@ export class CreatePostPage {
   $goToEditoButton;
   $goToPostsListLink;
   $updateButton;
+  $goToPostsListFromPostModified;
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
@@ -114,6 +115,8 @@ export class CreatePostPage {
     return this.$updateButton;
   }
 
+  unpublishPost() {}
+
   goToEdit() {
     if (!this.$goToEditoButton) {
       this.$goToEditoButton = cy.get(
@@ -130,6 +133,15 @@ export class CreatePostPage {
     }
 
     this.$goToPostsListLink.click();
+
+    return new PostsListPage(this.cy);
+  }
+
+  goToPostsListFromPostNotModified() {
+    if (!this.$goToPostsListFromPostModified) {
+      this.$goToPostsListFromPostModified = cy.get("a[data-test-link='posts']");
+    }
+    this.$goToPostsListFromPostModified.click();
 
     return new PostsListPage(this.cy);
   }

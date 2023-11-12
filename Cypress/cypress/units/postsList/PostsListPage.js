@@ -45,6 +45,13 @@ export class PostsListPage {
       .children("span");
   }
 
+  getPostTitle(elem) {
+    return elem
+      .children("a")
+      .children(".gh-content-entry-title")
+      .children("h3");
+  }
+
   scrollBotton() {
     if (!this.$postListContainer) {
       this.$postListContainer = cy.get(".gh-main");
@@ -52,8 +59,14 @@ export class PostsListPage {
     this.$postListContainer.scrollTo("bottom");
   }
 
-  goToEditPost($li) {
+  goToEditPostUnpublish($li) {
     $li.children("a").children("span[title='Go to Editor']").click();
+
+    return new CreatePostPage(this.cy);
+  }
+
+  goToEditPostPublish($li) {
+    $li.click();
 
     return new CreatePostPage(this.cy);
   }
