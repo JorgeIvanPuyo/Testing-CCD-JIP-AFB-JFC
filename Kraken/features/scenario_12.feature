@@ -1,7 +1,7 @@
-Feature: Escenario 11 de prueba Ghost Kraken
+Feature: Escenario 12 de prueba Ghost Kraken
 
 @user1 @web
-Scenario: Escenario 11. Borrado de un Post Publicado.
+Scenario: Escenario 12. Borrado de un Post Draft.
   Given I navigate to page "<URL>"
   When I login ghost "<USERNAME1>" and "<PASSWORD1>"
   And I wait for 1 seconds
@@ -12,7 +12,7 @@ Scenario: Escenario 11. Borrado de un Post Publicado.
   Then the URL should be posts "<EXPECTED_URL_POSTS>"
   And I count posts
   
-  When I click published post
+  When I click draft post
   And I wait for 1 seconds
   And I click settings
   And I wait for 1 seconds
@@ -21,3 +21,9 @@ Scenario: Escenario 11. Borrado de un Post Publicado.
   And I click confirm delete
   And I wait for 2 seconds
   Then The list of posts should decrement
+
+
+
+
+
+
