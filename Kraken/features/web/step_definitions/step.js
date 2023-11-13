@@ -257,16 +257,6 @@ When('I modify the post body', async function() {
   await posts.enterContent('Duis ante ligula, congue id ipsum ut, malesuada tincidunt massa.');
 })
 
-When('The update button is enabled', async function() {
-  let updateButton = this.driver.$('button[data-test-button="publish-save"]')
-
-  assert.notEqual(undefined, updateButton.disabled);
-})
-
-Then('I click in back to posts option to return', async function() {
-  posts = new Posts(this.driver);
-  await posts.backToPostsButton();
-})
 When('I create a new member', async function () {
   members = new Members(this.driver);
   await members.createNewMember("nombre","email@email.com","new member for tests");

@@ -3,7 +3,7 @@ Feature: Escenarios No. 9
 @user1 @web
 Scenario: Escenario 9. Verificar que una publicación no se modifique
   Given I navigate to page "<URL>"
-  When I login ghost "<USERNAME1>" and "<PASSWORD1>"
+  When I login ghost "<USERNAME>" and "<PASSWORD>"
   And I wait for 2 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
   Given I navigate to page "<POST_PAGE_URL>"
