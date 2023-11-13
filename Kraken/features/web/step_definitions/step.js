@@ -264,3 +264,14 @@ Then('the Signup info includes "Created"', async function () {
   // Verifica que el texto incluya la cadena "Created"
   assert.ok(text.includes('Created'), 'El texto no incluye "Created"');
 });
+
+When('The update button is enabled', async function() {
+  let updateButton = this.driver.$('button[data-test-button="publish-save"]')
+
+  assert.notEqual(undefined, updateButton.disabled);
+})
+
+Then('I click in back to posts option to return', async function() {
+  posts = new Posts(this.driver);
+  posts.backToPostsButton();
+})
