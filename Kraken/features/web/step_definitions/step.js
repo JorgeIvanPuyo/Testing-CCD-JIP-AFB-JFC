@@ -265,7 +265,7 @@ When('The update button is enabled', async function() {
 
 Then('I click in back to posts option to return', async function() {
   posts = new Posts(this.driver);
-  posts.backToPostsButton();
+  await posts.backToPostsButton();
 })
 When('I create a new member', async function () {
   members = new Members(this.driver);
