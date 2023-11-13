@@ -1,9 +1,5 @@
 import { APP_PAGE, USER, PASSWORD } from "../const";
-import { CreatePostPage } from "../units/createPost/CreatePostPage";
 import { SigninPage } from "../units/login/SignInPage";
-
-import { faker } from "@faker-js/faker";
-import { PostPage } from "../units/post/postPage";
 import { DeletePostPage } from "../units/deletePost/DeletePostPage";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";

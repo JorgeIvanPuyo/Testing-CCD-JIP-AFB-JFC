@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // esperamos el mensaje de error de ember-concurrency y lo ignoramos
+    if (err.message.includes("fetchTiers' was canceled")) {
+        return false;
+    }
+
+    // permitimos que Cypress falle la prueba
+    return true;
+});
