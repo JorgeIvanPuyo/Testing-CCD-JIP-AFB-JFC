@@ -1,4 +1,4 @@
-Feature: Escenarios 1, 2, 3, 4 y 5 de prueba Ghost
+Feature: Escenario 2 de prueba Ghost Kraken
 
 @user2 @web
 Scenario: Escenario 2. Login, navegar, crear y validar un nuevo post (dando click en icono new Post)

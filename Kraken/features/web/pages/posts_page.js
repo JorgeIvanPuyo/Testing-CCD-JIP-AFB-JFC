@@ -1,137 +1,131 @@
 class Posts {
-    constructor(driver) {
-        this.driver = driver
-    }
+  constructor(driver) {
+    this.driver = driver;
+  }
 
-    async clickNewPostButton() {
-        let element = await this.driver.$('.gh-btn-primary');
-        return await element.click();
-    }
+  async clickNewPostButton() {
+    let element = await this.driver.$("#ember78");
+    return await element.click();
+  }
 
-    async enterTittle(tittle) {
-        let element = await this.driver.$('[data-test-editor-title-input]');
-        return await element.setValue(tittle);
-    }
+  async enterTittle(tittle) {
+    let element = await this.driver.$("#ember93");
+    return await element.setValue(tittle);
+  }
 
-    async deleteTittle() {
-        let element = await this.driver.$('[data-test-editor-title-input]');
-        return await element.setValue("");
-    }
+  async deleteTittle() {
+    let element = await this.driver.$("[data-test-editor-title-input]");
+    return await element.setValue("");
+  }
 
-    async enterContent(content) {
-        let element = await this.driver.$('[role="textbox"]');
-        return await element.setValue(content);
-    }
+  async enterContent(content) {
+    let element = await this.driver.$(
+      "#ember89 > div.gh-koenig-editor.relative.z-0 > div.gh-koenig-editor-pane.flex.flex-column.mih-100 > div:nth-child(3) > div > div > div:nth-child(1) > div > p"
+    );
+    return await element.setValue(content);
+  }
 
-    async clickOnAPost(urlEditPost) {
-        windown.location.href = urlEditPost;
-        //let element = await this.driver.$$('.gh-list-row');
-        /*let postsList = this.driver.$('div[class~="posts-list"]');
+  async deleteContent() {
+    let element = await this.driver.$('[role="textbox"]');
+    return await element.setValue("");
+  }
 
-        for (let post of postsList) {
-            alert(post);
-            break;
-        }
+  async clickPublishButton() {
+    let element = await this.driver.$("button=Publish");
+    return await element.click();
+  }
 
-        let element = await this.driver.$('h3.gh-content-entry-title');
-        return await element.click();*/
-    }
+  async clickContinue() {
+    let element = await this.driver.$('[data-test-button="continue"]');
+    return await element.click();
+  }
 
-    async unplublishPost() {
-        let element = await this.driver.$('button.gh-btn.gh-btn-editor.darkgrey.gh-unpublish-trigger');
+  async clickPostNow() {
+    let element = await this.driver.$('[data-test-button="confirm-publish"]');
+    return await element.click();
+  }
 
-        if (element != null
-        && element != undefined) {
-            return await element.click();
-        }
-    }
+  async clickPreview() {
+    let element = await this.driver.$('[data-test-complete-bookmark=""]');
+    return await element.click();
+  }
 
-    async confirmUnpublish() {
-        let element = await this.driver.$('button[data-test-button="revert-to-draft"]');
-        return await element.click();
-    }
+  async getCurrentUrl() {
+    return await this.driver.getUrl();
+  }
 
-    async modifyPostTitle(title) {
-        let element = await this.driver.$('textarea.gh-editor-title.ember-text-area.gh-input.ember-view');
-        return await element.setValue(title);
-    }
+  async clickOnAPost() {
+    let element = await this.driver.$(".gh-list-data");
+    return await element.click();
+  }
 
-    async modifyPostBody(body) {
-        let element = await this.driver.$(
-            'div[data-lexical-editor="true"] p[data-koenig-dnd-droppable="true"]');
-        return await element.setValue(body);
-    }
-    async deleteContent() {
-        let element = await this.driver.$('[role="textbox"]');
-        return await element.setValue("");
-    }
+  async clickEditor() {
+    let element = await this.driver.$(
+      '[data-test-button="close-publish-flow"]'
+    );
+    return await element.click();
+  }
 
-    async clickPublishButton() {
-        let element = await this.driver.$('button=Publish');
-        return await element.click();
-    }
+  async clickPosts() {
+    let element = await this.driver.$('[data-test-link="posts"]');
+    return await element.click();
+  }
 
-    async clickContinue() {
-        let element = await this.driver.$('[data-test-button="continue"]');
-        return await element.click();
-    }
+  async countPosts() {
+    let element = await this.driver.$$(".gh-list-row");
+    return await element.length;
+  }
 
-    async clickPostNow() {
-        let element = await this.driver.$('[data-test-button="confirm-publish"]');
-        return await element.click();
-    }
+  async getDraftFirstPost() {
+    let firstPost = await this.driver.$(".gh-list-row:first-child");
+    return await firstPost.getText();
+  }
 
-    async clickPreview() {
-        let element = await this.driver.$('[data-test-complete-bookmark=""]');
-        return await element.click();
-    }
+  async clickEditPost() {
+    let element = await this.driver.$(".gh-list-data:first-child");
+    return await element.click();
+  }
 
-    async getCurrentUrl() {
-        return await this.driver.getUrl();
-    }
+  async getAllPosts() {
+    let element = await this.driver.$$(".gh-list-row");
+    return await element;
+  }
 
-    async clickOnAPost() {
-        let element = await this.driver.$('.gh-list-data');
-        return await element.click();
-    }
+  async clickOnElement(element) {
+    return await element.click();
+  }
 
-    async clickEditor() {
-        let element = await this.driver.$('[data-test-button="close-publish-flow"]');
-        return await element.click();
-    }
+  async clickSettings() {
+    let element = await this.driver.$(".settings-menu-toggle");
+    return await element.click();
+  }
 
-    async clickPosts() {
-        let element = await this.driver.$('[data-test-link="posts"]');
-        return await element.click();
-    }
+  async clickDelete() {
+    let element = await this.driver.$(".settings-menu-delete-button button");
+    return await element.click();
+  }
 
-    async countPosts() {
-        let element = await this.driver.$$('.gh-list-row');
-        return await element.length;
-    }
+  async confirmDelete() {
+    let element = await this.driver.$(".gh-btn-red");
+    return await element.click();
+  }
 
-    async getDraftFirstPost() {
-        let firstPost = await this.driver.$('.gh-list-row:first-child');
-        return await firstPost.getText();
-    }
+  async cancelDelete() {
+    let element = await this.driver.$(".gh-btn:first-child");
+    return await element.click();
+  }
 
-    async clickEditPost() {
-        let element = await this.driver.$('.gh-list-data:first-child');
-        return await element.click();
-    }
+  async backToPostsButton() {
+    let backToPostElement = await this.driver.$('a[data-test-link="posts"]')
 
-    async backToPostsButton() {
-        let backToPostElement = await this.driver.$('a[data-test-link="posts"]')
+    return await backToPostElement.click();
+  }
 
-        return await backToPostElement.click();
-    }
+  async updatePost() {
+      let updateButton = await this.driver.$('button[data-test-button="publish-save"]');
 
-    async updatePost() {
-        let updateButton = await this.driver.$('button[data-test-button="publish-save"]');
-
-        return await updateButton.click();
-    }
+      return await updateButton.click();
+  }
 }
 
 module.exports = Posts;
-

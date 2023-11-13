@@ -1,4 +1,8 @@
-export class LoginPage {
+import { PostsListPage } from "../postsList/PostsListPage";
+
+export class HomePage {
+  $postsButton = cy.get("a[data-test-nav='posts']");
+
   constructor(cy) {
     if (!cy) {
       throw new Error("Es requerida la instancia de cypress");
@@ -8,5 +12,11 @@ export class LoginPage {
 
   getUrl() {
     return this.cy.url();
+  }
+
+  goToPostsList() {
+    this.$postsButton.click();
+
+    return new PostsListPage(this.cy);
   }
 }

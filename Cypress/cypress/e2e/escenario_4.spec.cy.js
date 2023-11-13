@@ -29,7 +29,7 @@ describe("Como usuario quiero editar un post que no este publicado para actualiz
       posts.clickPublishButton();
       posts.clickContinueAndReviewButton();
       posts.goToEdit();
-      posts.goToPostList();
+      posts.goToPostsList();
 
       // Given: a list of posts
       const postList = new PostsListPage(cy);
@@ -47,7 +47,7 @@ describe("Como usuario quiero editar un post que no este publicado para actualiz
       // When: el usuario busca un post por titulo
       const postToEdit = postList2.getPostByTitle(title);
       // Then: el usuario podra editar el post haciendo click sobre el icono de editar
-      const postEditPage = postList2.goToEditPost(postToEdit);
+      const postEditPage = postList2.goToEditPostUnpublish(postToEdit);
 
       // When: el usuario ingrese el nuevo titulo y descripción
       const newTitle = faker.person.jobTitle();
@@ -55,7 +55,7 @@ describe("Como usuario quiero editar un post que no este publicado para actualiz
       postEditPage.fillPostTitle(newTitle);
       postEditPage.fillPostDescription(newDescription);
       // Then: el usuario regresa al listado de post y vera el post con el nuevo titulo, descripción y aun como borrador
-      postEditPage.goToPostList();
+      postEditPage.goToPostsList();
       const postList3 = new PostsListPage(cy);
       const postEdited = postList3.getPostByTitle(title + newTitle);
       const statusEdited = postList3.getStatusPost(postEdited);

@@ -1,4 +1,7 @@
+import { PostsListPage } from "../postsList/PostsListPage";
+import { AlertDialogExitPage } from "./AlertDialogExitPage";
 import { PostPublishedPage } from "./PostPublishedPage";
+import { SettingsPostPage } from "./SettingsPostPage";
 
 export class CreatePostPage {
   constructor(cy) {
@@ -20,6 +23,10 @@ export class CreatePostPage {
   $slug;
   $goToEditoButton;
   $goToPostsListLink;
+  $updateButton;
+  $goToPostsListFromPostModified;
+  $unpublishButton;
+  $unpublishAndRevertToDraftButton;
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
@@ -94,6 +101,8 @@ export class CreatePostPage {
     }
 
     this.$settingsButton.click();
+
+    return new SettingsPostPage(this.cy);
   }
 
   closeSettings() {
@@ -102,6 +111,57 @@ export class CreatePostPage {
     }
 
     this.$settingsButton.click();
+  }
+
+  getUpdateButton() {
+    if (!this.$updateButton) {
+      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+    }
+
+    return this.$updateButton;
+  }
+
+  clickUpDateButton() {
+    if (!this.$updateButton) {
+      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+    }
+
+    this.$updateButton.click();
+  }
+
+  unpublishPost() {
+    if (!this.$unpublishButton) {
+      this.$unpublishButton = cy.get("button[data-test-button='update-flow']");
+    }
+
+    this.$unpublishButton.click();
+    this.cy.wait(1000);
+
+    if (!this.$unpublishAndRevertToDraftButton) {
+      this.$unpublishAndRevertToDraftButton = cy.get(
+        "button[data-test-button='revert-to-draft']"
+      );
+    }
+
+    this.$unpublishAndRevertToDraftButton.click();
+  }
+
+  clickUnpublishPost() {
+    if (!this.$unpublishButton) {
+      this.$unpublishButton = cy.get("button[data-test-button='update-flow']");
+    }
+
+    this.$unpublishButton.click();
+  }
+
+  clickUnpublishPostAndRevertToDraft() {
+    if (!this.$unpublishAndRevertToDraftButton) {
+      this.$unpublishAndRevertToDraftButton = cy.get(
+        "button[data-test-button='revert-to-draft']"
+      );
+    }
+
+    this.$unpublishAndRevertToDraftButton.click();
   }
 
   goToEdit() {
@@ -114,12 +174,32 @@ export class CreatePostPage {
     this.$goToEditoButton.click();
   }
 
-  goToPostList() {
+  goToPostsList() {
     if (!this.$goToPostsListLink) {
       this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
     }
 
     this.$goToPostsListLink.click();
+
+    return new PostsListPage(this.cy);
+  }
+
+  goToPostsListWithOutSave() {
+    if (!this.$goToPostsListLink) {
+      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+    }
+
+    this.$goToPostsListLink.click();
+    return new AlertDialogExitPage(this.cy);
+  }
+
+  goToPostsListFromPostNotModified() {
+    if (!this.$goToPostsListFromPostModified) {
+      this.$goToPostsListFromPostModified = cy.get("a[data-test-link='posts']");
+    }
+    this.$goToPostsListFromPostModified.click();
+
+    return new PostsListPage(this.cy);
   }
 
   validatePostPublished() {

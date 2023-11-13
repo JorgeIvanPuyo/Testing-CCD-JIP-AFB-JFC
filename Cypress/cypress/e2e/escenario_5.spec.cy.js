@@ -20,9 +20,9 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
 
-      // Given: El ususario ingresa a crear un nuevo post
+      // Given: el usuario haga click sobre post y crear un nuevo post
       const posts = new CreatePostPage(cy);
-      posts.entryToPostListByLabel();
+      posts.entryToPostListByIcon();
       // When: el usuario ingresa los datos del nuevos post y sigue hasta su publicación
       const title = faker.person.jobTitle();
       const description = faker.lorem.paragraph();
