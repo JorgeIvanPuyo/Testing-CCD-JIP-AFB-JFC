@@ -82,7 +82,30 @@ class Posts {
         return await element.click();
     }
 
-    
+    async getAllPosts() {
+        let element = await this.driver.$$('.gh-list-row');
+        return await element;
+    }
+
+    async clickOnElement(element) {
+        return await element.click();
+    }
+
+    async clickSettings() {
+        let element = await this.driver.$('.settings-menu-toggle');
+        return await element.click();
+    }
+
+    async clickDelete() {
+        let element = await this.driver.$('.settings-menu-delete-button button');
+        return await element.click();
+    }
+
+    async confirmDelete() {
+        let element = await this.driver.$('.gh-btn-red');
+        return await element.click();
+    }
+
 }
 
 module.exports = Posts;
