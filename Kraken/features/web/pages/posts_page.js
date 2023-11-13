@@ -106,6 +106,11 @@ class Posts {
         return await element.click();
     }
 
+    async cancelDelete() {
+        let element = await this.driver.$('.gh-btn:first-child');
+        return await element.click();
+    }
+
 }
 
 module.exports = Posts;
