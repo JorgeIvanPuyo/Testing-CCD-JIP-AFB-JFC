@@ -196,3 +196,9 @@ When('I click draft post', async function() {
     }
   }
 })
+
+//Escenario #13
+When('I click cancel delete', async function() {
+  posts = new Posts(this.driver);
+  await posts.cancelDelete();
+})
