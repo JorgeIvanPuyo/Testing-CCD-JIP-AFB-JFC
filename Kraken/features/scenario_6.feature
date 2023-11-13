@@ -7,9 +7,15 @@ Scenario: Escenario 6. Dar de baja una publicación
   And I wait for 2 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
 
-  Given I navigate to page "<POST_PAGE_URL>"
-  When I click on a post
+  When I click posts icon
+  And I wait for 2 seconds 
+  Then the URL should be posts "<EXPECTED_URL_EDITOR_POSTS>"
+  
+  And I create a new post 
+  And I wait for 1 seconds
+  And I publish the post
   And I wait for 2 seconds
+
   When I click in unpublish button
   When I click on confirm unpublish
   And I wait for 2 seconds
