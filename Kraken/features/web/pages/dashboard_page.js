@@ -4,7 +4,7 @@ class Dashboard {
     }
 
     async clickPostsButton() {
-        let element = await this.driver.$('#ember19');
+        let element = await this.driver.$('[data-test-nav="posts"]');
         return await element.click();
     }
 

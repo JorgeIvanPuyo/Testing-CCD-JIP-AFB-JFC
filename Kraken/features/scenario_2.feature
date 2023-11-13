@@ -4,7 +4,7 @@ Feature: Escenario 2 de prueba Ghost Kraken
 Scenario: Escenario 2. Login, navegar, crear y validar un nuevo post (dando click en icono new Post)
   # And I wait for a signal containing "Escenario completo" for 20 seconds
   Given I navigate to page "<URL>"
-  When I login ghost "<USERNAME1>" and "<PASSWORD1>"
+  When I login ghost "<USERNAME>" and "<PASSWORD>"
   And I wait for 1 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
 

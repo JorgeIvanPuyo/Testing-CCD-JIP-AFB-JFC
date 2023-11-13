@@ -3,7 +3,7 @@ Feature: Escenario 5 de prueba Ghost Kraken
 @user1 @web
 Scenario: Escenario 5. Login, navegar, proceso de editar un post y publicarlo
   Given I navigate to page "<URL>"
-  When I login ghost "<USERNAME1>" and "<PASSWORD1>"
+  When I login ghost "<USERNAME>" and "<PASSWORD>"
   And I wait for 1 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
 

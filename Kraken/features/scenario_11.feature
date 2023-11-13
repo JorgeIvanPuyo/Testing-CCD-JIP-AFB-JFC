@@ -3,7 +3,7 @@ Feature: Escenario 11 de prueba Ghost Kraken
 @user1 @web
 Scenario: Escenario 11. Borrado de un Post Publicado.
   Given I navigate to page "<URL>"
-  When I login ghost "<USERNAME1>" and "<PASSWORD1>"
+  When I login ghost "<USERNAME>" and "<PASSWORD>"
   And I wait for 1 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
 
