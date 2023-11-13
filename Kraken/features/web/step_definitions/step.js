@@ -1,10 +1,10 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const assert = require("assert");
-const LoginPage = require("../pages/login_page");
-const Dashboard = require("../pages/dashboard_page");
-const Posts = require("../pages/posts_page");
-const Members = require("../pages/members_page");
-const properties = require("../../../properties.json");
+const { Given, When, Then } = require('@cucumber/cucumber');
+const assert = require('assert');
+const LoginPage = require('../pages/login_page');
+const Dashboard = require('../pages/dashboard_page');
+const Posts = require('../pages/posts_page');
+const properties = require('../../../properties.json');
+const postsArray = require('../../../ghost-post.json');
 
 let loginPage;
 let dashboard;
@@ -140,10 +140,12 @@ Then("The list of posts should be the same", async function () {
 });
 
 //Scenario #6
-When("I click on a post", async function () {
+When('I click on a post', async function() {
+  let selectedPostId = postsArray.posts[Math.random(0, 49)];
   posts = new Posts(this.driver);
-  await posts.clickOnAPost();
-});
+  let urlEditPost = `${properties.EXPECTED_URL_EDITOR_POSTS}/${selectedPostId}`;
+  await posts.clickOnAPost(urlEditPost);
+})
 
 When("I click in unpublish button", async function () {
   posts = new Posts(this.driver);
@@ -159,10 +161,9 @@ Then("the post should be as {kraken-string}", async function (postStatus) {
   assert.equal(postStatus, properties.POST_DRAFT_STATUS);
 });
 
-Then("The update button should be disabled", async function () {
-  let element = this.driver.$(
-    "button.gh-btn gh-btn-editor gh-editor-save-trigger green ember-view"
-  );
+// Scenario 7
+Then('The update button should be disabled', async function() {
+  let element = this.driver.$('button.gh-btn gh-btn-editor gh-editor-save-trigger green ember-view');
 
   if (undefined != element && null != element) {
     console.log(element);
@@ -245,6 +246,27 @@ When('I click new member', async function () {
   await members.clickNewMemberButton();
 })
 
+// Scenario 8
+When('I modify the post title', async function() {
+  posts = new Posts(this.driver);
+  await posts.enterTittle(`${Math.random()} Lorem ipsum dolor sit amet ${Math.random()}`);
+})
+
+When('I modify the post body', async function() {
+  posts = new Posts(this.driver);
+  await posts.enterContent('Duis ante ligula, congue id ipsum ut, malesuada tincidunt massa.');
+})
+
+When('The update button is enabled', async function() {
+  let updateButton = this.driver.$('button[data-test-button="publish-save"]')
+
+  assert.notEqual(undefined, updateButton.disabled);
+})
+
+Then('I click in back to posts option to return', async function() {
+  posts = new Posts(this.driver);
+  posts.backToPostsButton();
+})
 When('I create a new member', async function () {
   members = new Members(this.driver);
   await members.createNewMember("nombre","email@email.com","new member for tests");

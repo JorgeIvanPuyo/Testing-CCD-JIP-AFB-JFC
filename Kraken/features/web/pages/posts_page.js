@@ -112,6 +112,18 @@ class Posts {
     let element = await this.driver.$(".gh-btn:first-child");
     return await element.click();
   }
+
+  async backToPostsButton() {
+    let backToPostElement = await this.driver.$('a[data-test-link="posts"]')
+
+    return await backToPostElement.click();
+  }
+
+  async updatePost() {
+      let updateButton = await this.driver.$('button[data-test-button="publish-save"]');
+
+      return await updateButton.click();
+  }
 }
 
 module.exports = Posts;
