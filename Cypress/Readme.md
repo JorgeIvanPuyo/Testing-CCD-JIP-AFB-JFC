@@ -1,6 +1,6 @@
 ## Random testing - Los estudiantes
 
-Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghos](https://ghost.org/)
+Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghost](https://ghost.org/)
 
 ### Para ejecutar
 
