@@ -40,4 +40,13 @@ Prerequisitos
 20. `scenario_20.feature`
 
 ### Reportes de algunas pruebas ejecutadas
-
+[Scenario 1](reportes1-15/KrakenEscenario1)  
+[Scenario 2](reportes1-15/KrakenEscenario2)  
+[Scenario 3](reportes1-15/KrakenEscenario3)  
+[Scenario 4](reportes1-15/KrakenEscenario4)  
+[Scenario 5](reportes1-15/KrakenEscenario5)  
+[Scenario 11](reportes1-15/KrakenEscenario11)  
+[Scenario 12](reportes1-15/KrakenEscenario12)  
+[Scenario 13](reportes1-15/KrakenEscenario13)  
+[Scenario 14](reportes1-15/KrakenEscenario14)  
+[Scenario 15](reportes1-15/KrakenEscenario15)  
