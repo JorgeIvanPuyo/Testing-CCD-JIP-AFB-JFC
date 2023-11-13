@@ -4,17 +4,27 @@ Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost q
 
 ### Para ejecutar
 
-1. Instalar los paquetes con `pnpm install` o `npm install`
+1. Instalar los paquetes con `npm install`
 2. Ejecutar cypress `node_modules/.bin/cypress open`
 3. Selecciònar la opciòn **E2E Testing**
-4. Seleccinar el navegador y las pruebas para el archivo: monkey_testing_universidades.spec.cy.js
+4. Seleccinar el navegador y las pruebas para los archivos `escenario_n.spec.cy.js`, donde _n_ es el numerp del escenario detallado en la [Wiki](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/wiki)
 
-<br>
-<b>Presentado por</b>: Jorge Ivan Puyo
-<b>Presentado por</b>: Adrian Fransisco Becerra
-<b>Presentado por</b>: Juan Fernando Copete
-<b>Presentado por</b>: Cristhian Camilo Delgado - 202322923
 <br>
 <b>Node version</b>: v18.12.1
 <br>
-<b>Pnpm version</b>: 8.19.2
+<b>npm version</b>: 8.19.2
+
+### Observaciones
+
+Correr las pruebas en orden secuencial, esto con el fin de tener datos para la siguiente prueba, correr en el siguiente orden ascendente:
+
+1. `escenario_1.spec.cy.js`
+2. `escenario_2.spec.cy.js`
+3. `escenario_3.spec.cy.js`
+4. `escenario_4.spec.cy.js`
+   <br>
+
+- ....
+  <br>
+
+20. `escenario_20.spec.cy.js`
