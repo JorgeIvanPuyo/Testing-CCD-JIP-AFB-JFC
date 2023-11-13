@@ -10,3 +10,4 @@
 | Juan     | Copete           | jf.copete@uniandes.edu.co  | jfcopete       |
 
 [Correr pruebas en Cypress](Cypress/Readme.md)
+[Correr pruebas en Kraken](Kraken/Readme.md)
