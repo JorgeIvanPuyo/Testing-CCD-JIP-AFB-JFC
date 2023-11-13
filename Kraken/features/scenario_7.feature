@@ -1,7 +1,7 @@
 Feature: Dar de baja una publicación
 
 @user1 @web
-Scenario: Escenario 6. Dar de baja una publicación
+Scenario: Escenario 7. Dar de baja una publicación
   Given I navigate to page "<URL>"
   When I login ghost "<USERNAME1>" and "<PASSWORD1>"
   And I wait for 2 seconds
@@ -11,6 +11,7 @@ Scenario: Escenario 6. Dar de baja una publicación
   When I click on a post
   And I wait for 2 seconds
   When I click in unpublish button
+  And I wait for 2 seconds
   When I click on confirm unpublish
   And I wait for 2 seconds
   Given I navigate to page "<POST_PAGE_URL>"

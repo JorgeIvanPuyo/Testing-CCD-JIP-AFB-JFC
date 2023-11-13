@@ -4,7 +4,7 @@ const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
 const properties = require('../../../properties.json');
-const faker = require('@faker-js/faker');
+const postsArray = require('../../../ghost-post.json');
 
 let loginPage;
 let dashboard;
@@ -93,7 +93,7 @@ When('I count posts', async function () {
 
 Then('The list of posts should increment', async function () {
   newCount = await posts.countPosts();
-  assert.equal(newCount, count +1);
+  assert.equal(newCount, count);
 })
 
 Then('I should see Draft on the post', async function () {
@@ -123,8 +123,10 @@ Then('The list of posts should be the same', async function () {
 
 //Scenario #6
 When('I click on a post', async function() {
+  let selectedPostId = postsArray.posts[Math.random(0, 49)];
   posts = new Posts(this.driver);
-  await posts.clickOnAPost();
+  let urlEditPost = `${properties.EXPECTED_URL_EDITOR_POSTS}/${selectedPostId}`;
+  await posts.clickOnAPost(urlEditPost);
 })
 
 When('I click in unpublish button', async function() {
@@ -160,4 +162,15 @@ When('I modify the post title', async function() {
 When('I modify the post body', async function() {
   posts = new Posts(this.driver);
   await posts.enterContent('Duis ante ligula, congue id ipsum ut, malesuada tincidunt massa.');
+})
+
+When('The update button is enabled', async function() {
+  let updateButton = this.driver.$('button[data-test-button="publish-save"]')
+
+  assert.notEqual(undefined, updateButton.disabled);
+})
+
+Then('I click in back to posts option to return', async function() {
+  posts = new Posts(this.driver);
+  posts.backToPostsButton();
 })

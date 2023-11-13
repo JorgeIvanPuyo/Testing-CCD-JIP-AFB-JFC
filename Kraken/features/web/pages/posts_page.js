@@ -23,15 +23,27 @@ class Posts {
         return await element.setValue(content);
     }
 
-    async clickOnAPost() {
+    async clickOnAPost(urlEditPost) {
+        windown.location.href = urlEditPost;
+        //let element = await this.driver.$$('.gh-list-row');
+        /*let postsList = this.driver.$('div[class~="posts-list"]');
+
+        for (let post of postsList) {
+            alert(post);
+            break;
+        }
+
         let element = await this.driver.$('h3.gh-content-entry-title');
-        return await element.click();
+        return await element.click();*/
     }
 
     async unplublishPost() {
         let element = await this.driver.$('button.gh-btn.gh-btn-editor.darkgrey.gh-unpublish-trigger');
 
-        return await element.click();
+        if (element != null
+        && element != undefined) {
+            return await element.click();
+        }
     }
 
     async confirmUnpublish() {
@@ -108,7 +120,17 @@ class Posts {
         return await element.click();
     }
 
-    
+    async backToPostsButton() {
+        let backToPostElement = await this.driver.$('a[data-test-link="posts"]')
+
+        return await backToPostElement.click();
+    }
+
+    async updatePost() {
+        let updateButton = await this.driver.$('button[data-test-button="publish-save"]');
+
+        return await updateButton.click();
+    }
 }
 
 module.exports = Posts;
