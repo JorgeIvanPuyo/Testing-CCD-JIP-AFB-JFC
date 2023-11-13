@@ -38,3 +38,6 @@ Prerequisitos
   <br>
 
 20. `scenario_20.feature`
+
+### Reportes de algunas pruebas ejecutadas
+

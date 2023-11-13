@@ -25,6 +25,3 @@ Scenario: Escenario 1. Login, navegar, crear y validar un nuevo post (dando clic
 
 
 
-
-
-
