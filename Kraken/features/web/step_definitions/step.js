@@ -149,6 +149,37 @@ Then('The update button should be disabled', async function() {
   }
 })
 
+//Scenario #11
+When('I click published post', async function() {
+  posts = new Posts(this.driver);
+  const allPosts = await posts.getAllPosts();
 
+  for(const post of allPosts) {
+    const postText = await post.getText();
+    if(postText.includes('Published')) {
+      await posts.clickOnElement(post);
+      break;
+    }
+  }
+})
 
+When('I click settings', async function() {
+  posts = new Posts(this.driver);
+  await posts.clickSettings();
+})
+
+When('I click delete post', async function() {
+  posts = new Posts(this.driver);
+  await posts.clickDelete();
+})
+
+When('I click confirm delete', async function() {
+  posts = new Posts(this.driver);
+  await posts.confirmDelete();
+})
+
+Then('The list of posts should decrement', async function () {
+  newCount = await posts.countPosts();
+  assert.equal(newCount, count -1);
+})
 

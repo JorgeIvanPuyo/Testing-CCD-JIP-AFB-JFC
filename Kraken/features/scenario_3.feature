@@ -1,4 +1,4 @@
-Feature: Escenarios 1, 2, 3, 4 y 5 de prueba Ghost
+Feature: Escenarios 3 de prueba Ghost Kraken
 
 @user1 @web
 Scenario: Escenario 3. Login, navegar, proceso de crear un nuevo post incompleto, el post se debe guardar como draft

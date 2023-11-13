@@ -1,4 +1,4 @@
-Feature: Escenarios 1, 2, 3, 4 y 5 de prueba Ghost
+Feature: Escenarios 4 de prueba Ghost Kraken
 
 @user1 @web
 Scenario: Escenario 4. Login, navegar, proceso de editar un post y guardarlo como draft
