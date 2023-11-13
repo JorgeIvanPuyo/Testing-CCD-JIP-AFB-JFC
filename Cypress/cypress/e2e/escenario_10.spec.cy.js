@@ -6,10 +6,8 @@ import { faker } from "@faker-js/faker";
 import { PostPage } from "../units/post/postPage";
 import { PostsListPage } from "../units/postsList/PostsListPage";
 
-const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
-
-describe("Como usuario quiero actualizar un post publicado para tener actualizada a mi audiencia", function () {
-  it("intentar salir de la edicion del post por error para validar el aviso de confirmación de cambios", function () {
+describe("Como usuario quiero intentar eliminar un post pero no hacerlo para validar el mensaje de confirmación de eliminación de un post", function () {
+  it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 
@@ -37,33 +35,24 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
         .then((text) => {
           const trimText = text.trim();
           const newTitle = faker.lorem.words();
-          const newTitleAux = faker.lorem.words();
           const newDescription = faker.lorem.paragraph();
-          const newDescriptionAux = faker.lorem.paragraph();
-          // Then: el usuario podra editar el post
+          // Then: el usuario podra ver el listo de posts
           const postListPage2 = new PostsListPage(cy);
           const postSelected = postListPage2.getPostByTitle(trimText);
           const editPostPage = postListPage2.goToEditPostPublish(postSelected);
 
-          // Give: desde un posr editado sin actualizar
-          editPostPage.fillPostTitle(newTitle);
-          editPostPage.fillPostDescription(newDescription);
-          // When: el usuario intenta volver al listado de posta sin haber guardado cambios
-          const alertDialogPage = editPostPage.goToPostsListWithOutSave();
-          // Then: el usuario podra ver el aviso de confirmación de cambios y permanecer editando el post post
-          const editPostPage2 = alertDialogPage.clickStayButton();
+          // Give: Desde la pagina de edicion de post el usuario abre las configuraciones
+          const settingsPage = editPostPage.openSettings();
+          // When: el usuario intenta eliminar el post
+          const dialogDeletePage = settingsPage.clickDeletePost();
+          // Then: una alerta de confirmación aparece y el usuario decide no eliminar el post
+          const editPostPage2 = dialogDeletePage.clickStayButton();
 
-          // Give: un post en edicion con cambios
-          editPostPage2.fillPostTitle(newTitleAux);
-          editPostPage2.fillPostDescription(newDescriptionAux);
-          // when: el usuario actualiza el post y va hacia el listado de post
-          editPostPage2.getUpdateButton().click();
+          // When: el usuario regresa a el listado de post
           const postsListPage3 = editPostPage2.goToPostsList();
-          // Then: el usuario podra ver el post actualizado
+          // Then: el usuario podra ver el post sin haber sido borrado
           postsListPage3.scrollBotton();
-          postsListPage3
-            .getPostByTitle(trimText + newTitle + newTitleAux)
-            .should("exist");
+          postsListPage3.getPostByTitle(trimText).should("exist");
         });
     });
   });

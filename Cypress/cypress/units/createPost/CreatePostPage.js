@@ -1,5 +1,7 @@
 import { PostsListPage } from "../postsList/PostsListPage";
+import { AlertDialogExitPage } from "./AlertDialogExitPage";
 import { PostPublishedPage } from "./PostPublishedPage";
+import { SettingsPostPage } from "./SettingsPostPage";
 
 export class CreatePostPage {
   constructor(cy) {
@@ -99,6 +101,8 @@ export class CreatePostPage {
     }
 
     this.$settingsButton.click();
+
+    return new SettingsPostPage(this.cy);
   }
 
   closeSettings() {
@@ -115,6 +119,14 @@ export class CreatePostPage {
     }
 
     return this.$updateButton;
+  }
+
+  clickUpDateButton() {
+    if (!this.$updateButton) {
+      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+    }
+
+    this.$updateButton.click();
   }
 
   unpublishPost() {
@@ -170,6 +182,15 @@ export class CreatePostPage {
     this.$goToPostsListLink.click();
 
     return new PostsListPage(this.cy);
+  }
+
+  goToPostsListWithOutSave() {
+    if (!this.$goToPostsListLink) {
+      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+    }
+
+    this.$goToPostsListLink.click();
+    return new AlertDialogExitPage(this.cy);
   }
 
   goToPostsListFromPostNotModified() {
