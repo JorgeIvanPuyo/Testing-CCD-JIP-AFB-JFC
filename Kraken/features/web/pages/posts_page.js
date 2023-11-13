@@ -126,6 +126,12 @@ class Posts {
 
       return await updateButton.click();
   }
+
+  async clickOnSettings() {
+    let settingsButton = await this.driver.$('button[title="Settings"]');
+
+    return await settingsButton.click();
+  }
 }
 
 module.exports = Posts;
