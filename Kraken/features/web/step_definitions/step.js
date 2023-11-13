@@ -3,11 +3,13 @@ const assert = require("assert");
 const LoginPage = require("../pages/login_page");
 const Dashboard = require("../pages/dashboard_page");
 const Posts = require("../pages/posts_page");
+const Members = require("../pages/members_page");
 const properties = require("../../../properties.json");
 
 let loginPage;
 let dashboard;
 let posts;
+let members;
 let count = 0;
 let newCount = 0;
 //Login
@@ -220,4 +222,45 @@ When("I click draft post", async function () {
 When("I click cancel delete", async function () {
   posts = new Posts(this.driver);
   await posts.cancelDelete();
+});
+
+//Escenario #15
+
+When('I click members', async function () {
+  members = new Members(this.driver);
+  await members.clickMembers();
+})
+
+Then("the URL should be members {kraken-string}", async function (expectedUrl) {
+  const currentUrl = await members.getCurrentUrl();
+  assert.strictEqual(
+    currentUrl,
+    expectedUrl,
+    "URL did not match the expected URL"
+  );
+});
+
+When('I click new member', async function () {
+  members = new Members(this.driver);
+  await members.clickNewMemberButton();
+})
+
+When('I create a new member', async function () {
+  members = new Members(this.driver);
+  await members.createNewMember("nombre","email@email.com","new member for tests");
+})
+
+Then('member state should be created', async function () {
+  const text = await members.getState();
+  //const text = await state.getText();
+
+  assert.ok(text.includes('Created'), 'El usuario no ha sido creado');
+})
+
+Then('the Signup info includes "Created"', async function () {
+  const attributionElement = await this.driver.$('.gh-member-details-attribution');
+  const text = await attributionElement.getText();
+  
+  // Verifica que el texto incluya la cadena "Created"
+  assert.ok(text.includes('Created'), 'El texto no incluye "Created"');
 });
