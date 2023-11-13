@@ -183,3 +183,16 @@ Then('The list of posts should decrement', async function () {
   assert.equal(newCount, count -1);
 })
 
+//Escenario #12
+When('I click draft post', async function() {
+  posts = new Posts(this.driver);
+  const allPosts = await posts.getAllPosts();
+
+  for(const post of allPosts) {
+    const postText = await post.getText();
+    if(postText.includes('Draft')) {
+      await posts.clickOnElement(post);
+      break;
+    }
+  }
+})
