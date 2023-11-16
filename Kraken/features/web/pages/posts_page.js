@@ -4,7 +4,7 @@ class Posts {
   }
 
   async clickNewPostButton() {
-    let element = await this.driver.$('[data-test-new-post-button');
+    let element = await this.driver.$('[data-test-new-post-button]');
     return await element.click();
   }
 
@@ -129,6 +129,16 @@ class Posts {
     let settingsButton = await this.driver.$('button[title="Settings"]');
 
     return await settingsButton.click();
+  }
+
+  async unpublishPost() {
+    let unpublishButton = await this.driver.$('button[data-test-button="update-flow"]');
+    return await  unpublishButton.click();
+  }
+
+  async confirmUnpublish() {
+    let unpublishConfirmButton = await this.driver.$('button[data-test-button="revert-to-draft"]');
+    return await  unpublishConfirmButton.click();
   }
 }
 

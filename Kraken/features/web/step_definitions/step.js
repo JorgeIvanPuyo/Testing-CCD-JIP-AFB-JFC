@@ -3,8 +3,10 @@ const assert = require('assert');
 const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
+const Members = require('../pages/members_page');
 const properties = require('../../../properties.json');
 const postsArray = require('../../../ghost-post.json');
+const { faker } = require('@faker-js/faker');
 
 let loginPage;
 let dashboard;
@@ -62,8 +64,9 @@ When("I click new post", async function () {
 
 When("I create a new post", async function () {
   posts = new Posts(this.driver);
+  let content = faker.lorem.paragraph();
   await posts.enterTittle("TittleNewPost");
-  await posts.enterContent("Content for Test New Post Scenario.");
+  await posts.enterContent(content);
 });
 
 When("I publish the post", async function () {
@@ -149,7 +152,7 @@ When('I click on a post', async function() {
 
 When("I click in unpublish button", async function () {
   posts = new Posts(this.driver);
-  await posts.unplublishPost();
+  await posts.unpublishPost();
 });
 
 When("I click on confirm unpublish", async function () {
@@ -259,7 +262,10 @@ When('I modify the post body', async function() {
 
 When('I create a new member', async function () {
   members = new Members(this.driver);
-  await members.createNewMember("nombre","email@email.com","new member for tests");
+  let nombre = faker.person.fullName();
+  let email = faker.internet.email();
+  let note = faker.lorem.sentence();
+  await members.createNewMember(nombre,email,note);
 })
 
 Then('member state should be created', async function () {
