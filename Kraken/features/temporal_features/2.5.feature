@@ -7,6 +7,7 @@ Scenario: Escenario No. 10 borrar una publicación
   And I wait for 2 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
   Given I navigate to page "<POST_PAGE_URL>"
+  And I count posts
   When I click on a post
   And I wait for 2 seconds
   And I click settings
