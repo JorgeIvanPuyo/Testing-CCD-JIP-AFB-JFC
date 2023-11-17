@@ -1,5 +1,7 @@
 class Members {
 
+  clickMembersSelector = 'a[data-test-nav="members"]';
+
     constructor(driver) {
         this.driver = driver;
       }
@@ -23,6 +25,16 @@ class Members {
         return await element.click();
       }
 
+      /**
+       * When the modal dialog that appears when we're created a new member,
+       * the function allows to click on the button to stay into the form.
+       * 
+       * @returns {*}
+       */
+      async clickStayButtonModalDialog() {
+        return await this.driver.$('button[data-test-stay-button]').click();
+      }
+
       async createNewMember(name, email, note) {
         let element = await this.driver.$('#member-name');
         await element.setValue(name);
@@ -36,6 +48,18 @@ class Members {
 
       async getState() {
         let element = await this.driver.$('.gh-member-details-attribution');
+        return await element.getText();
+      }
+
+      /**
+       * Returns the actual registered members.
+       * 
+       * @returns {string} : The amount of members registered.
+       */
+      async getActualMembers() {
+        let element = await this.driver.$(
+          `${this.clickMembersSelector} span.gh-nav-member-count`);
+        
         return await element.getText();
       }
       
