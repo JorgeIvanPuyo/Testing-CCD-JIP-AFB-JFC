@@ -14,6 +14,9 @@ let posts;
 let members;
 let count = 0;
 let newCount = 0;
+let actualMembers = 0;
+let newMembers = 0;
+
 //Login
 When(
   "I login ghost {kraken-string} and {kraken-string}",
@@ -268,6 +271,20 @@ When('I create a new member', async function () {
   await members.createNewMember(nombre,email,note);
 })
 
+//Scenario #16
+When('I create a new member with the email {kraken-string}', async function (wrongEmail) {
+  members = new Members(this.driver);
+  await members.createNewMember(
+    "nombre"
+    , wrongEmail
+    , "new member for tests");
+});
+
+Then('The validation should be Invalid email', async function() {
+  let validationText = await members.getInvalidResponse('#member-email > p.response');
+  assert.equal(validationText, "Invalid Email.");
+});
+
 Then('member state should be created', async function () {
   const text = await members.getState();
   //const text = await state.getText();
@@ -293,3 +310,47 @@ Then('I click in back to posts option to return', async function() {
   posts = new Posts(this.driver);
   posts.backToPostsButton();
 })
+
+
+When('I try to create a new member but I click on Members option', async function() {
+  let members = new Members(this.driver);
+
+  members.typeNewMemberFieldsAndReturn(
+    "Kristopher N. Pimental"
+    , "KristopherNPimental@gustr.com"
+    , "Editor"
+    , "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+});
+
+Then('Should be visible a modal dialog asking me if I want to leave', async function() {
+  let modalDialogElement = this.driver.$(
+    'div#fullscreen-modal-action > div[data-test-modal="unsaved-settings"]');
+  let isDefined = (undefined !== modalDialogElement 
+                && null !== modalDialogElement);
+
+  assert.notEqual(false, isDefined);
+});
+
+When('I click on Leave option of the modal dialog', async function() {
+  let members = new Members(this.driver);
+  members.clickLeaveButtonModalDialog();
+});
+
+When('I click on Stay option of the modal dialog', async function() {
+  let members = new Members(this.driver);
+  members.clickStayButtonModalDialog();
+});
+
+//Scenario #18
+
+Then('The members should be increased', async function() {
+  let members = new Members(this.driver);
+
+  assert.notEqual(actualMembers, members.getActualMembers());
+});
+
+Then(`The members should'nt increased`, async function() {
+  let members = new Members(this.driver);
+
+  assert.equal(actualMembers, members.getActualMembers());
+});
