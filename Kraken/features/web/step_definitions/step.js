@@ -12,6 +12,9 @@ let posts;
 let members;
 let count = 0;
 let newCount = 0;
+let actualMembers = 0;
+let newMembers = 0;
+
 //Login
 When(
   "I login ghost {kraken-string} and {kraken-string}",
@@ -229,6 +232,7 @@ When("I click cancel delete", async function () {
 
 When('I click members', async function () {
   members = new Members(this.driver);
+  actualMembers = members.getActualMembers();
   await members.clickMembers();
 })
 
@@ -297,3 +301,34 @@ Then('I click in back to posts option to return', async function() {
   posts = new Posts(this.driver);
   posts.backToPostsButton();
 })
+
+When('I try to create a new member but I click on Members option', async function() {
+  let members = new Members(this.driver);
+
+  members.typeNewMemberFieldsAndReturn(
+    "Kristopher N. Pimental"
+    , "KristopherNPimental@gustr.com"
+    , "Editor"
+    , "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+});
+
+Then('Should be visible a modal dialog asking me if I want to leave', async function() {
+  let modalDialogElement = this.driver.$(
+    'div#fullscreen-modal-action > div[data-test-modal="unsaved-settings"]');
+  let isDefined = (undefined !== modalDialogElement 
+                && null !== modalDialogElement);
+
+  assert.notEqual(false, isDefined);
+});
+
+When('I click on Leave option of the modal dialog', async function() {
+  let members = new Members(this.driver);
+  members.clickLeaveButtonModalDialog();
+});
+
+//Scenario #18
+Then(`The members should'nt increased`, async function() {
+  let members = new Members(this.driver);
+
+  assert.equal(actualMembers, members.getActualMembers());
+});
