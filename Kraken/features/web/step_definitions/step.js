@@ -226,7 +226,6 @@ When("I click cancel delete", async function () {
 });
 
 //Escenario #15
-
 When('I click members', async function () {
   members = new Members(this.driver);
   await members.clickMembers();
@@ -266,11 +265,27 @@ When('The update button is enabled', async function() {
 Then('I click in back to posts option to return', async function() {
   posts = new Posts(this.driver);
   await posts.backToPostsButton();
-})
+});
+
 When('I create a new member', async function () {
   members = new Members(this.driver);
   await members.createNewMember("nombre","email@email.com","new member for tests");
-})
+});
+
+//Scenario #16
+When('I create a new member with the email {kraken-string}', async function (wrongEmail) {
+  members = new Members(this.driver);
+  await members.createNewMember(
+    "nombre"
+    , wrongEmail
+    , "new member for tests");
+});
+
+Then('The validation should be Invalid Email', async function() {
+  let validationText = await members.getInvalidResponse('#member-email > p.response');
+
+  assert.equal(validationText, "Invalid Email.");
+});
 
 Then('member state should be created', async function () {
   const text = await members.getState();

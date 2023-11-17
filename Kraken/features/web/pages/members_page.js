@@ -34,7 +34,18 @@ class Members {
         return await element.getText();
       }
       
+      /**
+       * Retorna el mensaje de respuesta de validación dado un selector.
+       * 
+       * @param {string} selector : Nombre del selector al cual se necesita 
+       *                            buscar el mensaje de validación
+       * @returns {string}
+       */
+      async getInvalidResponse(selector) {
+        let element = await this.driver.$(selector)
 
+        return await element.getText();
+      }
 
     }
 
