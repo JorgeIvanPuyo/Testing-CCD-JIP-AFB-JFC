@@ -9,6 +9,10 @@ for /f "delims=" %%F in ('dir /on /b /a-d "%temp%\*.feature"') do (
     del "%features%\%%~nxF"
 
     echo Escenario "%%~nxF" Ejecutado
+
+    for /d %%D in ("%temp%\lighthouse*") do (
+        rd /s /q "%%D"
+    )
 )
 
 echo Se han ejecutado todos los escenarios de prueba
