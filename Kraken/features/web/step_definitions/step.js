@@ -48,6 +48,15 @@ async function takeScreenshot() {
   console.log(`Screenshot saved: ${screenshotPath}`);
 }
 
+// Función para eliminar el contenido de una carpeta
+function clearFolder(folderPath) {
+  const files = fs.readdirSync(folderPath);
+  for (const file of files) {
+    const filePath = path.join(folderPath, file);
+    fs.unlinkSync(filePath);
+  }
+}
+
 //Tomar screenshots
 When("I take screenshot", async function () {
   browser = this.driver;
