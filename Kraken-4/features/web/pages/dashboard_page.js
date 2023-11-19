@@ -13,8 +13,13 @@ class Dashboard {
         return await element.click();
     }
 
+  /**
+   * Function that clicks on New Post icon. 
+   * 
+   * @returns {*} Triggers a click event.
+   */
     async clickPostsIcon() {
-        let element = await this.driver.$('[data-test-nav="new-story"]');
+        let element = await this.driver.$('a[href="#/editor/post/"]');
         return await element.click();
     }
 
