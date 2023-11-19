@@ -25,7 +25,7 @@ $cancelButton;
         }
     getDraftPostToDelete() {
             // Selecciona el primer post con la etiqueta 'Draft' 
-            return this.cy.get('li.gh-posts-list-item:contains("Draft")').first();
+            return this.cy.get('li.gh-list-row.gh-posts-list-item').contains('Draft').first();
         }
     getCancelButton() {
         return this.cy.get('button').contains('Cancel');
