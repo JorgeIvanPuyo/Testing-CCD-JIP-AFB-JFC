@@ -1,10 +1,14 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
+const Members = require('../pages/members_page');
 const properties = require('../../../properties.json');
 const postsArray = require('../../../ghost-post.json');
+const { faker } = require('@faker-js/faker');
 
 let loginPage;
 let dashboard;
@@ -12,6 +16,53 @@ let posts;
 let members;
 let count = 0;
 let newCount = 0;
+let actualMembers = 0;
+let newMembers = 0;
+
+// Variables para gestionar screenshots
+let browser;
+let scenarioFolder;
+let stepCount = 0;
+
+//Función para crear carpeta, limpiarla e iniciar variable stepCount
+Before(function (scenario) {
+  scenarioFolder = path.join(__dirname, '..', 'screenshots', scenario.pickle.name.replace(/ /g, '_'));
+
+  if (fs.existsSync(scenarioFolder)) {
+    clearFolder(scenarioFolder);
+  } else {
+    fs.mkdirSync(scenarioFolder, { recursive: true });
+  }
+
+  stepCount = 0; 
+});
+
+// Función para tomar capturas de pantalla con nombre y ubicación personalizados
+async function takeScreenshot() {
+  stepCount++;
+
+  const screenshotName = `step${stepCount}_screenshot.png`;
+  const screenshotPath = path.join(scenarioFolder, screenshotName);
+
+  await browser.saveScreenshot(screenshotPath);
+  console.log(`Screenshot saved: ${screenshotPath}`);
+}
+
+// Función para eliminar el contenido de una carpeta
+function clearFolder(folderPath) {
+  const files = fs.readdirSync(folderPath);
+  for (const file of files) {
+    const filePath = path.join(folderPath, file);
+    fs.unlinkSync(filePath);
+  }
+}
+
+//Tomar screenshots
+When("I take screenshot", async function () {
+  browser = this.driver;
+  await takeScreenshot();
+});
+
 //Login
 When(
   "I login ghost {kraken-string} and {kraken-string}",
@@ -62,8 +113,9 @@ When("I click new post", async function () {
 
 When("I create a new post", async function () {
   posts = new Posts(this.driver);
+  let content = faker.lorem.paragraph();
   await posts.enterTittle("TittleNewPost");
-  await posts.enterContent("Content for Test New Post Scenario.");
+  await posts.enterContent(content);
 });
 
 When("I publish the post", async function () {
@@ -149,7 +201,7 @@ When('I click on a post', async function() {
 
 When("I click in unpublish button", async function () {
   posts = new Posts(this.driver);
-  await posts.unplublishPost();
+  await posts.unpublishPost();
 });
 
 When("I click on confirm unpublish", async function () {
@@ -257,20 +309,27 @@ When('I modify the post body', async function() {
   await posts.enterContent('Duis ante ligula, congue id ipsum ut, malesuada tincidunt massa.');
 })
 
-When('The update button is enabled', async function() {
-  let updateButton = this.driver.$('button[data-test-button="publish-save"]')
-
-  assert.notEqual(undefined, updateButton.disabled);
-})
-
-Then('I click in back to posts option to return', async function() {
-  posts = new Posts(this.driver);
-  await posts.backToPostsButton();
-})
 When('I create a new member', async function () {
   members = new Members(this.driver);
-  await members.createNewMember("nombre","email@email.com","new member for tests");
+  let nombre = faker.person.fullName();
+  let email = faker.internet.email();
+  let note = faker.lorem.sentence();
+  await members.createNewMember(nombre,email,note);
 })
+
+//Scenario #16
+When('I create a new member with the email {kraken-string}', async function (wrongEmail) {
+  members = new Members(this.driver);
+  await members.createNewMember(
+    "nombre"
+    , wrongEmail
+    , "new member for tests");
+});
+
+Then('The validation should be Invalid email', async function() {
+  let validationText = await members.getInvalidResponse('#member-email > p.response');
+  assert.equal(validationText, "Invalid Email.");
+});
 
 Then('member state should be created', async function () {
   const text = await members.getState();
@@ -297,3 +356,48 @@ Then('I click in back to posts option to return', async function() {
   posts = new Posts(this.driver);
   posts.backToPostsButton();
 })
+
+
+When('I try to create a new member but I click on Members option', async function() {
+  let members = new Members(this.driver);
+
+  members.typeNewMemberFieldsAndReturn(
+    "Kristopher N. Pimental"
+    , "KristopherNPimental@gustr.com"
+    , "Editor"
+    , "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+});
+
+Then('Should be visible a modal dialog asking me if I want to leave', async function() {
+  let modalDialogElement = this.driver.$(
+    'div#fullscreen-modal-action > div[data-test-modal="unsaved-settings"]');
+  let isDefined = (undefined !== modalDialogElement 
+                && null !== modalDialogElement);
+
+  assert.notEqual(false, isDefined);
+});
+
+When('I click on Leave option of the modal dialog', async function() {
+  let members = new Members(this.driver);
+  members.clickLeaveButtonModalDialog();
+});
+
+When('I click on Stay option of the modal dialog', async function() {
+  let members = new Members(this.driver);
+  members.clickStayButtonModalDialog();
+});
+
+//Scenario #18
+
+Then('The members should be increased', async function() {
+  let members = new Members(this.driver);
+
+  assert.notEqual(actualMembers, members.getActualMembers());
+});
+
+Then(`The members should'nt increased`, async function() {
+  let members = new Members(this.driver);
+
+  assert.equal(actualMembers, members.getActualMembers());
+});
+

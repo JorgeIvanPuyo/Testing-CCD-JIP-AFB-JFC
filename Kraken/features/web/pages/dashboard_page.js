@@ -4,7 +4,7 @@ class Dashboard {
     }
 
     async clickPostsButton() {
-        let element = await this.driver.$('#ember19');
+        let element = await this.driver.$('[href="#/posts/"]');
         return await element.click();
     }
 
