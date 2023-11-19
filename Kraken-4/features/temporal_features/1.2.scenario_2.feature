@@ -1,28 +1,26 @@
-Feature: Escenarios 1 de prueba Ghost con Kraken
+Feature: Escenario 2 de prueba Ghost Kraken
 
-@user1 @web
-Scenario: Escenario 1. Login, navegar, crear y validar un nuevo post (dando click en texto Posts)
+@user2 @web
+#Escenario 2. Login, navegar, crear y validar un nuevo post (dando click en icono new Post)
+Scenario: Escenario 2.
   Given I navigate to page "<URL>"
   When I login ghost "<USERNAME1>" and "<PASSWORD1>"
   And I wait for 2 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
+  #Screenshot1
+  And I take screenshot
 
-  When I click posts
+  When I click posts icon
   And I wait for 2 seconds 
   Then the URL should be posts "<EXPECTED_URL_EDITOR_POSTS>"
-
+  #Screenshot2
+  And I take screenshot
+  
   And I create a new post 
   And I wait for 1 seconds
   And I publish the post
   And I wait for 2 seconds
   When I navigate to page "<EXPECTED_URL_POSTS>"
-  And I wait for 5 seconds
-  # Then I send a signal to user 2 containing "Escenario completo"
-
-
-
-
-
-
-
-
+  And I wait for 2 seconds
+  #Screenshot3
+  And I take screenshot
