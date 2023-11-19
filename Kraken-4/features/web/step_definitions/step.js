@@ -1,5 +1,7 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
@@ -10,8 +12,54 @@ let loginPage;
 let dashboard;
 let posts;
 let members;
-var count = 0;
+let count = 0;
 let newCount = 0;
+var postSelectedInDraftStatus = "";
+
+// Variables para gestionar screenshots
+let browser;
+let scenarioFolder;
+let stepCount = 0;
+
+//Función para crear carpeta, limpiarla e iniciar variable stepCount
+Before(function (scenario) {
+  scenarioFolder = path.join(__dirname, '..', 'screenshots', scenario.pickle.name.replace(/ /g, '_'));
+
+  if (fs.existsSync(scenarioFolder)) {
+    clearFolder(scenarioFolder);
+  } else {
+    fs.mkdirSync(scenarioFolder, { recursive: true });
+  }
+
+  stepCount = 0; 
+});
+
+// Función para tomar capturas de pantalla con nombre y ubicación personalizados
+async function takeScreenshot() {
+  stepCount++;
+
+  const screenshotName = `step${stepCount}_screenshot.png`;
+  const screenshotPath = path.join(scenarioFolder, screenshotName);
+
+  await browser.saveScreenshot(screenshotPath);
+  console.log(`Screenshot saved: ${screenshotPath}`);
+}
+
+// Función para eliminar el contenido de una carpeta
+function clearFolder(folderPath) {
+  const files = fs.readdirSync(folderPath);
+  for (const file of files) {
+    const filePath = path.join(folderPath, file);
+    fs.unlinkSync(filePath);
+  }
+}
+
+//Tomar screenshots
+When("I take screenshot", async function () {
+  browser = this.driver;
+  await takeScreenshot();
+});
+
 //Login
 When(
   "I login ghost {kraken-string} and {kraken-string}",
@@ -47,6 +95,7 @@ When("I click posts icon", async function () {
 });
 
 Then("the URL should be posts {kraken-string}", async function (expectedUrl) {
+  dashboard = new Dashboard(this.driver);
   const currentUrl = await dashboard.getCurrentUrl();
   assert.strictEqual(
     currentUrl,
@@ -110,19 +159,40 @@ Then("The list of posts should increment", async function () {
 });
 
 Then("I should see Draft on the post", async function () {
-  const draftPost = await posts.getDraftFirstPost();
-  assert.strictEqual(
-    draftPost.includes("Draft"),
-    true,
-    `Post does not include Draft`
-  );
+  posts = new Posts(this.driver);
+  const allPosts = await posts.getAllPosts();
+  let isInDraftStatus = false;
+
+  for (let post of allPosts) {
+    let postUrl = await post.$('.gh-post-list-status');
+    let hrefAttribute = await postUrl.getAttribute('href');
+    let columnStatus = await post.$('.gh-post-list-status div span');
+    let statusText = await columnStatus.getText();
+
+    if (hrefAttribute == postSelectedInDraftStatus) {
+      isInDraftStatus = (statusText == properties.POST_DRAFT_STATUS.toUpperCase());
+    }
+  }
+
+  assert.equal(isInDraftStatus, true);
 });
 
 //Scenario #4
-
 When("I click edit post", async function () {
   posts = new Posts(this.driver);
-  await posts.clickEditPost();
+  const allPosts = await posts.getAllPosts();
+
+  for (let post of allPosts) {
+    let columnStatus = await post.$('.gh-post-list-status div span');
+    let postUrl = await post.$('.gh-post-list-status');
+    let statusText = await columnStatus.getText();
+
+    if (statusText == properties.POST_DRAFT_STATUS.toUpperCase()) {
+      postSelectedInDraftStatus = await postUrl.getAttribute('href');
+      await columnStatus.click();
+      break;
+    }
+  }
 });
 
 When("I edit a draft post", async function () {
@@ -295,4 +365,9 @@ When('The update button is enabled', async function() {
 Then('I click in back to posts option to return', async function() {
   posts = new Posts(this.driver);
   posts.backToPostsButton();
-})
+});
+
+When('I click posts to see the list', async function(){
+  posts = new Posts(this.driver);
+  posts = posts.goToPostsList();
+});
