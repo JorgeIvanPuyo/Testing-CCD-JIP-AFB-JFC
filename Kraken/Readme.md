@@ -1,6 +1,6 @@
 ## Random testing Kraken - Ghost
 
-Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghost](https://ghost.org/)
+Este proyecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghost](https://ghost.org/)
 
 ### Para ejecutar
 
@@ -22,31 +22,28 @@ Prerequisitos
 
 
 ### Observaciones
-- Se debe tener corriendo Ghost de forma local.
-- Se debe modificar las variables en el archivo properties.json, incluyendo la URL local donde corre Ghost, el USERNAME y el PASSWORD de un usuario registrado en la instancia de Ghost local.
-- Se recomienda tener Ghost con por lo menos un post en draft y un post published.
-- Se recomienda no tener ningun member agregado a la instancia de Ghost que se va a probar.
-- Correr las pruebas en orden secuencial, una a una en orden ascendente:
+- Se pueden encontrar las 2 versiones de Ghost trabajadas en las siguientes URLs:  
 
-1. `scenario_1.feature`
-2. `scenario_2.feature`
-3. `scenario_3.features`
-4. `scenario_4.feature`
-   <br>
+Ghost V4.48.0 -> http://157.230.86.220:4470/ghost  
+Ghost V5.72.0 -> http://157.230.86.220:5720/ghost  
 
-- ....
-  <br>
+Credenciales:  
+USR: example@test.com  
+PWD: Test123456  
 
-20. `scenario_20.feature`
+- En la carpeta [Ghost 5.72.0](../Kraken/features/temporal_features) encontrará los features desarrollados para Ghost 5.72 con toma de screenshots implementado    
+- En la carpeta [Ghost 4.48.0](../Kraken-4/features/temporal_features) encontrará los features desarrollados para Ghost 4.48 con toma de screenshots implementado
+- Si su sistema le permite correr los scripts ".features" de forma automatica, puede moverlos directamente a la carpeta features y ejecutar "npx kraken-node run".
+- Si su sistema solo le permite correr un script .feature a la vez, se implementó en windows un archivo "runKrakenGhost5.bat" y "runKrakenGhost4.bat", que realiza de forma automatica la tarea de mover los archivos ".feature" de la carpeta temporal a la carpeta de prueba y limpiar todo al finalizar, solo debe ejecutarlo y las pruebas se realizaran en orden, de forma secuencial y las screenshots quedaran guardadas en "/features/web/screenshots".
 
-### Reportes de algunas pruebas ejecutadas
-[Scenario 1](reportes1-15/KrakenEscenario1)  
-[Scenario 2](reportes1-15/KrakenEscenario2)  
-[Scenario 3](reportes1-15/KrakenEscenario3)  
-[Scenario 4](reportes1-15/KrakenEscenario4)  
-[Scenario 5](reportes1-15/KrakenEscenario5)  
-[Scenario 11](reportes1-15/KrakenEscenario11)  
-[Scenario 12](reportes1-15/KrakenEscenario12)  
-[Scenario 13](reportes1-15/KrakenEscenario13)  
-[Scenario 14](reportes1-15/KrakenEscenario14)  
-[Scenario 15](reportes1-15/KrakenEscenario15)  
+### Para generar el reporte con ResembleJS  
+
+- En la carpeta [ResembleJS Kraken](../resembleKraken) se encuentra el archivo "index.js" encargado de hacer la comparación de imagenes y generar el reporte html.
+- Por favor configure el path donde quedaron guardados los screenshots de Ghost5 y Ghost4 en las lineas 71 y 72 de este archivo. Debe tener la forma:  
+      const imagePath1 = `C:/Users/user/krakenNode16/Kraken/features/web/screenshots/${scenario.name}/${step}_screenshot.png`;  
+      const imagePath2 = `C:/Users/user/krakenNode16/Kraken-4/features/web/screenshots/${scenario.name}/${step}_screenshot.png`;  
+- En la terminal, ubicado en el folder de [ResembleJS Kraken](../resembleKraken) ejecute el comando "node index.js"    
+- La comparación de imagenes se llevará acabo y se entregará el reporte html en la carpeta results, se genera un reporte por cada ejecución de resembler y se guarda en una carpeta que tiene como nombre el Timestamp de la  ejecución.
+
+
+### Video de ejecución de pruebas en las 2 versiones de Ghost y la generación del reporte en ResembleJS
