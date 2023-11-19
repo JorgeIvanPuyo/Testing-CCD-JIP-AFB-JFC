@@ -30,9 +30,10 @@ export class CreatePostPage {
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
-      this.$addLabel = cy.get("a[data-test-nav='posts']");
+      this.$addLabel = cy.get(".gh-nav-list-new .ember-view");
     }
-    this.$addLabel.click();
+    console.log("this.$addLabel: ", this.$addLabel);
+    this.$addLabel[0].click();
 
     if (!this.$addPostButton) {
       this.$addPostButton = cy.get("a[data-test-new-post-button]");
