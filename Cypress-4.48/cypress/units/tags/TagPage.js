@@ -18,15 +18,15 @@ export class TagPage {
     }
     
     getTagNameInput() {
-        return this.cy.get('input[name="name"][data-test-input="tag-name"]');
+        return this.cy.get('input[type="text"][name="name"]');
     }
     
     getTagAccentColorInput() {
-        return this.cy.get('input[name="accent-color"][data-test-input="accentColor"]');
+        return this.cy.get('input[name="accent-color"].gh-input');
     }
     
     getTagSlugInput() {
-        return this.cy.get('input[name="slug"][data-test-input="tag-slug"]');
+        return this.cy.get('input#tag-slug');
     }
     
     getTagSlugPreview() {
@@ -34,11 +34,11 @@ export class TagPage {
     }
     
     getTagDescriptionTextarea() {
-        return this.cy.get('textarea[name="description"][data-test-input="tag-description"]');
+        return this.cy.get('textarea#tag-description');
     }
     
     getSaveButton() {
-        return this.cy.get('span[data-test-task-button-state="idle"]').contains('Save');
+        return this.cy.get('button.gh-btn.gh-btn-primary.gh-btn-icon').contains('Save');
     }
     
 
