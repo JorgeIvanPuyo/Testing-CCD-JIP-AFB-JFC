@@ -8,26 +8,59 @@ describe("Como usuario quiero eliminar un post en estado 'Draft' para borrar una
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 
+    cy.screenshot({
+      capture: "viewport",
+      scale: true,
+    });
+
     cy.window().then((win) => {
-      // Give: Usuario ingrese al login
       const signinPage = new SigninPage(cy);
-      // When: digite sus datos y haga click sobre entrar
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
-      // Then: el usuario ingresa al dashboard
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
       homePage.getUrl().should("contain", "/dashboard");
 
-        const post = new DeletePostPage(cy)
-        cy.wait(1000);
-        post.navigateToPosts();
-        // Usar el nuevo método para seleccionar un post en estado 'Draft'
-        post.getDraftPostToDelete().click();
-        cy.wait(300);
-        post.getSettingsButton().click();
+      const post = new DeletePostPage(cy)
+      cy.wait(1000);
+      post.navigateToPosts();
 
-        // Continuar con la lógica para eliminar el post
-        post.getDeleteButton().click();
-        post.getDeleteConfirmationButton().click();
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
 
+      post.getDraftPostToDelete().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      cy.wait(300);
+      post.getSettingsButton().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      post.getDeleteButton().click();
+      post.getDeleteConfirmationButton().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
     });
 });
 });

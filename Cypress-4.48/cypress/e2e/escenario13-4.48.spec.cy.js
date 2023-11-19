@@ -8,29 +8,67 @@ describe("Como usuario quiero eliminar un post en estado 'Draft' para borrar una
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 
-    cy.window().then((win) => {
-      // Give: Usuario ingrese al login
-      const signinPage = new SigninPage(cy);
-      // When: digite sus datos y haga click sobre entrar
-      const homePage = signinPage.loginValidUser(USER, PASSWORD);
-      // Then: el usuario ingresa al dashboard
-      homePage.getUrl().should("contain", "/dashboard");
-
-        const post = new DeletePostPage(cy)
-        cy.wait(1000);
-
-        post.navigateToPosts();
-
-        // Usar el nuevo método para seleccionar un post en estado 'Draft' 
-        post.getDraftPostToDelete().click();
-        post.getSettingsButton().click();
-
-        // Continuar con la lógica para eliminar el post
-        post.getDeleteButton().click();
-        post.getCancelButton().click();
-
+    cy.screenshot({
+      capture: "viewport",
+      scale: true,
     });
 
-    
+    cy.window().then((win) => {
+      const signinPage = new SigninPage(cy);
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      const homePage = signinPage.loginValidUser(USER, PASSWORD);
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      homePage.getUrl().should("contain", "/dashboard");
+
+      const post = new DeletePostPage(cy)
+      cy.wait(1000);
+
+      post.navigateToPosts();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      // Usar el nuevo método para seleccionar un post en estado 'Draft' 
+      post.getDraftPostToDelete().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      post.getSettingsButton().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      // Continuar con la lógica para eliminar el post
+      post.getDeleteButton().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
+      post.getCancelButton().click();
+
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+    });
 });
 });
