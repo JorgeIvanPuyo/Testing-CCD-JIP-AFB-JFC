@@ -51,6 +51,10 @@ memberExists(memberEmail) {
     });
 }
 
+getLabelMember(){
+    return this.cy.get('.ember-power-select-trigger-multiple-input');    ;
+
+}
 memberDoesNotExist(memberEmail) {
     return this.cy.get('table.gh-list').then($table => {
         // Si la tabla no contiene el email, pasa la aserción
