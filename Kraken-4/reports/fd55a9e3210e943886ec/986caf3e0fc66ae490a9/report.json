@@ -1,0 +1,181 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "escenarios-de-prueba-ghost;escenario-1.-login,-navegar,-crear-y-validar-un-nuevo-post",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Escenario 1. Login, navegar, crear y validar un nuevo post",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "failed",
+              "duration": 1433000000,
+              "error_message": "The CHROME_PATH environment variable must be set to a Chrome/Chromium executable no older than Chrome stable.\nError\n    at new LauncherError (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/chrome-launcher/dist/utils.js:26:22)\n    at new ChromePathNotSetError (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/chrome-launcher/dist/utils.js:33:9)\n    at Object.linux (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/chrome-launcher/dist/chrome-finder.js:128:15)\n    at Function.getFirstInstallation (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/chrome-launcher/dist/chrome-launcher.js:126:51)\n    at Launcher.launch (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/chrome-launcher/dist/chrome-launcher.js:187:43)\n    at launch (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/chrome-launcher/dist/chrome-launcher.js:35:20)\n    at launchChrome (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/devtools/build/launcher.js:80:55)\n    at launch (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/devtools/build/launcher.js:181:16)\n    at Function.newSession (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/devtools/build/index.js:54:54)\n    at Object.remote (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/webdriverio/build/index.js:77:43)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I navigate to page \"<URL>\"",
+            "match": {
+              "location": "node_modules/kraken-node/lib/steps/web.js:41"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "I login ghost \"<USERNAME1>\" and \"<PASSWORD1>\"",
+            "match": {
+              "location": "features/web/step_definitions/step.js:11"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I wait for 2 seconds",
+            "match": {
+              "location": "node_modules/kraken-node/lib/steps/both.js:73"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "the URL should be dashboard \"<EXPECTED_URL_DASHBOARD>\"",
+            "match": {
+              "location": "features/web/step_definitions/step.js:18"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I click posts",
+            "match": {
+              "location": "features/web/step_definitions/step.js:23"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I wait for 2 seconds",
+            "match": {
+              "location": "node_modules/kraken-node/lib/steps/both.js:73"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "the URL should be posts \"<EXPECTED_URL_POSTS>\"",
+            "match": {
+              "location": "features/web/step_definitions/step.js:28"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "I click new post",
+            "match": {
+              "location": "features/web/step_definitions/step.js:33"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I create a new post",
+            "match": {
+              "location": "features/web/step_definitions/step.js:38"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I wait for 5 seconds",
+            "match": {
+              "location": "node_modules/kraken-node/lib/steps/both.js:73"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "failed",
+              "duration": 4000000,
+              "error_message": "TypeError: Cannot read properties of undefined (reading 'deleteSession')\n    at WebClient.<anonymous> (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/WebClient.js:109:59)\n    at step (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/WebClient.js:59:23)\n    at Object.next (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/WebClient.js:40:53)\n    at /home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/WebClient.js:34:71\n    at new Promise (<anonymous>)\n    at __awaiter (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/WebClient.js:30:12)\n    at WebClient.stop (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/WebClient.js:104:16)\n    at WebClient.<anonymous> (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/Client.js:109:51)\n    at step (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/Client.js:67:23)\n    at Object.next (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/Client.js:48:53)\n    at fulfilled (/home/gato/UniAndes/Semester1/PAS/Testing-CCD-JIP-AFB-JFC/Kraken/node_modules/kraken-node/lib/clients/Client.js:39:58)"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@user1",
+            "line": 3
+          },
+          {
+            "name": "@web",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "escenarios-de-prueba-ghost",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Escenarios de prueba Ghost",
+    "tags": [],
+    "uri": "features/my_first.feature"
+  }
+]
