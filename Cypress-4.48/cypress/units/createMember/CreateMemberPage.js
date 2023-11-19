@@ -38,7 +38,7 @@ getMembersBackLink() {
     return this.cy.get('a[data-test-link="members-back"]');
 }
 getStayButton() {
-    return this.cy.get('button[data-test-stay-button]');
+    return this.cy.contains('button.gh-btn', 'Stay');
 }
 
 getLeaveButton() {
