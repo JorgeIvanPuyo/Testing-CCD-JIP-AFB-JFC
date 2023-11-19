@@ -41,7 +41,7 @@ Before(function (scenario) {
 async function takeScreenshot() {
   stepCount++;
 
-  const screenshotName = `step${stepCount}_screenshot_${Date.now()}.png`;
+  const screenshotName = `step${stepCount}_screenshot.png`;
   const screenshotPath = path.join(scenarioFolder, screenshotName);
 
   await browser.saveScreenshot(screenshotPath);
