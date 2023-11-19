@@ -10,7 +10,7 @@ let loginPage;
 let dashboard;
 let posts;
 let members;
-let count = 0;
+var count = 0;
 let newCount = 0;
 //Login
 When(

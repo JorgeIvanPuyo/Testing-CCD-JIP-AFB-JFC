@@ -10,7 +10,7 @@ class Posts {
    * @returns {*} Triggers a click event.
    */
   async clickNewPostButton() {
-    let element = await this.driver.$('#ember78');
+    let element = await this.driver.$('a[href="#/editor/post/"]');
     return await element.click();
   }
 
@@ -108,18 +108,33 @@ class Posts {
     return await element.click();
   }
 
+  /**
+   * Reference a button called Posts that returns to the posts list.
+   * 
+   * @returns {*} A clickable event to turn backk to the posts list.
+   */
   async clickPosts() {
-    let element = await this.driver.$('[data-test-link="posts"]');
+    let element = await this.driver.$('a.gh-editor-back-button');
     return await element.click();
   }
 
+  /**
+   * Counts the amount of post registered.
+   * 
+   * @returns {number} The amount of post registered.
+   */
   async countPosts() {
     let element = await this.driver.$$(".gh-list-row");
     return await element.length;
   }
 
+  /**
+   * Get the first post from the posts list.
+   * 
+   * @returns {*} An element with the post information.
+   */
   async getDraftFirstPost() {
-    let firstPost = await this.driver.$(".gh-list-row:first-child");
+    let firstPost = await this.driver.$(".gh-list-row.gh-posts-list-item:first-child");
     return await firstPost.getText();
   }
 
