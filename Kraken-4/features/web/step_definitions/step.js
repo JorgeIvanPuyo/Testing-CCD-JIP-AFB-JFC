@@ -1,5 +1,7 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
@@ -13,6 +15,50 @@ let members;
 let count = 0;
 let newCount = 0;
 var postSelectedInDraftStatus = "";
+
+// Variables para gestionar screenshots
+let browser;
+let scenarioFolder;
+let stepCount = 0;
+
+//Función para crear carpeta, limpiarla e iniciar variable stepCount
+Before(function (scenario) {
+  scenarioFolder = path.join(__dirname, '..', 'screenshots', scenario.pickle.name.replace(/ /g, '_'));
+
+  if (fs.existsSync(scenarioFolder)) {
+    clearFolder(scenarioFolder);
+  } else {
+    fs.mkdirSync(scenarioFolder, { recursive: true });
+  }
+
+  stepCount = 0; 
+});
+
+// Función para tomar capturas de pantalla con nombre y ubicación personalizados
+async function takeScreenshot() {
+  stepCount++;
+
+  const screenshotName = `step${stepCount}_screenshot.png`;
+  const screenshotPath = path.join(scenarioFolder, screenshotName);
+
+  await browser.saveScreenshot(screenshotPath);
+  console.log(`Screenshot saved: ${screenshotPath}`);
+}
+
+// Función para eliminar el contenido de una carpeta
+function clearFolder(folderPath) {
+  const files = fs.readdirSync(folderPath);
+  for (const file of files) {
+    const filePath = path.join(folderPath, file);
+    fs.unlinkSync(filePath);
+  }
+}
+
+//Tomar screenshots
+When("I take screenshot", async function () {
+  browser = this.driver;
+  await takeScreenshot();
+});
 
 //Login
 When(

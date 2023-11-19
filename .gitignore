@@ -198,4 +198,7 @@ Kraken/.kraken
 Kraken/reports
 Kraken-4/reports
 
+# Resemble Files
+resembleKraken/results/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,cypressio,windows,linux

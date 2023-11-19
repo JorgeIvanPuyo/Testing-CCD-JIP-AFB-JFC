@@ -4,12 +4,12 @@ class Posts {
   }
 
   async clickNewPostButton() {
-    let element = await this.driver.$("#ember78");
+    let element = await this.driver.$('[data-test-new-post-button]');
     return await element.click();
   }
 
   async enterTittle(tittle) {
-    let element = await this.driver.$("#ember93");
+    let element = await this.driver.$('[data-test-editor-title-input]');
     return await element.setValue(tittle);
   }
 
@@ -19,9 +19,7 @@ class Posts {
   }
 
   async enterContent(content) {
-    let element = await this.driver.$(
-      "#ember89 > div.gh-koenig-editor.relative.z-0 > div.gh-koenig-editor-pane.flex.flex-column.mih-100 > div:nth-child(3) > div > div > div:nth-child(1) > div > p"
-    );
+    let element = await this.driver.$('[role="textbox"]');
     return await element.setValue(content);
   }
 
@@ -131,6 +129,16 @@ class Posts {
     let settingsButton = await this.driver.$('button[title="Settings"]');
 
     return await settingsButton.click();
+  }
+
+  async unpublishPost() {
+    let unpublishButton = await this.driver.$('button[data-test-button="update-flow"]');
+    return await  unpublishButton.click();
+  }
+
+  async confirmUnpublish() {
+    let unpublishConfirmButton = await this.driver.$('button[data-test-button="revert-to-draft"]');
+    return await  unpublishConfirmButton.click();
   }
 }
 
