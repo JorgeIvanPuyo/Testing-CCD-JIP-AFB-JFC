@@ -42,8 +42,9 @@ getStayButton() {
 }
 
 getLeaveButton() {
-    return this.cy.get('button[data-test-leave-button]');
-}
+    return this.cy.contains('button.gh-btn.gh-btn-red', 'Leave');
+  }
+
 
 memberExists(memberEmail) {
     return this.cy.get('table.gh-list').contains('tr', memberEmail).then($el => {
