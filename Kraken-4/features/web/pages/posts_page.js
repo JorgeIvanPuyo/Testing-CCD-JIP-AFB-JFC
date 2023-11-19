@@ -1,5 +1,8 @@
 class Posts {
 
+  postTitleSelector   = 'textarea[placeholder="Post title"]';
+  postContentSelector = 'div[data-kg="editor"]';
+
   constructor(driver) {
     this.driver = driver;
   }
@@ -26,7 +29,7 @@ class Posts {
   }
 
   async deleteTittle() {
-    let element = await this.driver.$("[data-test-editor-title-input]");
+    let element = await this.driver.$(this.postTitleSelector);
     return await element.setValue("");
   }
 
@@ -42,7 +45,7 @@ class Posts {
   }
 
   async deleteContent() {
-    let element = await this.driver.$('[role="textbox"]');
+    let element = await this.driver.$(this.postContentSelector);
     return await element.setValue("");
   }
 
@@ -139,12 +142,17 @@ class Posts {
   }
 
   async clickEditPost() {
-    let element = await this.driver.$(".gh-list-data:first-child");
+    let element = await this.driver.$("ol:nth-child(2)");
     return await element.click();
   }
 
+  /**
+   * Get all item posts.
+   * 
+   * @returns {*} A list with posts with the selector gh-posts-list-item
+   */
   async getAllPosts() {
-    let element = await this.driver.$$(".gh-list-row");
+    let element = await this.driver.$$(".gh-posts-list-item");
     return await element;
   }
 
@@ -188,6 +196,12 @@ class Posts {
     let settingsButton = await this.driver.$('button[title="Settings"]');
 
     return await settingsButton.click();
+  }
+
+  async goToPostsList() {
+    let element = await this.driver.$('a[href="#/posts/"]');
+
+    return await element.click();
   }
 }
 
