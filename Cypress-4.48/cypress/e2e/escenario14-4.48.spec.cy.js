@@ -1,6 +1,8 @@
 import { APP_PAGE, USER, PASSWORD } from "../const";
 import { SigninPage } from "../units/login/SignInPage";
 import { ModifyPostPage } from "../units/modifyPost/ModifyPostPage";
+import { faker } from "@faker-js/faker";
+
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 describe("Como usuario quiero eliminar un post en estado 'Draft' para borrar una publicación", function () {
@@ -16,7 +18,7 @@ describe("Como usuario quiero eliminar un post en estado 'Draft' para borrar una
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
     const date= '2023-11-05';
-    const  url= "Cypress";
+    const  url= faker.lorem.word();
     const hours = "15:00";
     cy.wait(1000);
         const post = new ModifyPostPage(cy);
