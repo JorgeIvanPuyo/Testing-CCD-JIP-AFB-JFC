@@ -18,13 +18,13 @@ getNewMemberButton() {
 
 }
 getMemberNameInput() {
-    return this.cy.get('[data-test-input="member-name"]');
+    return this.cy.get('input#member-name[name="name"][type="text"]');
 }
 getMemberEmailInput() {
-    return this.cy.get('[data-test-input="member-email"]');
+    return this.cy.get('input[type="text"][name="email"]');
 }
 getSaveButton() {
-    return this.cy.get('span[data-test-task-button-state="idle"]').contains('Save');
+    return this.cy.contains('button', 'Save');
 }
 
 getEmberPowerSelectInput() {
@@ -32,7 +32,7 @@ getEmberPowerSelectInput() {
 }
 
 getMemberNoteTextarea() {
-    return this.cy.get('textarea.gh-member-details-textarea');
+    return this.cy.get('textarea#member-note[name="note"]');
 }
 getMembersBackLink() {
     return this.cy.get('a[data-test-link="members-back"]');

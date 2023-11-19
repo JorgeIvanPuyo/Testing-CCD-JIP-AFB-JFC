@@ -14,23 +14,24 @@ export class ModifyPostPage {
 
     getPublishedPostToModify() {
         // Selecciona el primer post con la etiqueta 'Draft' 
-        return this.cy.get('li.gh-posts-list-item:contains("Published")').first();
+        return this.cy.get('li.gh-list-row.gh-posts-list-item').contains('Published').first();
     }
 
     getPostDraftToModify() {
         // Selecciona el primer post con la etiqueta 'Draft' 
-        return this.cy.get('li.gh-posts-list-item:contains("Draft")').first();
+        return  this.cy.get('li.gh-list-row.gh-posts-list-item').contains('Draft').first();
     }
 
-    getPostSettings() {
-        return this.cy.get('[data-test-psm-trigger]');
+    getSettingsButton() {
+        return cy.get('button.settings-menu-toggle.gh-btn.gh-btn-editor.gh-btn-icon.icon-only.gh-btn-action-icon');
+
     }
 
     getPublisehModifyUrl() { return this.cy.get('#url').clear();}
 
     getPublishedModifyDate() { return this.cy.get('.gh-date-time-picker-date input[type="text"]').clear(); }
-    getPublisehModifyHours() { return this.cy.get('input[data-test-date-time-picker-time-input]').clear();}
-    getPublishedViewPost() {return this.cy.get('#entry-controls > div > div.settings-menu-content > form > section > div:nth-child(1) > a');}
+    getPublisehModifyHours() { return this.cy.get('.gh-date-time-picker-time input[type="text"]').clear(); }
+    getPublishedViewPost() {return this.cy.get('a.post-view-link');}
     getTagInputDiv() {
         return this.cy.get('#tag-input');
     }
@@ -48,6 +49,9 @@ export class ModifyPostPage {
         return this.cy.get('input.ember-power-select-trigger-multiple-input');
     }
     
+    getUrlPreviewDescription() {
+        return cy.get('.ghost-url-preview.description');
+      }    
     
     
 
