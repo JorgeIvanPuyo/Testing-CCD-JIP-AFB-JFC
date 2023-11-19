@@ -134,11 +134,11 @@ function createReport(datetime, results) {
         </div>
           <div class="imgline">
             <div class="imgcontainer">
-              <span class="imgname">Before</span>
+              <span class="imgname">Ghost 5.72.2</span>
               <img class="img2" src="${scenario.name}_${step.step}_before.png" label="Before">
             </div>
             <div class="imgcontainer">
-              <span class="imgname">After</span>
+              <span class="imgname">4.48.9</span>
               <img class="img2" src="${scenario.name}_${step.step}_after.png" label="After">
             </div>
             <div class="imgcontainer">
