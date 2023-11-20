@@ -27,8 +27,23 @@ describe("Como usuario quiero editar un post que no este publicado para actualiz
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       posts.clickPublishButton();
+
+      // ventana para revizar el post screenshot;
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
       posts.clickContinueAndReviewButton();
+
+      // Confirmar publicación;
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
       posts.goToEdit();
+      // Then: el usuario podra ver el post sin publicar
       posts.goToPostsList();
 
       // Given: a list of posts

@@ -31,6 +31,13 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       posts.clickPublishButton();
       posts.clickContinueAndReviewButton();
       posts.clickPublishPostRightNow();
+
+      // Post publicado screenshot;
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);

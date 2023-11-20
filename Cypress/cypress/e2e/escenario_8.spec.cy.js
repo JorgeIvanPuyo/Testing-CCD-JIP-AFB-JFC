@@ -50,6 +50,13 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
           editPostPage.fillPostDescription(newDescription);
           // When: el usuario intenta volver al listado de posta sin haber guardado cambios
           const alertDialogPage = editPostPage.goToPostsListWithOutSave();
+
+          // confirmar cambios screenshot;
+          cy.screenshot({
+            capture: "viewport",
+            scale: true,
+          });
+
           // Then: el usuario podra ver el aviso de confirmación de cambios y permanecer editando el post post
           const editPostPage2 = alertDialogPage.clickStayButton();
 

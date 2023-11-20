@@ -31,6 +31,12 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       posts.goToEdit();
       posts.goToPostsList();
 
+      // Lista de post screenshot;
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
+
       // Given: a list of posts
       const postList = new PostsListPage(cy);
       // When: el usuario busca un post por titulo

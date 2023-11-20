@@ -20,10 +20,6 @@ describe("Como usuario quiero ingresar a editar un post publicado pero sin modif
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
-
-      // Given: el usuario esta en el dashboard
-      // When: el usuario hace click sobre ver el listado de post
-      // Then: el usuario podra ver el listo de posts
       const postListPage = homePage.goToPostsList();
 
       // Given: el usuario selecciona un post publicado de la lista
@@ -33,6 +29,12 @@ describe("Como usuario quiero ingresar a editar un post publicado pero sin modif
       // Then: el usuario podra ver el boton de editas deshabilidato
       const $updateButton = createPostPage.getUpdateButton();
       $updateButton.should("be.disabled");
+
+      // Boton desahabilitado screenshot;
+      cy.screenshot({
+        capture: "viewport",
+        scale: true,
+      });
 
       // Given: el usuario si no ha modificado nada del post
       // When: el usuario regresa al listado de posts
