@@ -23,12 +23,23 @@ describe("Como usuario quiero crear miembros para gestionar mi comunidad", funct
 
       // When: El usuario crea un nuevo miembro
       members.getNewMemberButton().click();
+
+      // Agregar captura de pantalla después de hacer clic en "New Member"
+      cy.screenshot('Clic en "New Member"');
+
       cy.wait(1000);
       const memberName = faker.person.fullName();
       const memberEmail = faker.internet.email();
       members.getMemberNameInput().type(memberName);
       members.getMemberEmailInput().type(memberEmail);
+
+      // Agregar captura de pantalla después de ingresar datos y antes de hacer clic en "Save"
+      cy.screenshot('Ingreso de datos del nuevo miembro');
+
       members.getSaveButton().click();
+
+      // Agregar captura de pantalla después de hacer clic en "Save"
+      cy.screenshot('Clic en "Save"');
 
       // Then: El usuario ha creado el miembro y puede verificar su existencia
       // Aquí puedes agregar las verificaciones necesarias para confirmar la creación del miembro
