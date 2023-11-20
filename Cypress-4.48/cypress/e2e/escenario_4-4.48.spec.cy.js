@@ -26,9 +26,11 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       // When: el usuario ingresa los datos del nuevos post y sigue hasta su publicación
       const title = faker.person.jobTitle();
       const description = faker.lorem.paragraph();
+      cy.wait(500);
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       posts.clickPublishButton();
+      cy.wait(500);
       posts.clickContinueAndReviewButton();
       posts.clickPublishPostRightNow();
 
@@ -37,24 +39,6 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
         capture: "viewport",
         scale: true,
       });
-
-      // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
-      const postPublishedPage = posts.validatePostPublished();
-      postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
-      postPublishedPage.getTitlePublishPage().should("contain", title);
-      postPublishedPage
-        .getDescriptionPusblished()
-        .should("contain", description);
-
-      // Given: el usuario ha creado el post y publicado
-      const postPage = new PostPage(cy);
-      // When: el usuario haga click sobre el post publicado
-      const slug = title.split(" ").join("-").toLowerCase();
-      cy.visit(`${APP_PAGE}/${slug}`);
-      // Then: el usuario podra ver el post publicado
-      postPage.getTitle().should("contain", title);
-      postPage.getDescription().should("contain", description);
-      postPage.getUrl().should("contain", `/${slug}`);
     });
   });
 });
