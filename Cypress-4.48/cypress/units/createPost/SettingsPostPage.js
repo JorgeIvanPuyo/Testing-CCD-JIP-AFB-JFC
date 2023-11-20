@@ -23,7 +23,7 @@ export class SettingsPostPage {
 
   clickDeletePost() {
     if (!this.$deletePostButton) {
-      this.$deletePostButton = cy.get(".settings-menu-delete-button button");
+      this.$deletePostButton = cy.get(".settings-menu-delete-button");
     }
 
     this.$deletePostButton.click();

@@ -101,7 +101,7 @@ export class CreatePostPage {
 
   openSettings() {
     if (!this.$settingsButton) {
-      this.$settingsButton = cy.get("button[data-test-psm-trigger]");
+      this.$settingsButton = cy.get(".settings-menu-toggle.gh-btn");
     }
 
     this.$settingsButton.click();
@@ -129,10 +129,17 @@ export class CreatePostPage {
 
   clickUpDateButton() {
     if (!this.$updateButton) {
-      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+      this.$updateButton = cy.get(
+        ".gh-publishmenu .ember-basic-dropdown-trigger"
+      );
     }
 
     this.$updateButton.click();
+  }
+
+  clickPublish() {
+    const publish = this.cy.get(".gh-publishmenu-footer .gh-btn.gh-btn-black");
+    publish.click();
   }
 
   unpublishPost() {

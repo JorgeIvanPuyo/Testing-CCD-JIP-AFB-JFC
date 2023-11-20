@@ -6,7 +6,7 @@ import { faker } from "@faker-js/faker";
 import { PostPage } from "../units/post/postPage";
 import { PostsListPage } from "../units/postsList/PostsListPage";
 
-describe("Como usuario quiero actualizar un post publicado para tener actualizada a mi audiencia", function () {
+describe("Como usuario quiero intentar eliminar un post pero no hacerlo para validar el mensaje de confirmación de eliminación de un post", function () {
   it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
@@ -18,15 +18,18 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
+      cy.wait(1000);
 
       // Given: el usuario esta en el dashboard
       // When: el usuario hace click sobre ver el listado de post
       const postListPage = homePage.goToPostsList();
+      cy.wait(1000);
       // Then: el usuario podra ver el listo de posts
       postListPage.scrollBotton();
 
       // Given: una lista de post
       const postPublished = postListPage.getPostPublished();
+      cy.wait(1000);
       // When: el usuario selecciona un post publicado
       postPublished
         .children("a")
@@ -34,22 +37,23 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
         .invoke("text")
         .then((text) => {
           const trimText = text.trim();
-          const newTitle = faker.lorem.words();
-          const newDescription = faker.lorem.paragraph();
-          // Then: el usuario podra editar el post
+          // Then: el usuario podra ver el listo de posts
           const postListPage2 = new PostsListPage(cy);
           const postSelected = postListPage2.getPostByTitle(trimText);
           const editPostPage = postListPage2.goToEditPostPublish(postSelected);
 
-          // Give: desde un posr editado sin actualizar
-          editPostPage.fillPostTitle(newTitle);
-          editPostPage.fillPostDescription(newDescription);
-          // When: el usuario guarde sus cambios y regrese a el listado de post
-          editPostPage.clickUpDateButton();
-          const postsListPage3 = editPostPage.goToPostsList();
-          // Then: el usuario podra ver el post actualizado
+          // Give: Desde la pagina de edicion de post el usuario abre las configuraciones
+          const settingsPage = editPostPage.openSettings();
+          // When: el usuario intenta eliminar el post
+          const dialogDeletePage = settingsPage.clickDeletePost();
+          // Then: una alerta de confirmación aparece y el usuario decide no eliminar el post
+          const editPostPage2 = dialogDeletePage.clickStayButton();
+
+          // When: el usuario regresa a el listado de post
+          const postsListPage3 = editPostPage2.goToPostsList();
+          // Then: el usuario podra ver el post sin haber sido borrado
           postsListPage3.scrollBotton();
-          postsListPage3.getPostByTitle(trimText + newTitle).should("exist");
+          postsListPage3.getPostByTitle(trimText).should("exist");
         });
     });
   });
