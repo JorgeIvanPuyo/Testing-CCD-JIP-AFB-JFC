@@ -30,26 +30,30 @@ export class CreatePostPage {
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
-      this.$addLabel = cy.get("a[data-test-nav='posts']");
+      this.$addLabel = cy.get(".gh-nav-list-new a[href='#/posts/']");
     }
     this.$addLabel.click();
 
     if (!this.$addPostButton) {
-      this.$addPostButton = cy.get("a[data-test-new-post-button]");
+      this.$addPostButton = cy.get(".view-actions a.gh-btn-primary");
     }
     this.$addPostButton.click();
   }
 
   entryToPostListByIcon() {
     if (!this.$addIcon) {
-      this.$addIcon = cy.get("a[data-test-nav='new-story']");
+      this.$addIcon = cy.get(".gh-nav-list-new .gh-nav-new-post");
     }
+    this.cy.wait(500);
     this.$addIcon.click();
+    this.cy.wait(500);
+
+    return new CreatePostPage(this.cy);
   }
 
   #getForm() {
     if (!this.$postTitleInput) {
-      this.$postTitleInput = cy.get("textarea[data-test-editor-title-input]");
+      this.$postTitleInput = cy.get("textarea[placeholder='Post title']");
     }
 
     if (!this.$postDescription) {
@@ -69,7 +73,9 @@ export class CreatePostPage {
 
   clickPublishButton() {
     if (!this.$publishButton) {
-      this.$publishButton = cy.get("button[data-test-button='publish-flow']");
+      this.$publishButton = cy.get(
+        ".gh-publishmenu.ember-view div[role='button']"
+      );
     }
 
     this.$publishButton.click();
@@ -78,7 +84,7 @@ export class CreatePostPage {
   clickContinueAndReviewButton() {
     if (!this.$continueAndReviewButton) {
       this.$continueAndReviewButton = cy.get(
-        "button[data-test-button='continue']"
+        ".gh-publishmenu-footer .gh-btn-black"
       );
     }
 
@@ -87,9 +93,7 @@ export class CreatePostPage {
 
   clickPublishPostRightNow() {
     if (!this.$pusblishRightNowButton) {
-      this.$pusblishRightNowButton = cy.get(
-        "button[data-test-button='confirm-publish']"
-      );
+      this.$pusblishRightNowButton = cy.get(".modal-footer .gh-btn-black");
     }
 
     this.$pusblishRightNowButton.click();
@@ -97,7 +101,7 @@ export class CreatePostPage {
 
   openSettings() {
     if (!this.$settingsButton) {
-      this.$settingsButton = cy.get("button[data-test-psm-trigger]");
+      this.$settingsButton = cy.get(".settings-menu-toggle.gh-btn");
     }
 
     this.$settingsButton.click();
@@ -115,7 +119,9 @@ export class CreatePostPage {
 
   getUpdateButton() {
     if (!this.$updateButton) {
-      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+      this.$updateButton = cy.get(
+        ".gh-publishmenu .ember-basic-dropdown-trigger"
+      );
     }
 
     return this.$updateButton;
@@ -123,10 +129,17 @@ export class CreatePostPage {
 
   clickUpDateButton() {
     if (!this.$updateButton) {
-      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+      this.$updateButton = cy.get(
+        ".gh-publishmenu .ember-basic-dropdown-trigger"
+      );
     }
 
     this.$updateButton.click();
+  }
+
+  clickPublish() {
+    const publish = this.cy.get(".gh-publishmenu-footer .gh-btn.gh-btn-black");
+    publish.click();
   }
 
   unpublishPost() {
@@ -166,9 +179,7 @@ export class CreatePostPage {
 
   goToEdit() {
     if (!this.$goToEditoButton) {
-      this.$goToEditoButton = cy.get(
-        "button[data-test-button='close-publish-flow']"
-      );
+      this.$goToEditoButton = cy.get(".modal-footer button[type='button']");
     }
 
     this.$goToEditoButton.click();
@@ -176,7 +187,7 @@ export class CreatePostPage {
 
   goToPostsList() {
     if (!this.$goToPostsListLink) {
-      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+      this.$goToPostsListLink = cy.get(".gh-editor-header a[href='#/posts/']");
     }
 
     this.$goToPostsListLink.click();
@@ -186,7 +197,7 @@ export class CreatePostPage {
 
   goToPostsListWithOutSave() {
     if (!this.$goToPostsListLink) {
-      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+      this.$goToPostsListLink = cy.get(".gh-editor-header a[href='#/posts/']");
     }
 
     this.$goToPostsListLink.click();

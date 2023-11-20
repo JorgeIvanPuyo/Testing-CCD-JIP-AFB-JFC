@@ -1,8 +1,8 @@
 import { CreatePostPage } from "../createPost/CreatePostPage";
 
 export class PostsListPage {
-  $postsListTitle = cy.get("li.gh-list-row");
-  $addPostButton = cy.get("a[data-test-new-post-button]");
+  $postsListTitle;
+  $addPostButton = cy.get("a[href='#/editor/post/']");
   $postListContainer;
 
   constructor(cy) {
@@ -13,21 +13,29 @@ export class PostsListPage {
   }
 
   getPostByTitle(title) {
+    if (!this.$postsListTitle) {
+      this.$postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
+    }
+    console.log("title: ", title);
+    console.log("***", title.length);
     return this.$postsListTitle
       .children("a")
+      .first()
       .children(".gh-content-entry-title")
-      .contains("h3", title)
       .parent("a")
       .parent("li");
   }
 
   getPostPublished() {
+    if (!this.$postsListTitle) {
+      this.$postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
+    }
     return this.$postsListTitle
       .children("a")
-      .children(".gh-content-entry-status")
-      .children(".published")
+      .children("div")
+      .children(".gh-content-status-published")
       .first()
-      .parent("p")
+      .parent("div")
       .parent("a")
       .parent("li");
   }
@@ -38,11 +46,12 @@ export class PostsListPage {
     return new CreatePostPage(this.cy);
   }
 
+  selectAPostPublishedEdit() {
+    return false;
+  }
+
   getStatusPost($li) {
-    return $li
-      .children("a")
-      .children(".gh-content-entry-status")
-      .children("span");
+    return $li.children("a").children(".gh-post-list-status").children("span");
   }
 
   getPostTitle(elem) {

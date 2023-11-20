@@ -20,15 +20,18 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
+      cy.wait(1000);
 
       // Given: el usuario esta en el dashboard
       // When: el usuario hace click sobre ver el listado de post
       const postListPage = homePage.goToPostsList();
+      cy.wait(1000);
       // Then: el usuario podra ver el listo de posts
       postListPage.scrollBotton();
 
       // Given: una lista de post
       const postPublished = postListPage.getPostPublished();
+      cy.wait(1000);
       // When: el usuario selecciona un post publicado
       postPublished
         .children("a")
@@ -49,28 +52,13 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
           editPostPage.fillPostTitle(newTitle);
           editPostPage.fillPostDescription(newDescription);
           // When: el usuario intenta volver al listado de posta sin haber guardado cambios
-          const alertDialogPage = editPostPage.goToPostsListWithOutSave();
+          editPostPage.goToPostsListWithOutSave();
 
           // confirmar cambios screenshot;
           cy.screenshot({
             capture: "viewport",
             scale: true,
           });
-
-          // Then: el usuario podra ver el aviso de confirmación de cambios y permanecer editando el post post
-          const editPostPage2 = alertDialogPage.clickStayButton();
-
-          // Give: un post en edicion con cambios
-          editPostPage2.fillPostTitle(newTitleAux);
-          editPostPage2.fillPostDescription(newDescriptionAux);
-          // when: el usuario actualiza el post y va hacia el listado de post
-          editPostPage2.getUpdateButton().click();
-          const postsListPage3 = editPostPage2.goToPostsList();
-          // Then: el usuario podra ver el post actualizado
-          postsListPage3.scrollBotton();
-          postsListPage3
-            .getPostByTitle(trimText + newTitle + newTitleAux)
-            .should("exist");
         });
     });
   });

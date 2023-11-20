@@ -39,7 +39,7 @@ export class ModifyPostPage {
         return this.cy.get('ul.ember-power-select-options li.ember-power-select-option').first();
     }
     getUpdateButton() {
-        return this.cy.get('span[data-test-task-button-state="idle"]').contains('Update');
+        return this.cy.get('div.gh-btn-editor.green').contains('Update');
     }
     getLeaveButton() {
         return this.cy.get('button.gh-btn.gh-btn-red').contains('Leave');

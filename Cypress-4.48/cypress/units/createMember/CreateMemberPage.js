@@ -38,12 +38,13 @@ getMembersBackLink() {
     return this.cy.get('a[data-test-link="members-back"]');
 }
 getStayButton() {
-    return this.cy.get('button[data-test-stay-button]');
+    return this.cy.contains('button.gh-btn', 'Stay');
 }
 
 getLeaveButton() {
-    return this.cy.get('button[data-test-leave-button]');
-}
+    return this.cy.contains('button.gh-btn.gh-btn-red', 'Leave');
+  }
+
 
 memberExists(memberEmail) {
     return this.cy.get('table.gh-list').contains('tr', memberEmail).then($el => {
@@ -51,6 +52,10 @@ memberExists(memberEmail) {
     });
 }
 
+getLabelMember(){
+    return this.cy.get('.ember-power-select-trigger-multiple-input');    ;
+
+}
 memberDoesNotExist(memberEmail) {
     return this.cy.get('table.gh-list').then($table => {
         // Si la tabla no contiene el email, pasa la aserción

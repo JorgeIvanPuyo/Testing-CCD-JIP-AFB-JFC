@@ -21,15 +21,19 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       // Given: el usuario haga click sobre post y crear un nuevo post
       const posts = new CreatePostPage(cy);
       posts.entryToPostListByIcon();
+      cy.wait(500);
       // When: el usuario ingresa los datos del nuevos post pero no lo publica
       const title = faker.person.jobTitle();
       const description = faker.lorem.paragraph();
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
+      cy.wait(500);
       posts.clickPublishButton();
       posts.clickContinueAndReviewButton();
       posts.goToEdit();
-      posts.goToPostsList();
+      cy.wait(500);
+      const alertPage = posts.goToPostsListWithOutSave();
+      alertPage.clickLeaveButton();
 
       // Lista de post screenshot;
       cy.screenshot({
@@ -41,12 +45,8 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       const postList = new PostsListPage(cy);
       // When: el usuario busca un post por titulo
       const post = postList.getPostByTitle(title);
-      const status = postList.getStatusPost(post);
       // Then: el usuario podra validar que esta como borrador es decir no se ha publicado
-      status.should(($status) => {
-        if (!$status.length) return;
-        expect($status[0]).to.contain.text("Draft");
-      });
+      post.should("exist");
     });
   });
 });

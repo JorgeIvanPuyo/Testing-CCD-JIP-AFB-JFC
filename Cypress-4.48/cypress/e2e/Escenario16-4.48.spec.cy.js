@@ -45,6 +45,7 @@ describe("Como usuario quiero crear miembros para gestionar mi comunidad", funct
       const memberEmail = faker.internet.email();
       members.getMemberNameInput().type(memberName,{force: true});
       members.getMemberEmailInput().type(memberEmail,{force: true});
+      members.getLabelMember().type("User",{force: true});
 
       cy.screenshot({
         capture: "viewport",
