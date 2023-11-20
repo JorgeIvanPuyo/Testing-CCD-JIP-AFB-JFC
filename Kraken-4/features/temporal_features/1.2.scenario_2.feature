@@ -19,8 +19,9 @@ Scenario: Escenario 2.
   And I create a new post 
   And I wait for 1 seconds
   And I publish the post
+   #Screenshot3
+  And I take screenshot
   And I wait for 2 seconds
   When I navigate to page "<EXPECTED_URL_POSTS>"
   And I wait for 2 seconds
-  #Screenshot3
-  And I take screenshot
+ 

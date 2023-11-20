@@ -25,10 +25,11 @@ Scenario: Escenario 5.
   And I wait for 1 seconds
   And I publish the post
   And I wait for 2 seconds
+    #Screenshot4
+  And I take screenshot 
   Then The url should include "<EXPECTED_TITLE_NEW_POST>"
   And I wait for 2 seconds
-  #Screenshot4
-  And I take screenshot 
+
 
 
 

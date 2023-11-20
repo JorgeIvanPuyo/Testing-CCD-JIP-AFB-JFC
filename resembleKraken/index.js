@@ -32,25 +32,25 @@ const scenarios = [
       "step4",
     ],
   },
-  // {
-  //   name: "Escenario_4.",
-  //   steps: [
-  //     "step1",
-  //     "step2",
-  //     "step3",
-  //     "step4",
-  //     "step5",
-  //   ],
-  // },
-  // {
-  //   name: "Escenario_5.",
-  //   steps: [
-  //     "step1",
-  //     "step2",
-  //     "step3",
-  //     "step4",
-  //   ],
-  // },
+  {
+    name: "Escenario_4.",
+    steps: [
+      "step1",
+      "step2",
+      "step3",
+      "step4",
+      "step5",
+    ],
+  },
+  {
+    name: "Escenario_5.",
+    steps: [
+      "step1",
+      "step2",
+      "step3",
+      "step4",
+    ],
+  },
 ];
 
 async function executeCompare() {
@@ -101,7 +101,7 @@ async function executeCompare() {
 
   console.log('---------------------------');
   console.log("Comparación finalizada");
-  return results;
+  console.log("Consulte el reporte en la carpeta results con el nombre de la fecha");
 }
 
 function createReport(datetime, results) {
@@ -138,7 +138,7 @@ function createReport(datetime, results) {
               <img class="img2" src="${scenario.name}_${step.step}_before.png" label="Before">
             </div>
             <div class="imgcontainer">
-              <span class="imgname">4.48.9</span>
+              <span class="imgname">Ghost 4.48.9</span>
               <img class="img2" src="${scenario.name}_${step.step}_after.png" label="After">
             </div>
             <div class="imgcontainer">

@@ -19,11 +19,12 @@ Scenario: Escenario 2.
   When I create a new post 
   And I wait for 1 seconds
   And I publish the post
+  #Screenshot3
+  And I take screenshot
   And I wait for 2 seconds
   Then The url should include "<EXPECTED_TITLE_NEW_POST>"
   And I wait for 2 seconds
-  #Screenshot3
-  And I take screenshot 
+ 
 
 
 

@@ -13,11 +13,12 @@ Scenario: Escenario 1.
   When I click posts
   And I wait for 2 seconds 
   Then the URL should be posts "<EXPECTED_URL_POSTS>"
-  #Screenshot2
-  And I take screenshot
 
   When I click new post 
   And I wait for 1 seconds
+  #Screenshot2
+  And I take screenshot
+
   And I create a new post 
   And I wait for 1 seconds
   #Screenshot3

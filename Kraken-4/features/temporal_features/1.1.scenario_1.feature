@@ -23,10 +23,11 @@ Scenario: Escenario 1.
 
   And I publish the post
   And I wait for 2 seconds
+  #Screenshot4
+  And I take screenshot
   When I navigate to page "<EXPECTED_URL_POSTS>"
   And I wait for 1 seconds
-  #Screenshot4
-  And I take screenshot 
+  
 
 
 
