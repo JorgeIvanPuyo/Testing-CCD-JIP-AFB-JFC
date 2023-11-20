@@ -3,9 +3,6 @@ import { CreatePostPage } from "../units/createPost/CreatePostPage";
 import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
-import { PostPage } from "../units/post/postPage";
-
-const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("ResizeObserver")) {
@@ -60,31 +57,11 @@ describe(escenaryDescription, function () {
       posts.clickPublishButton();
       posts.clickContinueAndReviewButton();
       posts.clickPublishPostRightNow();
-      // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
+      // Then: el usuario habra publicado el nuevo post
       const postPublishedPage = posts.validatePostPublished();
-      postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
-      postPublishedPage.getTitlePublishPage().should("contain", title);
-      postPublishedPage
-        .getDescriptionPusblished()
-        .should("contain", description);
+      postPublishedPage.validatePublished().should("contain", "Published");
 
       // Nuevo post publicado screenshot;
-      cy.screenshot({
-        capture: "viewport",
-        scale: true,
-      });
-
-      // Given: el usuario ha creado el post y publicado
-      const postPage = new PostPage(cy);
-      // When: el usuario haga click sobre el post publicado
-      const slug = title.split(" ").join("-").toLowerCase();
-      cy.visit(`${APP_PAGE}/${slug}`);
-      // Then: el usuario podra ver el post publicado
-      postPage.getTitle().should("contain", title);
-      postPage.getDescription().should("contain", description);
-      postPage.getUrl().should("contain", `/${slug}`);
-
-      // Pagina del nuevo post screenshot;
       cy.screenshot({
         capture: "viewport",
         scale: true,

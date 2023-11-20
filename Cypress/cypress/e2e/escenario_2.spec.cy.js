@@ -7,13 +7,19 @@ import { PostPage } from "../units/post/postPage";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
-describe("Como usuario quiero crear y publicar post para tener a mis seguidores actualizados", function () {
+Cypress.on("uncaught:exception", (err, runnable) => {
+  if (err.message.includes("ResizeObserver")) {
+    return false;
+  }
+});
+
+describe("Como usuario quiero crear y publicar post desde el listado para tener a mis seguidores actualizados", function () {
   it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 
     cy.window().then((win) => {
-      // Give: Usuario ingrese al login
+      // Give: La pagina de login
       const signinPage = new SigninPage(cy);
       // When: digite sus datos y haga click sobre entrar
       const homePage = signinPage.loginValidUser(USER, PASSWORD);

@@ -21,12 +21,8 @@ describe("Como usuario quiero unpublish un post para no mostrar mas este conteni
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
 
-      // Given: el usuario esta en el dashboard
-      // When: el usuario hace click sobre ver el listado de post
-      // Then: el usuario podra ver el listo de posts
-      const postListPage = homePage.goToPostsList();
-
       // Given: el usuario selecciona un post publicado de la lista
+      const postListPage = homePage.goToPostsList();
       postListPage.scrollBotton();
       // When: el usuario valida el boton de editar
       const postPublished = postListPage.getPostPublished();
@@ -48,6 +44,13 @@ describe("Como usuario quiero unpublish un post para no mostrar mas este conteni
 
           editPostPage.unpublishPost();
           cy.wait(1000);
+
+          // uppublish post screenshot;
+          cy.screenshot({
+            capture: "viewport",
+            scale: true,
+          });
+
           const postListPage3 = editPostPage.goToPostsList();
 
           postListPage.scrollBotton();
