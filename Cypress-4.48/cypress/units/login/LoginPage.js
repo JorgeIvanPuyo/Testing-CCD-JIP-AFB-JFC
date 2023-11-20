@@ -1,7 +1,7 @@
 import { PostsListPage } from "../postsList/PostsListPage";
 
 export class HomePage {
-  $postsButton = cy.get('a[href="#/posts/"]');
+  $postsButton;
 
   constructor(cy) {
     if (!cy) {
@@ -15,6 +15,9 @@ export class HomePage {
   }
 
   goToPostsList() {
+    if (!this.$postsButton) {
+      this.$postsButton = cy.get('.gh-nav-list-new  a[href="#/posts/"]');
+    }
     this.$postsButton.click();
 
     return new PostsListPage(this.cy);

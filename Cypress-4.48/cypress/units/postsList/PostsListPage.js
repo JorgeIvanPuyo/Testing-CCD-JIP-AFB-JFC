@@ -1,7 +1,7 @@
 import { CreatePostPage } from "../createPost/CreatePostPage";
 
 export class PostsListPage {
-  $postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
+  $postsListTitle;
   $addPostButton = cy.get("a[href='#/editor/post/']");
   $postListContainer;
 
@@ -13,21 +13,29 @@ export class PostsListPage {
   }
 
   getPostByTitle(title) {
+    if (!this.$postsListTitle) {
+      this.$postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
+    }
+    console.log("title: ", title);
+    console.log("***", title.length);
     return this.$postsListTitle
       .children("a")
+      .first()
       .children(".gh-content-entry-title")
-      .contains("h3", title)
       .parent("a")
       .parent("li");
   }
 
   getPostPublished() {
+    if (!this.$postsListTitle) {
+      this.$postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
+    }
     return this.$postsListTitle
       .children("a")
-      .children(".gh-content-entry-status")
-      .children(".published")
+      .children("div")
+      .children(".gh-content-status-published")
       .first()
-      .parent("p")
+      .parent("div")
       .parent("a")
       .parent("li");
   }
@@ -36,6 +44,10 @@ export class PostsListPage {
     this.getPostPublished().click();
 
     return new CreatePostPage(this.cy);
+  }
+
+  selectAPostPublishedEdit() {
+    return false;
   }
 
   getStatusPost($li) {

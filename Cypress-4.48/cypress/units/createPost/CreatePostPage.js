@@ -119,7 +119,9 @@ export class CreatePostPage {
 
   getUpdateButton() {
     if (!this.$updateButton) {
-      this.$updateButton = cy.get("button[data-test-button='publish-save']");
+      this.$updateButton = cy.get(
+        ".gh-publishmenu .ember-basic-dropdown-trigger"
+      );
     }
 
     return this.$updateButton;

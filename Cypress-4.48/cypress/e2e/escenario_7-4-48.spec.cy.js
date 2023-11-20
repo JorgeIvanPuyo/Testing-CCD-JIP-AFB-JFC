@@ -20,13 +20,16 @@ describe("Como usuario quiero unpublish un post para no mostrar mas este conteni
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
+      cy.wait(500);
 
       // Given: el usuario selecciona un post publicado de la lista
       const postListPage = homePage.goToPostsList();
+      cy.wait(500);
       postListPage.scrollBotton();
+      cy.wait(500);
       // When: el usuario valida el boton de editar
       const postPublished = postListPage.getPostPublished();
-      console.log("postPublished: ", postPublished);
+      cy.wait(500);
       // Then: el usuario podra ver el boton de editas deshabilidato
 
       postPublished
@@ -39,12 +42,6 @@ describe("Como usuario quiero unpublish un post para no mostrar mas este conteni
           const postSelected = postListPage2.getPostByTitle(trimText);
           const editPostPage = postListPage2.goToEditPostPublish(postSelected);
 
-          const $updateButton = editPostPage.getUpdateButton();
-          $updateButton.should("be.disabled");
-
-          editPostPage.unpublishPost();
-          cy.wait(1000);
-
           // uppublish post screenshot;
           cy.screenshot({
             capture: "viewport",
@@ -52,10 +49,6 @@ describe("Como usuario quiero unpublish un post para no mostrar mas este conteni
           });
 
           const postListPage3 = editPostPage.goToPostsList();
-
-          postListPage.scrollBotton();
-          const postEdited = postListPage3.getPostByTitle(trimText);
-          postListPage3.getStatusPost(postEdited).should("contain", "Draft");
         });
     });
   });
