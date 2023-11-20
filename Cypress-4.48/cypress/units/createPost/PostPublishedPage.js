@@ -16,4 +16,8 @@ export class PostPublishedPage {
   getTitlePage() {
     return this.cy.get("div[data-test-complete-title] span");
   }
+
+  validatePublished() {
+    return this.cy.get(".gh-editor-post-status span div");
+  }
 }
