@@ -13,6 +13,11 @@
 
 [Correr pruebas en Kraken](Kraken/Readme.md)  
 
-### Video de ejecución de pruebas en las 2 versiones de Ghost y la generación del reporte en ResembleJS y BackstopJS  
+## Video de ejecución de pruebas en las 2 versiones de Ghost y la generación del reporte en ResembleJS y BackstopJS  
 
-[Semana 6 Grupo 22 Youtube](https://www.youtube.com/watch?v=AaU9bdKaAjY)
+[Semana 6 Grupo 22 Youtube](https://www.youtube.com/watch?v=AaU9bdKaAjY)  
+
+## URL de instancias de Ghost desplegadas en dos versiones diferentes  
+
+Ghost V4.48.0 -> http://157.230.86.220:4470/ghost  
+Ghost V5.72.0 -> http://157.230.86.220:5720/ghost  
