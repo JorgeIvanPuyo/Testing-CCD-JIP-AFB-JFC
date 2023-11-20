@@ -46,4 +46,7 @@ PWD: Test123456
 - La comparación de imagenes se llevará acabo y se entregará el reporte html en la carpeta results, se genera un reporte por cada ejecución de resembler y se guarda en una carpeta que tiene como nombre el Timestamp de la  ejecución.
 
 
-### Video de ejecución de pruebas en las 2 versiones de Ghost y la generación del reporte en ResembleJS
+### Video de ejecución de pruebas en las 2 versiones de Ghost y la generación del reporte en ResembleJS y BackstopJS  
+
+[Semana 6 Grupo 22 Youtube](https://www.youtube.com/watch?v=AaU9bdKaAjY)
+
