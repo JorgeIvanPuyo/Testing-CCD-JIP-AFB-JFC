@@ -21,3 +21,7 @@
 
 Ghost V4.48.0 -> http://157.230.86.220:4470/ghost  
 Ghost V5.72.0 -> http://157.230.86.220:5720/ghost  
+
+## Issues reportados
+
+[ISSUE 011.Ver listado de Post no se dirije en ghost 4.48 ](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/issues/40#issue-2001223754)
