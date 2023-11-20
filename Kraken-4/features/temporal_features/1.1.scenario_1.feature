@@ -5,7 +5,7 @@ Feature: Escenario 1 de prueba Ghost con Kraken
 Scenario: Escenario 1.
   Given I navigate to page "<URL>"
   When I login ghost "<USERNAME1>" and "<PASSWORD1>"
-  And I wait for 2 seconds
+  And I wait for 4 seconds
   Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
   #Screenshot1
   And I take screenshot   
