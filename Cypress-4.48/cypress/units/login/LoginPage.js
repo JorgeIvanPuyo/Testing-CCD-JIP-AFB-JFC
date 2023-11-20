@@ -16,7 +16,7 @@ export class HomePage {
 
   goToPostsList() {
     if (!this.$postsButton) {
-      this.$postsButton = cy.get('.gh-nav-list-new  a[href="#/posts/"]');
+      this.$postsButton = cy.get('.gh-nav-list-new a[href="#/posts/"]');
     }
     this.$postsButton.click();
 

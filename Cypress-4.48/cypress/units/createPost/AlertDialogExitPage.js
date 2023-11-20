@@ -1,7 +1,7 @@
 import { CreatePostPage } from "./CreatePostPage";
 
 export class AlertDialogExitPage {
-  $footerBottonsContainer = cy.get(".modal-footer");
+  $footerBottonsContainer;
 
   constructor(cy) {
     if (!cy) {
@@ -11,12 +11,18 @@ export class AlertDialogExitPage {
   }
 
   clickStayButton() {
+    if (!this.$footerBottonsContainer) {
+      this.$footerBottonsContainer = cy.get(".modal-footer");
+    }
     this.$footerBottonsContainer.children("button").contains("Stay").click();
 
     return new CreatePostPage(this.cy);
   }
 
   clickLeaveButton() {
+    if (!this.$footerBottonsContainer) {
+      this.$footerBottonsContainer = cy.get(".modal-footer");
+    }
     this.$footerBottonsContainer.children("button").contains("Leave").click();
   }
 }
