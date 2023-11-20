@@ -188,7 +188,7 @@ export class CreatePostPage {
 
   goToPostsListWithOutSave() {
     if (!this.$goToPostsListLink) {
-      this.$goToPostsListLink = cy.get(".modal-footer .gh-btn-red");
+      this.$goToPostsListLink = cy.get(".gh-editor-header a[href='#/posts/']");
     }
 
     this.$goToPostsListLink.click();

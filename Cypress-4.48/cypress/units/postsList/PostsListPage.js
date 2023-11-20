@@ -1,8 +1,8 @@
 import { CreatePostPage } from "../createPost/CreatePostPage";
 
 export class PostsListPage {
-  $postsListTitle = cy.get("li.gh-list-row");
-  $addPostButton = cy.get("a[data-test-new-post-button]");
+  $postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
+  $addPostButton = cy.get("a[href='#/editor/post/']");
   $postListContainer;
 
   constructor(cy) {
@@ -39,10 +39,7 @@ export class PostsListPage {
   }
 
   getStatusPost($li) {
-    return $li
-      .children("a")
-      .children(".gh-content-entry-status")
-      .children("span");
+    return $li.children("a").children(".gh-post-list-status").children("span");
   }
 
   getPostTitle(elem) {
