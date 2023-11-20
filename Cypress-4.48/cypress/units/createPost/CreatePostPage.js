@@ -30,27 +30,30 @@ export class CreatePostPage {
 
   entryToPostListByLabel() {
     if (!this.$addLabel) {
-      this.$addLabel = cy.get(".gh-nav-list-new .ember-view");
+      this.$addLabel = cy.get(".gh-nav-list-new a[href='#/posts/']");
     }
-    console.log("this.$addLabel: ", this.$addLabel);
-    this.$addLabel[0].click();
+    this.$addLabel.click();
 
     if (!this.$addPostButton) {
-      this.$addPostButton = cy.get("a[data-test-new-post-button]");
+      this.$addPostButton = cy.get(".view-actions a.gh-btn-primary");
     }
     this.$addPostButton.click();
   }
 
   entryToPostListByIcon() {
     if (!this.$addIcon) {
-      this.$addIcon = cy.get("a[data-test-nav='new-story']");
+      this.$addIcon = cy.get(".gh-nav-list-new .gh-nav-new-post");
     }
+    this.cy.wait(500);
     this.$addIcon.click();
+    this.cy.wait(500);
+
+    return new CreatePostPage(this.cy);
   }
 
   #getForm() {
     if (!this.$postTitleInput) {
-      this.$postTitleInput = cy.get("textarea[data-test-editor-title-input]");
+      this.$postTitleInput = cy.get("textarea[placeholder='Post title']");
     }
 
     if (!this.$postDescription) {
@@ -70,7 +73,9 @@ export class CreatePostPage {
 
   clickPublishButton() {
     if (!this.$publishButton) {
-      this.$publishButton = cy.get("button[data-test-button='publish-flow']");
+      this.$publishButton = cy.get(
+        ".gh-publishmenu.ember-view div[role='button']"
+      );
     }
 
     this.$publishButton.click();
@@ -79,7 +84,7 @@ export class CreatePostPage {
   clickContinueAndReviewButton() {
     if (!this.$continueAndReviewButton) {
       this.$continueAndReviewButton = cy.get(
-        "button[data-test-button='continue']"
+        ".gh-publishmenu-footer .gh-btn-black"
       );
     }
 
@@ -88,9 +93,7 @@ export class CreatePostPage {
 
   clickPublishPostRightNow() {
     if (!this.$pusblishRightNowButton) {
-      this.$pusblishRightNowButton = cy.get(
-        "button[data-test-button='confirm-publish']"
-      );
+      this.$pusblishRightNowButton = cy.get(".modal-footer .gh-btn-black");
     }
 
     this.$pusblishRightNowButton.click();
@@ -167,9 +170,7 @@ export class CreatePostPage {
 
   goToEdit() {
     if (!this.$goToEditoButton) {
-      this.$goToEditoButton = cy.get(
-        "button[data-test-button='close-publish-flow']"
-      );
+      this.$goToEditoButton = cy.get(".modal-footer button[type='button']");
     }
 
     this.$goToEditoButton.click();
@@ -177,7 +178,7 @@ export class CreatePostPage {
 
   goToPostsList() {
     if (!this.$goToPostsListLink) {
-      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+      this.$goToPostsListLink = cy.get(".gh-editor-header a[href='#/posts/']");
     }
 
     this.$goToPostsListLink.click();
@@ -187,7 +188,7 @@ export class CreatePostPage {
 
   goToPostsListWithOutSave() {
     if (!this.$goToPostsListLink) {
-      this.$goToPostsListLink = cy.get("a[data-test-link='posts']");
+      this.$goToPostsListLink = cy.get(".modal-footer .gh-btn-red");
     }
 
     this.$goToPostsListLink.click();
