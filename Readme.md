@@ -12,3 +12,7 @@
 [Correr pruebas en Cypress](Cypress/Readme.md)  
 
 [Correr pruebas en Kraken](Kraken/Readme.md)  
+
+### Video de ejecución de pruebas en las 2 versiones de Ghost y la generación del reporte en ResembleJS y BackstopJS  
+
+[Semana 6 Grupo 22 Youtube](https://www.youtube.com/watch?v=AaU9bdKaAjY)
