@@ -4,7 +4,7 @@ import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
 import { PostPage } from "../units/post/postPage";
-import { getAprioriPostData, getPseudoRamdonPost } from "../utils";
+import { getAprioriPostData, getPseudoRamdonData } from "../utils";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
@@ -81,7 +81,7 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       posts.entryToPostListByIcon();
 
       // datos pseudo aleatoreos
-      const { title, description } = await getPseudoRamdonPost();
+      const { title, description } = await getPseudoRamdonData();
 
       // When: los datos son validados en los campos
       posts.fillPostTitle(title);

@@ -1,9 +1,5 @@
 import { APP_PAGE, USER, PASSWORD } from "../const";
-import { CreatePostPage } from "../units/createPost/CreatePostPage";
 import { SigninPage } from "../units/login/SignInPage";
-
-import { faker } from "@faker-js/faker";
-import { PostPage } from "../units/post/postPage";
 import { PostsListPage } from "../units/postsList/PostsListPage";
 
 describe("Como usuario quiero intentar eliminar un post pero no hacerlo para validar el mensaje de confirmación de eliminación de un post", function () {
@@ -34,8 +30,6 @@ describe("Como usuario quiero intentar eliminar un post pero no hacerlo para val
         .invoke("text")
         .then((text) => {
           const trimText = text.trim();
-          const newTitle = faker.lorem.words();
-          const newDescription = faker.lorem.paragraph();
           // Then: el usuario podra ver el listo de posts
           const postListPage2 = new PostsListPage(cy);
           const postSelected = postListPage2.getPostByTitle(trimText);

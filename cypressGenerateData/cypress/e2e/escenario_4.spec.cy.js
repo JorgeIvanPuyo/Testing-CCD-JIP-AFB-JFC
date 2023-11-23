@@ -4,7 +4,7 @@ import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
 import { PostsListPage } from "../units/postsList/PostsListPage";
-import { getAprioriPostData, getPseudoRamdonPost } from "../utils";
+import { getAprioriPostData, getPseudoRamdonData } from "../utils";
 
 describe("Como usuario quiero editar un post que no este publicado para actualizarlo y tenerlo como borrador", function () {
   it("e2e datos aleatorios usando 'Faker' ", function () {
@@ -93,7 +93,7 @@ describe("Como usuario quiero editar un post que no este publicado para actualiz
       posts.entryToPostListByIcon();
 
       // Given: los campos generados de forma pseudo aleatoria
-      const { title, description } = await getPseudoRamdonPost();
+      const { title, description } = await getPseudoRamdonData();
       // When: el usuario ingresa los datos del nuevos post
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);

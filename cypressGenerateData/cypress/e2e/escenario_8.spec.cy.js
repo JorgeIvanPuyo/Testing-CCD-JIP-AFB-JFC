@@ -4,7 +4,7 @@ import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
 import { PostsListPage } from "../units/postsList/PostsListPage";
-import { getAprioriPostData, getPseudoRamdonPost } from "../utils";
+import { getAprioriPostData, getPseudoRamdonData } from "../utils";
 
 describe("Como usuario quiero actualizar un post publicado para tener actualizada a mi audiencia", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
@@ -103,9 +103,9 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
           const trimText = text.trim();
           // When: La data del post es generada de forma pseudo aleatoria
           const { title: newTitle, description: newDescription } =
-            await getPseudoRamdonPost();
+            await getPseudoRamdonData();
           const { title: newTitleAux, description: newDescriptionAux } =
-            await getPseudoRamdonPost();
+            await getPseudoRamdonData();
 
           // Then: el usuario podra editar el post
           const postListPage2 = new PostsListPage(cy);
