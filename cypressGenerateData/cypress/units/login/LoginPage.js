@@ -1,4 +1,4 @@
-import { MemberPage } from "../members/MembersPage";
+import { MembersPage } from "../members/MembersPage";
 import { PostsListPage } from "../postsList/PostsListPage";
 
 export class HomePage {
@@ -25,6 +25,6 @@ export class HomePage {
   goToMembers() {
     this.$anchorMemebers.click();
 
-    return new MemberPage(this.cy);
+    return new MembersPage(this.cy);
   }
 }

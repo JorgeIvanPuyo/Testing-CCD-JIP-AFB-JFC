@@ -83,13 +83,14 @@ export async function getPseudoRamdonData() {
 export function getAprioriMemberData(position) {
   if (position < 0 || position > 9) {
     return new Error(
-      "The memeber position in 'getAprioriMemberData' must be between 0 and 119"
+      "The memeber position in 'getAprioriMemberData' must be between 0 and 9"
     );
   }
 
   return {
     name: MOCK_DATA[position].name,
     wrongEmail: MOCK_DATA[position].wrongEmail,
+    email: MOCK_DATA[position].email,
   };
 }
 

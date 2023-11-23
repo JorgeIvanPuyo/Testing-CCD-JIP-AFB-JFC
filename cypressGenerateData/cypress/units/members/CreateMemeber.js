@@ -1,6 +1,9 @@
+import { MembersPage } from "./MembersPage";
+
 export class CreateMemberPage {
   $inputName = cy.get(".gh-cp-member-email-name input[name='name']");
   $inputEmail = cy.get(".gh-cp-member-email-name input[name='email']");
+  $anchorMemeberList = cy.get(".gh-canvas-breadcrumb a[href='#/members/']");
   $saveButton;
   $retryButton;
 
@@ -37,6 +40,12 @@ export class CreateMemberPage {
       );
     }
     return this.$retryButton;
+  }
+
+  goToMembersList() {
+    this.$anchorMemeberList.click();
+
+    return new MembersPage(this.cy);
   }
 
   getEmailError() {
