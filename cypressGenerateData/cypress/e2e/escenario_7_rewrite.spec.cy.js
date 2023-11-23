@@ -3,10 +3,9 @@ import { CreatePostPage } from "../units/createPost/CreatePostPage";
 import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
-import { PostPage } from "../units/post/postPage";
 import { PostsListPage } from "../units/postsList/PostsListPage";
 
-describe("Como usuario quiero actualizar un post publicado para tener actualizada a mi audiencia", function () {
+describe("Como usuario quiero unpublish un post para no mostrar mas este contenido", function () {
   it("e2e", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
@@ -19,37 +18,41 @@ describe("Como usuario quiero actualizar un post publicado para tener actualizad
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
 
-      // Given: el usuario esta en el dashboard
-      // When: el usuario hace click sobre ver el listado de post
+      // Given: el usuario selecciona un post publicado de la lista
       const postListPage = homePage.goToPostsList();
-      // Then: el usuario podra ver el listo de posts
       postListPage.scrollBotton();
-
-      // Given: una lista de post
+      // When: el usuario valida el boton de editar
       const postPublished = postListPage.getPostPublished();
-      // When: el usuario selecciona un post publicado
+      console.log("postPublished: ", postPublished);
+      // Then: el usuario podra ver el boton de editas deshabilidato
+
       postPublished
         .children("a")
         .children("h3")
         .invoke("text")
         .then((text) => {
           const trimText = text.trim();
-          const newTitle = faker.lorem.words();
-          const newDescription = faker.lorem.paragraph();
-          // Then: el usuario podra editar el post
           const postListPage2 = new PostsListPage(cy);
           const postSelected = postListPage2.getPostByTitle(trimText);
           const editPostPage = postListPage2.goToEditPostPublish(postSelected);
 
-          // Give: desde un posr editado sin actualizar
-          editPostPage.fillPostTitle(newTitle);
-          editPostPage.fillPostDescription(newDescription);
-          // When: el usuario guarde sus cambios y regrese a el listado de post
-          editPostPage.clickUpDateButton();
-          const postsListPage3 = editPostPage.goToPostsList();
-          // Then: el usuario podra ver el post actualizado
-          postsListPage3.scrollBotton();
-          postsListPage3.getPostByTitle(trimText + newTitle).should("exist");
+          const $updateButton = editPostPage.getUpdateButton();
+          $updateButton.should("be.disabled");
+
+          editPostPage.unpublishPost();
+          cy.wait(1000);
+
+          // uppublish post screenshot;
+          cy.screenshot({
+            capture: "viewport",
+            scale: true,
+          });
+
+          const postListPage3 = editPostPage.goToPostsList();
+
+          postListPage.scrollBotton();
+          const postEdited = postListPage3.getPostByTitle(trimText);
+          postListPage3.getStatusPost(postEdited).should("contain", "Draft");
         });
     });
   });

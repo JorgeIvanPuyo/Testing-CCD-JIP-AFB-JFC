@@ -3,10 +3,6 @@ import { CreatePostPage } from "../units/createPost/CreatePostPage";
 import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
-import { PostPage } from "../units/post/postPage";
-import { PostsListPage } from "../units/postsList/PostsListPage";
-
-const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
 describe("Como usuario quiero ingresar a editar un post publicado pero sin modificarlo regresar al listado de post", function () {
   it("e2e", function () {
@@ -20,26 +16,23 @@ describe("Como usuario quiero ingresar a editar un post publicado pero sin modif
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
-      const postListPage = homePage.goToPostsList();
 
-      // Given: el usuario selecciona un post publicado de la lista
+      // Given: El usuario esta en el dashboard
+      // When: el usuario hace click sobre ver el listado de post
+      const postListPage = homePage.goToPostsList();
+      // When: el usuario hace scrollpara buscar su post
       postListPage.scrollBotton();
-      // When: el usuario valida el boton de editar
+      // When: El usuario selecciona un post publicado para editar
       const createPostPage = postListPage.selectAPostPublished();
-      // Then: el usuario podra ver el boton de editas deshabilidato
+      // Then: el usuario podra ver el boton de editar deshabilidato
       const $updateButton = createPostPage.getUpdateButton();
       $updateButton.should("be.disabled");
-
-      // Boton desahabilitado screenshot;
-      cy.screenshot({
-        capture: "viewport",
-        scale: true,
-      });
 
       // Given: el usuario si no ha modificado nada del post
       // When: el usuario regresa al listado de posts
       const postsListPage2 = createPostPage.goToPostsList();
       // Then: el usuario podra ver el listo de posts y el post seleccionado sin modificar
+      postsListPage2.getUrl().should("contain", "/posts");
     });
   });
 });
