@@ -7,7 +7,7 @@ import { getAprioriMemberData, getPseudoRamdonData } from "../utils";
 describe("Como usuario validar la NO creación de un nuevo miembro con un email no valido para asegurar la calidad del software", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.window().then((win) => {
       // Give: Usuario ingrese al login
