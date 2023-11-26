@@ -28,6 +28,10 @@ export class CreatePostPage {
   $unpublishButton;
   $unpublishAndRevertToDraftButton;
 
+  getUrl() {
+    return this.cy.url();
+  }
+
   entryToPostListByLabel() {
     if (!this.$addLabel) {
       this.$addLabel = cy.get("a[data-test-nav='posts']");
