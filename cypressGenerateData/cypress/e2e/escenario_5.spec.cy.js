@@ -11,7 +11,7 @@ const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 describe("Como usuario quiero crear y publicar post para tener a mis seguidores actualizados", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.window().then((win) => {
       // Give: Usuario ingrese al login

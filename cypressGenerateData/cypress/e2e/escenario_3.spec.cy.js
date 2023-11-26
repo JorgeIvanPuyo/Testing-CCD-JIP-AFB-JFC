@@ -16,7 +16,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como borrador y editarlo en otro momento", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.window().then((win) => {
       // Give: Usuario ingrese al login

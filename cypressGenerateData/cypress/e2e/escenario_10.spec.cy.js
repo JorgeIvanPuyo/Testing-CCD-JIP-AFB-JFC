@@ -8,7 +8,7 @@ import { TITLE_PUBLISH_PAGE } from "../../../Cypress/cypress/const";
 describe("Como usuario quiero crear un nuevo post ingresando desde la opción Scheduled para mantener a mis usuarios actualizados", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.window().then((win) => {
       // Give: Usuario ingresa sus datos al login

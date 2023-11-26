@@ -9,7 +9,7 @@ import { getAprioriPostData, getPseudoRamdonData } from "../utils";
 describe("Como usuario quiero editar un post que no este publicado para actualizarlo y tenerlo como borrador", function () {
   it("e2e datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.window().then((win) => {
       // Give: Usuario ingrese al login
