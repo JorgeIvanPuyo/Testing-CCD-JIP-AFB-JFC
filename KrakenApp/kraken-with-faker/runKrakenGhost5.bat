@@ -1,7 +1,7 @@
 @echo off
 
-set "temp=C:\Users\ginav\uniandes\krakenNode16\Kraken\features\temporal_features"
-set "features=C:\Users\ginav\uniandes\krakenNode16\Kraken\features"
+set "temp=C:\Users\ginav\uniandes\krakenNode16\KrakenApp\kraken-with-faker\features\temporal_features"
+set "features=C:\Users\ginav\uniandes\krakenNode16\KrakenApp\kraken-with-faker\features"
 
 for /f "delims=" %%F in ('dir /on /b /a-d "%temp%\*.feature"') do (
     copy "%temp%\%%F" "%features%" 

@@ -9,6 +9,7 @@ const Members = require('../pages/members_page');
 const properties = require('../../../properties.json');
 const postsArray = require('../../../ghost-post.json');
 const { faker } = require('@faker-js/faker');
+const axios = require('axios');
 
 let loginPage;
 let dashboard;
@@ -63,6 +64,17 @@ When("I take screenshot", async function () {
   await takeScreenshot();
 });
 
+//Leer archivo de datos a priori
+function getRandomDataFromJson(filePath) {
+  const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const randomElement = jsonData[Math.floor(Math.random() * jsonData.length)];
+
+  return {
+    title: randomElement.title,
+    content: randomElement.description,
+  };
+}
+
 //Login
 When(
   "I login ghost {kraken-string} and {kraken-string}",
@@ -113,12 +125,48 @@ When("I click new post", async function () {
 
 When("I create a new post", async function () {
   posts = new Posts(this.driver);
+  let content = "Contenido del post";
+  let title = "Titulo del post";
+
+  await posts.enterTittle(title);
+  await posts.enterContent(content);
+});
+
+//Paso para data random con Faker
+When("I create a new post with Faker", async function () {
+  posts = new Posts(this.driver);
   let content = faker.lorem.paragraph();
   let title = faker.lorem.text();
 
   await posts.enterTittle(title);
   await posts.enterContent(content);
 });
+
+//Paso para data Apriori con mockaroo
+When("I create a new post with data mockaroo apriori", async function () {
+  posts = new Posts(this.driver);
+  const jsonFilePath = path.join(__dirname, '../../../posts-member.data.json');
+  const randomData = getRandomDataFromJson(jsonFilePath);
+  
+  await posts.enterTittle(randomData.title);
+  await posts.enterContent(randomData.content);
+});
+
+//Paso para data Pseudo random con mockaroo
+When("I create a new post with data mockaroo pseudo", async function () {
+  posts = new Posts(this.driver);
+  const apiEndpoint = 'https://my.api.mockaroo.com/ghost_mock_data.json?key=4629f080';
+  const response = await axios.get(apiEndpoint);
+  const mockarooData = response.data;
+
+  
+  await posts.enterTittle(mockarooData.title);
+  await posts.enterContent(mockarooData.description);
+});
+
+When("I click post now", async function () {
+  await posts.clickPostNow();
+})
 
 When("I publish the post", async function () {
   await posts.clickPublishButton();
