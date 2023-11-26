@@ -1,14 +1,24 @@
-## Random testing 
+## Pruebas automatizadas usando cypress
 
-Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghost](https://ghost.org/)
+Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghost](https://ghost.org/).
+
+Para esta semana se generaron escenarios de pruebas usandop 3 tecnicas:
+* pruebas apriori con la mockaroo (ver archivo *ghost-mock-data.json*)
+* Datos seudo aleatorios usando el api de [mockaroo](https://mockaroo.com/)
+* Datos aleatorios usando [faker](https://fakerjs.dev/guide/)
 
 ### Para ejecutar
 
 1. Instalar los paquetes con `npm install`
-2. Ejecutar cypress `node_modules/.bin/cypress open`
-3. Selecciònar la opción **E2E Testing**
-4. Seleccinar el navegador y las pruebas para los archivos `escenario_n.spec.cy.js`, donde _n_ es el número del escenario detallado en la [Wiki](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/wiki)
+2. Dentro del archivo *cypress/const.js* se encuentran las configuraciones como usuario, password, mockaroo credenciales. Si se necesita correr en local bajo otras credenciales, cambiarlas en este archivo.
+3. Ejecutar cypress `node_modules/.bin/cypress open`
+4. Selecciònar la opción **E2E Testing**
+5. Seleccinar el navegador y las pruebas para los archivos `escenario_n.spec.cy.js`, donde _n_ es el número del escenario detallado en la [Wiki](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/wiki)
 
+### Escenarios y versiones
+ Cada archivo tiene tiene 3 diferentes methodos de generación de datos, por lo tanto se puede decir que cada archivo tiene 3 escenarios.
+
+<b>Ghost versión</b>: V5.72.0
 <br>
 <b>Node version</b>: v18.12.1
 <br>
