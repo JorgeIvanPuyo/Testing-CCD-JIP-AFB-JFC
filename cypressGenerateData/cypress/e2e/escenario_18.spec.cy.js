@@ -6,7 +6,7 @@ import { CreateMemberPage } from "../units/createMember/CreateMemberPage";
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
 describe("Gestión de Miembros en la Comunidad", function () {
-  it("Intentar crear un nuevo miembro y luego abandonar el proceso", function () {
+  it("Intentar crear un nuevo miembro y luego abandonar el proceso e2e - datos aleatorios usando 'Faker'", function () {
     // Given Un usuario con credenciales válidas
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);

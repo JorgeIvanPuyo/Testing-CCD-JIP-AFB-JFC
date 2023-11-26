@@ -5,7 +5,7 @@ import { SigninPage } from "../units/login/SignInPage";
 import { faker } from "@faker-js/faker";
 
 describe("Como usuario quiero crear miembros para gestionar mi comunidad", function () {
-  it("Añadir un nuevo miembro con éxito", function () {
+  it("Añadir un nuevo miembro con éxito e2e - datos aleatorios usando 'Faker'", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 

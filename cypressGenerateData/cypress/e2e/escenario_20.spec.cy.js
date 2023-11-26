@@ -6,7 +6,7 @@ import { TagPage} from "../units/tags/TagPage";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 describe("Gestión de Tags en la Plataforma", function () {
-    it("Crear un nuevo tag, asignarlo a un post y luego verificar la asignación y desasignación", function () {
+    it("Crear un nuevo tag, asignarlo a un post y luego verificar la asignación y desasignación e2e - datos aleatorios usando 'Faker'", function () {
       // Given Un usuario con credenciales válidas
       cy.visit(`${APP_PAGE}/ghost/#/signin`);
       const signinPage = new SigninPage(cy);
