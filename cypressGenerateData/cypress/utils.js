@@ -1,4 +1,4 @@
-import MOCK_DATA from "../posts-member.data.json";
+import MOCK_DATA from "../ghost-mock-data.json";
 
 const process = require("process");
 import fs from "fs";
