@@ -4,7 +4,7 @@ import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
 import { PostPage } from "../units/post/postPage";
-import { getAprioriPostData, getPseudoRamdonData } from "../utils";
+import { getAprioriPostData, getPseudoRamdonData, getSlug } from "../utils";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
