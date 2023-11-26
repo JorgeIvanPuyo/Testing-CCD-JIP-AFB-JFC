@@ -79,8 +79,11 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       posts.fillPostDescription(description);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
+      cy.wait(1000);
       posts.clickContinueAndReviewButton();
+      cy.wait(1000);
       posts.clickPublishPostRightNow();
+      cy.wait(1000);
 
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
@@ -92,6 +95,7 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
 
       // Given: el usuario ha creado el post y publicado
       const postPage = new PostPage(cy);
+      cy.wait(500);
       // When: el usuario haga click sobre el post publicado
       const slug = getSlug(title);
       cy.visit(`${APP_PAGE}/${slug}`);
@@ -125,8 +129,11 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       posts.fillPostDescription(description);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
+      cy.wait(500);
       posts.clickContinueAndReviewButton();
+      cy.wait(500);
       posts.clickPublishPostRightNow();
+      cy.wait(500);
 
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();

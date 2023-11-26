@@ -82,7 +82,7 @@ export class CreatePostPage {
   clickContinueAndReviewButton() {
     if (!this.$continueAndReviewButton) {
       this.$continueAndReviewButton = cy.get(
-        "button[data-test-button='continue']"
+        ".gh-publish-cta button[data-test-button='continue']"
       );
     }
 

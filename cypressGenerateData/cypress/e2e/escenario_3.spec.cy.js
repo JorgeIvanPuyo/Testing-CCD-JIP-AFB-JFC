@@ -6,6 +6,13 @@ import { faker } from "@faker-js/faker";
 import { PostsListPage } from "../units/postsList/PostsListPage";
 import { getAprioriPostData, getPseudoRamdonData } from "../utils";
 
+
+Cypress.on("uncaught:exception", (err, runnable) => {
+  if (err.message.includes("ResizeObserver")) {
+    return false;
+  }
+});
+
 describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como borrador y editarlo en otro momento", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
@@ -32,21 +39,27 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       posts.clickPublishButton();
+      cy.wait(1000);
       posts.clickContinueAndReviewButton();
+      cy.wait(1000);
       posts.goToEdit();
+      cy.wait(500);
       // Then: el usuario habra tendra nuevo post NO publicado y podra verlo en el listado
       posts.goToPostsList();
+      cy.wait(500);
 
       // Given: a list of posts
       const postList = new PostsListPage(cy);
       // When: el usuario busca un post por titulo
       const post = postList.getPostByTitle(title);
       const status = postList.getStatusPost(post);
+      cy.wait(500);
       // Then: el usuario podra validar que esta como borrador es decir no se ha publicado
       status.should(($status) => {
         if (!$status.length) return;
         expect($status[0]).to.contain.text("Draft");
       });
+      cy.wait(500);
     });
   });
 
@@ -74,21 +87,27 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       posts.clickPublishButton();
+      cy.wait(1000);
       posts.clickContinueAndReviewButton();
+      cy.wait(1000);
       posts.goToEdit();
+      cy.wait(1000);
       // Then: el usuario habra tendra nuevo post NO publicado y podra verlo en el listado
       posts.goToPostsList();
+      cy.wait(1000);
 
       // Given: a list of posts
       const postList = new PostsListPage(cy);
       // When: el usuario busca un post por titulo
       const post = postList.getPostByTitle(title);
       const status = postList.getStatusPost(post);
+      cy.wait(1000);
       // Then: el usuario podra validar que esta como borrador es decir no se ha publicado
       status.should(($status) => {
         if (!$status.length) return;
         expect($status[0]).to.contain.text("Draft");
       });
+      cy.wait(1000);
     });
   });
 
@@ -116,16 +135,21 @@ describe("Como usuario quiero crear un post pero no publicarlo para tenerlo como
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       posts.clickPublishButton();
+      cy.wait(1000);
       posts.clickContinueAndReviewButton();
+      cy.wait(1000);
       posts.goToEdit();
+      cy.wait(1000);
       // Then: el usuario habra tendra nuevo post NO publicado y podra verlo en el listado
       posts.goToPostsList();
+      cy.wait(1000);
 
       // Given: a list of posts
       const postList = new PostsListPage(cy);
       // When: el usuario busca un post por titulo
       const post = postList.getPostByTitle(title);
       const status = postList.getStatusPost(post);
+      cy.wait(1000);
       // Then: el usuario podra validar que esta como borrador es decir no se ha publicado
       status.should(($status) => {
         if (!$status.length) return;

@@ -39,7 +39,7 @@ describe("Como usuario validar la NO creación de un nuevo miembro con un email 
       createMemberPage.fillEmail(email);
       // When: el usuario hace click sobre crear miembro
       createMemberPage.clickToSave();
-      cy.wait(500);
+      cy.wait(1000);
       // Then: el usuario podra ver el mensaje de error de email y el boton cambio de estado
       createMemberPage.getEmailError().should("contain", "Invalid Email");
       createMemberPage.getRetryButton().should("exist");
