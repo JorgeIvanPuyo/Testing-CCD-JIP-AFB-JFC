@@ -15,7 +15,6 @@ describe("Creación de tags internos en la plataforma", function () {
         cy.url().should("contain", "/dashboard");
 
         // And El usuario hace clic en el botón 'Tags' en el panel de navegación
-        cy.wait(1000);
         tagPage.navigateToTags();
 
         // And El usuario hace clic en 'Internal Tags'
