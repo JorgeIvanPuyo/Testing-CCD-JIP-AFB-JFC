@@ -1,6 +1,9 @@
 class Posts {
   constructor(driver) {
     this.driver = driver;
+
+    this.tagInputElement = '#tag-input ul input';
+    this.updateButtonElement = 'button[data-test-button="publish-save"]'
   }
 
   async clickNewPostButton() {
@@ -139,6 +142,14 @@ class Posts {
   async confirmUnpublish() {
     let unpublishConfirmButton = await this.driver.$('button[data-test-button="revert-to-draft"]');
     return await  unpublishConfirmButton.click();
+  }
+
+  async setTagToAPost(tagName) {
+    await this.driver.$(this.tagInputElement).setValue(tagName);
+  }
+
+  async clickOnTagInput() {
+    await this.driver.$(this.tagInputElement).click();
   }
 }
 

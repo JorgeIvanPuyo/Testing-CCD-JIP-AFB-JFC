@@ -9,6 +9,8 @@ const Members = require('../pages/members_page');
 const properties = require('../../../properties.json');
 const postsArray = require('../../../ghost-post.json');
 const { faker } = require('@faker-js/faker');
+const TagPage = require('../pages/tag_page');
+const Tag = require('../pages/tag_page');
 
 let loginPage;
 let dashboard;
@@ -18,6 +20,8 @@ let count = 0;
 let newCount = 0;
 let actualMembers = 0;
 let newMembers = 0;
+let tagPage;
+let tagName = '';
 
 // Variables para gestionar screenshots
 let browser;
@@ -408,3 +412,54 @@ Then(`The members should'nt increased`, async function() {
   assert.equal(actualMembers, members.getActualMembers());
 });
 
+//Scenario #19
+When("I click on Tags's page", async function() {
+  tagPage = new Tag(this.driver);
+  tagPage.goToTags();
+});
+
+Then('The page should be {kraken-string}', async function(tagsUrl) {
+  assert.equal(tagsUrl, await this.driver.getUrl());
+});
+
+When("I click on New Tag's button", async function() {
+  tagPage = new Tag(this.driver);
+  tagPage.clickNewTagButton();
+});
+
+When("I write the tag's name", async function() {
+  tagPage = new Tag(this.driver);
+  tagName = faker.word.adjective();
+  tagPage.setName(tagName);
+});
+
+When("I choose the tag's color", async function() {
+  tagPage = new Tag(this.driver);
+  tagPage.setColor(faker.color.rgb({prefix : '', casing : 'upper'}));
+});
+
+When("I write the tag's description", async function() {
+  tagPage = new Tag(this.driver);
+  tagPage.setDescription(faker.lorem.paragraph());
+});
+
+When("I click on save button", async function() {
+  tagPage = new Tag(this.driver);
+  tagPage.save();
+});
+
+Then('The new tag should be created', async function() {
+  tagPage = new Tag(this.driver);
+
+  assert.equal(await tagPage.isTagCreated(tagName), true);
+});
+
+When("I do click in Tag's input", async function() {
+  postPage = new Posts(this.driver);
+  postPage.setTagToAPost(tagName);
+});
+
+When("I select a tag", async function() {
+  postPage = new Posts(this.driver);
+  postPage.clickOnTagInput();
+});

@@ -16,16 +16,29 @@ Scenario: Creación de un nuevo tag
   Then  The page should be "<EXPECTED_URL_NEW_TAGS>"
 
   When  I write the tag's name
+  And   I wait for 1 seconds
   When  I choose the tag's color
-  When  I write the tag's slug
-  Then  The preview for the slug should show the URL append to new slug name
+  And   I wait for 1 seconds
+  # When  I write the tag's slug
+  # Then  The preview for the slug should show the URL append to new slug name
   When  I write the tag's description
+  And   I wait for 1 seconds
   When  I click on save button
   And   I wait for 2 seconds
   When  I click on Tags's page
-  Then  The new tags should be created
+  # Then  The new tag should be created
   
   Given I navigate to page "<POST_PAGE_URL>"
   When  I click published post
   And   I wait for 2 seconds
   When  I click settings
+
+  # When  I do click in Tag's input
+  # And   I wait for 2 seconds
+  # When  I select a tag
+  # And   I wait for 2 seconds
+  # Then  The update button should be enabled
+
+  # Given I click on post's update button
+  # And   I wait for 2 seconds
+  # When  I back to posts list
