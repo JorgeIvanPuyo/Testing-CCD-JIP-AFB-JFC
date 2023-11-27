@@ -71,7 +71,7 @@ class Members {
         let element2 = await this.driver.$('#member-email');
         await element2.setValue(email);
         
-        let labelsElement = await this.driver.$('.label-token > input');
+        let labelsElement = await this.driver.$('.ember-power-select-trigger-multiple-input');
         await labelsElement.setValue(labels);
 
         let element3 = await this.driver.$('#member-note');

@@ -1,7 +1,7 @@
-Feature: Escenarios 15 de prueba Ghost con Kraken
+Feature: Escenario 16 de prueba de Ghost con Kraken
 
 @user1 @web
-Scenario: Escenario 15. Creación de un nuevo member
+Scenario: Escenario 16. Creación de un nuevo miembro.
   Given I navigate to page "<URL>"
   When I login ghost "<USERNAME>" and "<PASSWORD>"
   And I wait for 2 seconds
@@ -13,16 +13,12 @@ Scenario: Escenario 15. Creación de un nuevo member
 
   When I click new member 
   And I wait for 1 seconds
-  And I create a new member with apriori data generation
-  And I wait for 3 seconds
+  And I create a new member with the email "<WRONG_EMAIL>" using apriori data generation
+  And I wait for 1 seconds
+  Then The validation should be Invalid email
+  And I wait for 2 seconds
+  And I create a new member
+  And I wait for 1 seconds
   Then member state should be created
   And I wait for 2 seconds
-
-#El member no debe existir para que pueda ser creado
-
-
-
-
-
-
 

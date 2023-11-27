@@ -447,8 +447,20 @@ When('I create a new member with the email {kraken-string}', async function (wro
     , faker.lorem.sentence());
 });
 
+
+When('I create a new member with the email {kraken-string} using apriori data generation'
+  , async function (wrongEmail) {
+  members = new Members(this.driver);
+  const data = aprioriData[Math.floor(Math.random() * 120)];
+
+  await members.createNewMember(
+    data.name
+    , data.wrongEmail
+    , data.description);
+});
+
 Then('The validation should be Invalid email', async function() {
-  let validationText = await members.getInvalidResponse('#member-email > p.response');
+  let validationText = await members.getInvalidResponse('#member-email + p.response');
   assert.equal(validationText, "Invalid Email.");
 });
 
@@ -478,7 +490,6 @@ Then('I click in back to posts option to return', async function() {
   posts.backToPostsButton();
 })
 
-
 When('I try to create a new member but I click on Members option', async function() {
   let members = new Members(this.driver);
 
@@ -487,6 +498,17 @@ When('I try to create a new member but I click on Members option', async functio
     , faker.internet.email()
     , faker.person.jobDescriptor()
     , faker.lorem.paragraph());
+});
+
+When('I try to create a new member but I click on Members option with apriori data generation', async function() {
+  let members = new Members(this.driver);
+  const data = aprioriData[Math.floor(Math.random() * 120)];
+
+  members.typeNewMemberFieldsAndReturn(
+    data.name
+    , data.email
+    , data.description
+    , data.description);
 });
 
 Then('Should be visible a modal dialog asking me if I want to leave', async function() {
