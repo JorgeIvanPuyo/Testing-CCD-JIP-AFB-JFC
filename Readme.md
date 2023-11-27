@@ -19,7 +19,7 @@
 Para esta semana, se trabajó en 60 escenarios usando kraken y otros 60 usando cypress, donde se aplicarón las tres tecnicas de generaciòn de datos: apriori, pseudo aleatorio y aleatorio. 
 
 * Los escenarios en **Cypress** se encuentran dentro de la carpeta */cypressGenerateData* [Ver Readme](cypressGenerateData/Readme.md)
-*
+* Los escenarios en **Kraken** se encuentran dentro de la carpeta *KrakenApp\kraken-with-faker*. Dentro de la carpeta features se encuentra cada uno de los archivos de cada escenario. Se creó un paso especifico para generar datos aleatorios con faker, otro para obtener datos apriri de un archivo generado con Mockaroo y almacenado en *KrakenApp\kraken-with-faker\posts-member.data.json*, y otro paso especifico para hacer llamados a una API de Mockaroo que entrega datos de un pool pseudo aleatorio.
 
 
 ## Semana 6
