@@ -3,6 +3,8 @@ import { SigninPage } from "../units/login/SignInPage";
 import { faker } from "@faker-js/faker";
 import { ModifyPostPage } from "../units/modifyPost/ModifyPostPage";
 import { TagPage} from "../units/tags/TagPage";
+import { getAprioriTagData } from "../utils";
+
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 describe("Gestión de Tags en la Plataforma", function () {
@@ -83,4 +85,77 @@ describe("Gestión de Tags en la Plataforma", function () {
       cy.contains(tagName).should('not.exist');
     }); 
   });
-  
+describe("Gestión de Tags en la Plataforma", function () {
+  it("Crear un nuevo tag, asignarlo a un post y luego verificar la asignación y desasignación e2e - datos de 'Mockaroo'", function () {
+      // Given Un usuario con credenciales válidas
+      cy.visit(`${APP_PAGE}/ghost/#/signin`);
+      const signinPage = new SigninPage(cy);
+      const modifyPostPage = new ModifyPostPage(cy);
+      const tagPage = new TagPage(cy);
+
+      // When El usuario inicia sesión con 'user' y 'password' válidos
+      signinPage.loginValidUser(USER, PASSWORD);
+      cy.url().should("contain", "/dashboard");
+
+      // And El usuario hace clic en el botón 'Tags' en el panel de navegación
+      tagPage.navigateToTags();
+
+      // And El usuario hace clic en 'New Tag'
+      tagPage.getNewTagButton().click();
+
+      // And El usuario agrega un 'nombre', 'color' y 'descripción' para el tag desde Mockaroo
+      const tagData = getAprioriTagData(0); // Obtener el primer elemento de MOCK_DATA
+      tagPage.getTagNameInput().type(tagData.nameTag);
+      tagPage.getTagAccentColorInput().type(tagData.color.substring(1)); // Remover '#' del color
+      const tagSlug = faker.lorem.slug();// Generar un slug del nombre
+      tagPage.getTagSlugInput().type(tagSlug);
+      tagPage.getTagDescriptionTextarea().type(tagData.description);
+
+      // Then Se valida que la vista previa del 'slug' cambió
+      tagPage.getTagSlugPreview().should('contain', tagSlug);
+
+      // And El usuario hace clic en 'Save'
+      tagPage.getSaveButton().click();
+
+      // And El usuario hace clic en 'Tags'
+      tagPage.navigateToTags();
+
+      // Then Se valida que se haya creado un tag nuevo
+      cy.contains(tagData.nameTag).should('exist');
+
+      // And El usuario hace clic en 'Posts'
+      modifyPostPage.navigateToPosts();
+
+      // And El usuario selecciona un post en estado 'Draft'
+      modifyPostPage.getPostDraftToModify().click();
+
+      // And El usuario hace clic en el menú colapsable 'Settings'
+      modifyPostPage.getPostSettings().click();
+
+      // And El usuario hace clic en 'Tags'
+      modifyPostPage.getTagInputDiv().click();
+      modifyPostPage.getFirstEmberPowerSelectOption().click();
+
+      // Then Se valida que el tag recién creado esté disponible
+      cy.contains(tagData.nameTag).should('exist');
+
+      // And El usuario hace clic en el nuevo tag
+      cy.contains(tagData.nameTag).click();
+
+      // And El usuario hace clic en el menú colapsable 'Settings'
+      modifyPostPage.getPostSettings().click();
+
+      // And El usuario hace clic en 'Update'
+      modifyPostPage.getUpdateButton().click();
+
+      // And El usuario hace clic en 'Posts'
+      modifyPostPage.navigateToPosts();
+
+      // And El usuario selecciona el mismo post
+      modifyPostPage.getPostDraftToModify().click();
+
+      // Then Se valida que no se guardó el tag asignado al post
+      modifyPostPage.getPostSettings().click();
+      cy.contains(tagData.nameTag).should('not.exist');
+  }); 
+});
