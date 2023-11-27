@@ -143,3 +143,12 @@ export async function getPseudoRamdonTag() {
       throw error;
     });
 }
+
+export function getBaseUrl(url) {
+  // Creamos un elemento de anclaje (a) para aprovechar las propiedades del DOM
+  const anchorElement = document.createElement('a');
+  anchorElement.href = url;
+
+  // Devolvemos la parte del protocolo y el hostname
+  return `${anchorElement.protocol}//${anchorElement.hostname}`;
+}

@@ -2,7 +2,7 @@ import { APP_PAGE, USER, PASSWORD } from "../const";
 import { SigninPage } from "../units/login/SignInPage";
 import { TagPage } from "../units/tags/TagPage";
 import { faker } from "@faker-js/faker";
-import { getPseudoRamdonMemeber } from "../utils";
+import { getBaseUrl, getPseudoRamdonMemeber } from "../utils";
 
 
 describe("Creación de tags internos en la plataforma", function () {
@@ -56,12 +56,13 @@ describe("Creación de tags internos en la plataforma", function () {
     });
 });
 describe("Creación de tags internos en la plataforma", function () {
-    it("Creación de un nuevo internal tag con nombre inválido URL e2e - datos aleatorios usando 'Faker'", async function () {
+    it("Creación de un nuevo internal tag con nombre inválido URL e2e - datos aleatorios usando 'Mockaroo'", async function () {
         // Given Un usuario con credenciales válidas
-        const { name, email } = await getPseudoRamdonMemeber();
+        const {  pseudoMember } = await getPseudoRamdonMemeber();
 
         cy.visit(`${APP_PAGE}/ghost/#/signin`);
-        
+        const url_name= getBaseUrl(pseudoMember);
+
         const signinPage = new SigninPage(cy);
         const tagPage = new TagPage(cy);
 
@@ -79,7 +80,7 @@ describe("Creación de tags internos en la plataforma", function () {
         tagPage.getCreateNewTagInternal().click();
 
         // And El usuario introduce un nombre inválido en formato URL en el campo 'Nombre'
-        tagPage.getTagNameInput().type(name);
+        tagPage.getTagNameInput().type(url_name);
 
         // And El usuario agrega un color en el campo 'Color'
         const tagColor = faker.internet.color();
@@ -103,6 +104,6 @@ describe("Creación de tags internos en la plataforma", function () {
         tagPage.navigateToTags();
 
         // Then Se valida que se haya creado un nuevo tag
-        cy.contains(tagName).should('exist');
+        cy.contains(pseudoMember).should('exist');
     });
 });
