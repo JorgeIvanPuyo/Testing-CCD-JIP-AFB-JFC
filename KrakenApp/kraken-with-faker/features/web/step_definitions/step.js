@@ -24,6 +24,19 @@ let newMembers = 0;
 let browser;
 let scenarioFolder;
 let stepCount = 0;
+let pseudoRandomData = async function() {
+  const apiEndpoint = 'https://my.api.mockaroo.com/ghost_mock_data.json?key=4629f080';
+  const response = await axios.get(apiEndpoint);
+
+  return response.data;
+}
+let aprioriData = () => {
+  const jsonFilePath = path.join(__dirname, '../../../posts-member.data.json');
+  const randomData = getRandomDataFromJson(jsonFilePath);
+
+  return randomData;
+}
+
 
 //Función para crear carpeta, limpiarla e iniciar variable stepCount
 Before(function (scenario) {
@@ -406,6 +419,16 @@ When('I create a new member', async function () {
   let nombre = faker.person.fullName();
   let email = faker.internet.email();
   let note = faker.lorem.sentence();
+  await members.createNewMember(nombre,email,note);
+});
+
+When('I create a new member with apriori data generation', async function () {
+  members = new Members(this.driver);
+  let data = aprioriData();
+
+  let nombre = data.title;
+  let email = data.email;
+  let note = data.description;
   await members.createNewMember(nombre,email,note);
 })
 
