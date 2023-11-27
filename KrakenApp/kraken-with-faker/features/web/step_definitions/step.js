@@ -10,6 +10,7 @@ const properties = require('../../../properties.json');
 const postsArray = require('../../../ghost-post.json');
 const { faker } = require('@faker-js/faker');
 const axios = require('axios');
+const aprioriData = require('../../../posts-member.data.json');
 
 let loginPage;
 let dashboard;
@@ -29,12 +30,6 @@ let pseudoRandomData = async function() {
   const response = await axios.get(apiEndpoint);
 
   return response.data;
-}
-let aprioriData = () => {
-  const jsonFilePath = path.join(__dirname, '../../../posts-member.data.json');
-  const randomData = getRandomDataFromJson(jsonFilePath);
-
-  return randomData;
 }
 
 
@@ -424,9 +419,9 @@ When('I create a new member', async function () {
 
 When('I create a new member with apriori data generation', async function () {
   members = new Members(this.driver);
-  let data = aprioriData();
+  const data = aprioriData[Math.floor(Math.random() * 120)];
 
-  let nombre = data.title;
+  let nombre = data.name;
   let email = data.email;
   let note = data.description;
   await members.createNewMember(nombre,email,note);
