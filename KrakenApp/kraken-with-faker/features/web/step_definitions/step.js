@@ -208,6 +208,7 @@ When("I count posts", async function () {
 });
 
 Then("The list of posts should increment", async function () {
+  posts = new Posts(this.driver);
   newCount = await posts.countPosts();
   assert.equal(newCount, count + 1);
 });
@@ -237,6 +238,42 @@ When("I edit a draft post", async function () {
   await posts.deleteContent();
   await posts.enterTittle(title);
   await posts.enterContent(content);
+});
+
+When("I edit a draft post with Faker", async function () {
+  posts = new Posts(this.driver);
+  let content = faker.lorem.paragraph();
+  let title = faker.lorem.text();
+
+  await posts.deleteTittle();
+  await posts.deleteContent();
+  await posts.enterTittle(title);
+  await posts.enterContent(content);
+});
+
+//Paso para edit post Apriori con mockaroo
+When("I edit a draft post with mockaroo apriori", async function () {
+  posts = new Posts(this.driver);
+  const jsonFilePath = path.join(__dirname, '../../../posts-member.data.json');
+  const randomData = getRandomDataFromJson(jsonFilePath);
+  
+  await posts.deleteTittle();
+  await posts.deleteContent();
+  await posts.enterTittle(randomData.title);
+  await posts.enterContent(randomData.content);
+});
+
+//Paso para edit post Pseudo random con mockaroo
+When("I edit a draft post with mockaroo pseudo", async function () {
+  posts = new Posts(this.driver);
+  const apiEndpoint = 'https://my.api.mockaroo.com/ghost_mock_data.json?key=4629f080';
+  const response = await axios.get(apiEndpoint);
+  const mockarooData = response.data;
+
+  await posts.deleteTittle();
+  await posts.deleteContent();
+  await posts.enterTittle(mockarooData.title);
+  await posts.enterContent(mockarooData.description);
 });
 
 Then("The list of posts should be the same", async function () {
