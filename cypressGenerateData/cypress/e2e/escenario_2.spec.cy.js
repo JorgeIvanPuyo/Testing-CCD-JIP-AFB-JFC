@@ -4,7 +4,7 @@ import { SigninPage } from "../units/login/SignInPage";
 
 import { faker } from "@faker-js/faker";
 import { PostPage } from "../units/post/postPage";
-import { getAprioriPostData, getPseudoRamdonData } from "../utils";
+import { getAprioriPostData, getPseudoRamdonData, getSlug } from "../utils";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
@@ -17,7 +17,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 describe("Como usuario quiero crear y publicar post desde el listado para tener a mis seguidores actualizados", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.window().then((win) => {
       // Give: La pagina de login
@@ -41,8 +41,11 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       posts.fillPostDescription(description);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
+      cy.wait(200);
       posts.clickContinueAndReviewButton();
+      cy.wait(200);
       posts.clickPublishPostRightNow();
+      cy.wait(200);
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
@@ -88,8 +91,11 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       posts.fillPostDescription(description);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
+      cy.wait(200);
       posts.clickContinueAndReviewButton();
+      cy.wait(200);
       posts.clickPublishPostRightNow();
+      cy.wait(200);
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
@@ -126,6 +132,7 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       const posts = new CreatePostPage(cy);
       // When: El ususario ingresa a crear un nuevo post
       posts.entryToPostListByIcon();
+      cy.wait(500);
 
       // datos apriori
       const { title, description } = getAprioriPostData(1);
@@ -133,10 +140,14 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       // When: los datos son validados en los campos
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
+      cy.wait(500);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
+      cy.wait(1000);
       posts.clickContinueAndReviewButton();
+      cy.wait(1000);
       posts.clickPublishPostRightNow();
+      cy.wait(1000);
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);

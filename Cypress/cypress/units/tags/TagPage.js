@@ -46,8 +46,15 @@ export class TagPage {
         return this.cy.get('span[data-test-task-button-state="success"]');
     }
 
+    getInternalTag()
+    {
+        return this.cy.get('button[data-test-tags-nav="internal"]');
+    }
 
-
+    getCreateNewTagInternal() {
+        return this.cy.contains('span', 'Create a new tag');
+    }
+    
 
 
 }  

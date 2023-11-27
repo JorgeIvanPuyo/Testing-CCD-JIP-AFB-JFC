@@ -1,33 +1,40 @@
-import { APP_PAGE, USER, PASSWORD } from "../const";
-import { CreatePostPage } from "../units/createPost/CreatePostPage";
-import { SigninPage } from "../units/login/SignInPage";
-
 import { faker } from "@faker-js/faker";
+import { APP_PAGE, USER, PASSWORD } from "../const";
+import { SigninPage } from "../units/login/SignInPage";
 import { PostPage } from "../units/post/postPage";
 import { getAprioriPostData, getPseudoRamdonData, getSlug } from "../utils";
+import { TITLE_PUBLISH_PAGE } from "../../../Cypress/cypress/const";
 
-const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
-
-describe("Como usuario quiero crear y publicar post para tener a mis seguidores actualizados", function () {
+describe("Como usuario quiero crear un nuevo post ingresando desde la opción Scheduled para mantener a mis usuarios actualizados", function () {
   it("e2e - datos aleatorios usando 'Faker' ", function () {
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(2000);
 
     cy.window().then((win) => {
-      // Give: Usuario ingrese al login
+      // Give: Usuario ingresa sus datos al login
       const signinPage = new SigninPage(cy);
-      // When: digite sus datos y haga click sobre entrar
+      // When: Haga click sobre el boton de entrar
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
 
-      // Given: el usuario se encuentra en el dashboard
-      // When: haga click sobre post y crear un nuevo post
-      const posts = new CreatePostPage(cy);
-      posts.entryToPostListByIcon();
-      // When: los datos son generados aleatoriamente.
+      // Given: estando en el dashboard
+      // When: El usuario hace click sobre la opcion para ver post agendados
+      const postsScheduled = homePage.goToPostScheduled();
+      // Then: el usuario estara en el listado de post agendados
+      postsScheduled.getUrl().should("contain", "type=scheduled");
+
+      // Given: estando en el listado de post agendados
+      // When: El usuario ingresa a crear un nuevo post
+      const posts = postsScheduled.goToCreatePost();
+      // Then: el usuario estara en el formulario para crear un nuevo post
+      posts.getUrl().should("contain", "/editor/post");
+
+
+      // Given: datos aleatoreos para el post
       const title = faker.person.jobTitle();
       const description = faker.lorem.paragraph();
+
       // When: los datos son validados en los campos
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
@@ -35,7 +42,6 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
       posts.clickPublishButton();
       posts.clickContinueAndReviewButton();
       posts.clickPublishPostRightNow();
-
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
@@ -61,30 +67,36 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
     cy.wait(1000);
 
     cy.window().then(async (win) => {
-      // Give: Usuario ingrese al login
+      // Give: Usuario ingresa sus datos al login
       const signinPage = new SigninPage(cy);
-      // When: digite sus datos y haga click sobre entrar
+      // When: Haga click sobre el boton de entrar
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
 
-      // Given: el usuario se encuentra en el dashboard
-      // When: haga click sobre post y crear un nuevo post
-      const posts = new CreatePostPage(cy);
-      posts.entryToPostListByIcon();
-      // When: Se crean datos pseudo aleatoreos
-      const { title, description } = await getPseudoRamdonData();
+      // Given: estando en el dashboard
+      // When: El usuario hace click sobre la opcion para ver post agendados
+      const postsScheduled = homePage.goToPostScheduled();
+      // Then: el usuario estara en el listado de post agendados
+      postsScheduled.getUrl().should("contain", "type=scheduled");
+
+      // Given: estando en el listado de post agendados
+      // When: El usuario ingresa a crear un nuevo post
+      const posts = postsScheduled.goToCreatePost();
+      // Then: el usuario estara en el formulario para crear un nuevo post
+      posts.getUrl().should("contain", "/editor/post");
+
+
+      // Given: datos pseudo aleatoreos para el post
+      const {title, description} = await getPseudoRamdonData();
+
       // When: los datos son validados en los campos
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
-      cy.wait(1000);
       posts.clickContinueAndReviewButton();
-      cy.wait(1000);
       posts.clickPublishPostRightNow();
-      cy.wait(1000);
-
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
@@ -95,7 +107,6 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
 
       // Given: el usuario ha creado el post y publicado
       const postPage = new PostPage(cy);
-      cy.wait(500);
       // When: el usuario haga click sobre el post publicado
       const slug = getSlug(title);
       cy.visit(`${APP_PAGE}/${slug}`);
@@ -110,31 +121,37 @@ describe("Como usuario quiero crear y publicar post para tener a mis seguidores 
     cy.visit(`${APP_PAGE}/ghost/#/signin`);
     cy.wait(1000);
 
-    cy.window().then((win) => {
-      // Give: Usuario ingrese al login
+    cy.window().then(async (win) => {
+      // Give: Usuario ingresa sus datos al login
       const signinPage = new SigninPage(cy);
-      // When: digite sus datos y haga click sobre entrar
+      // When: Haga click sobre el boton de entrar
       const homePage = signinPage.loginValidUser(USER, PASSWORD);
       // Then: el usuario ingresa al dashboard
       homePage.getUrl().should("contain", "/dashboard");
 
-      // Given: el usuario se encuentra en el dashboard
-      // When: haga click sobre post y crear un nuevo post
-      const posts = new CreatePostPage(cy);
-      posts.entryToPostListByIcon();
-      // When: los datos son generados apriori.
-      const { title, description } = getAprioriPostData(0);
+      // Given: estando en el dashboard
+      // When: El usuario hace click sobre la opcion para ver post agendados
+      const postsScheduled = homePage.goToPostScheduled();
+      // Then: el usuario estara en el listado de post agendados
+      postsScheduled.getUrl().should("contain", "type=scheduled");
+
+      // Given: estando en el listado de post agendados
+      // When: El usuario ingresa a crear un nuevo post
+      const posts = postsScheduled.goToCreatePost();
+      // Then: el usuario estara en el formulario para crear un nuevo post
+      posts.getUrl().should("contain", "/editor/post");
+
+
+      // Given: datos apriori para el post
+      const {title, description} = getAprioriPostData(10);
+
       // When: los datos son validados en los campos
       posts.fillPostTitle(title);
       posts.fillPostDescription(description);
       // When: El usuario hace click sobre publicar
       posts.clickPublishButton();
-      cy.wait(500);
       posts.clickContinueAndReviewButton();
-      cy.wait(500);
       posts.clickPublishPostRightNow();
-      cy.wait(500);
-
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = posts.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);

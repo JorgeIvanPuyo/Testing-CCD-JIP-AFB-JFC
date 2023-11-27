@@ -199,6 +199,7 @@ $RECYCLE.BIN/
 Kraken/.kraken
 Kraken/reports
 Kraken-4/reports
+KrakenApp/kraken-with-faker/reports/
 
 # Resemble Files
 resembleKraken/results/

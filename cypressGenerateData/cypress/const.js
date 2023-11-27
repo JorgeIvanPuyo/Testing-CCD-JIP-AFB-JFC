@@ -1,5 +1,5 @@
-export const USER = "cc.delgado@uniandes.edu.co";
-export const PASSWORD = "Test123456";
+export const USER = "jf.copete@uniandes.edu.co";
+export const PASSWORD = "***";
 export const APP_PAGE = "http://localhost:2368";
 export const API_URL = "https://my.api.mockaroo.com/ghost_mock_data.json";
 export const API_KEY = "4629f080";
