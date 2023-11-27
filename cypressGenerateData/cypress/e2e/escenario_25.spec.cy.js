@@ -3,7 +3,7 @@ import { SigninPage } from "../units/login/SignInPage";
 import { TagPage } from "../units/tags/TagPage";
 import { ModifyPostPage } from "../units/modifyPost/ModifyPostPage";
 import { faker } from "@faker-js/faker";
-import { getPseudoRamdonMemeber } from "../utils";
+import { getPseudoRamdonMemeber,getBaseUrl } from "../utils";
 
 
 describe("Gestión de Tags en la Plataforma", function () {
@@ -85,6 +85,11 @@ describe("Gestión de Tags en la Plataforma", function () {
         cy.contains(tagName).should('exist');
     });
 });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> develop
 describe("Gestión de Tags en la Plataforma", function () {
     it("Asignación de un nuevo tag con nombre inválido a un post e2e - datos Apriori usando 'Mockaroo'", async function () {
         // Given Un usuario con credenciales válidas
@@ -92,8 +97,13 @@ describe("Gestión de Tags en la Plataforma", function () {
         const signinPage = new SigninPage(cy);
         const tagPage = new TagPage(cy);
         const modifyPostPage = new ModifyPostPage(cy);
+<<<<<<< HEAD
         const {  url,description } = await getPseudoRamdonMemeber();
 
+=======
+        const {  description,pseudoMember } = await getPseudoRamdonMemeber();
+        const url_name= getBaseUrl(pseudoMember);
+>>>>>>> develop
 
         // When El usuario inicia sesión con 'user' y 'password' válidos
         signinPage.loginValidUser(USER, PASSWORD);
@@ -109,7 +119,11 @@ describe("Gestión de Tags en la Plataforma", function () {
         tagPage.getCreateNewTagInternal().click();
 
         // And El usuario introduce un nombre inválido en formato URL en el campo 'Nombre'
+<<<<<<< HEAD
         tagPage.getTagNameInput().type(url);
+=======
+        tagPage.getTagNameInput().type(url_name);
+>>>>>>> develop
 
         // And El usuario agrega un color en el campo 'Color'
         const tagColor = faker.internet.color();
@@ -132,7 +146,11 @@ describe("Gestión de Tags en la Plataforma", function () {
         tagPage.navigateToTags();
 
         // Then Se valida que se haya creado un nuevo tag
+<<<<<<< HEAD
         cy.contains(tagName).should('exist');
+=======
+        cy.contains(url_name).should('exist');
+>>>>>>> develop
 
         // And El usuario hace clic en 'Posts'
         modifyPostPage.navigateToPosts();
@@ -148,10 +166,17 @@ describe("Gestión de Tags en la Plataforma", function () {
         modifyPostPage.getFirstEmberPowerSelectOption().click();
 
         // Then Se valida que el tag recién creado esté disponible
+<<<<<<< HEAD
         cy.contains(tagName).should('exist');
 
         // And El usuario hace clic en el nuevo tag
         cy.contains(tagName).click();
+=======
+        cy.contains(url_name).should('exist');
+
+        // And El usuario hace clic en el nuevo tag
+        cy.contains(url_name).click();
+>>>>>>> develop
 
         // And El usuario hace clic en 'Update'
         cy.wait(1000)
@@ -161,6 +186,10 @@ describe("Gestión de Tags en la Plataforma", function () {
 
 
         // Then Se valida que la página tenga el nuevo tag asignado al post
+<<<<<<< HEAD
         cy.contains(tagName).should('exist');
+=======
+        cy.contains(url_name).should('exist');
+>>>>>>> develop
     });
 });
