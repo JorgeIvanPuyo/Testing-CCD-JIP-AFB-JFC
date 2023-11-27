@@ -1,7 +1,7 @@
 import { APP_PAGE, USER, PASSWORD } from "../const";
 import { CreateMemberPage } from "../units/createMember/CreateMemberPage";
 import { SigninPage } from "../units/login/SignInPage";
-import { getAprioriPostData, getPseudoRamdonData, getSlug,getPseudoRamdonMemeber } from "../utils";
+import { getPseudoRamdonMemeber } from "../utils";
 
 import { faker } from "@faker-js/faker";
 
@@ -82,7 +82,7 @@ describe("Como usuario quiero crear miembros para gestionar mi comunidad", funct
     
   });
   describe("Como usuario quiero crear miembros para gestionar mi comunidad", function () {
-    it("Añadir un nuevo miembro con éxito e2e - datos aleatorios usando 'Faker'", function () {
+    it("Añadir un nuevo miembro con éxito e2e - datos aleatorios usando 'Mockaroo API'", function () {
       cy.visit(`${APP_PAGE}/ghost/#/signin`);
       cy.wait(1000);
   
@@ -100,9 +100,10 @@ describe("Como usuario quiero crear miembros para gestionar mi comunidad", funct
         membersPage.navigateToMembers();
   
         // When: El usuario crea un nuevo miembro
+        const { name, email } = await getPseudoRamdonMemeber();
+
         membersPage.getNewMemberButton().click();
-        const memberName = faker.person.fullName();
-        membersPage.getMemberNameInput().type(memberName);
+        membersPage.getMemberNameInput().type(name);
         cy.screenshot("New Member Page"); // Captura de pantalla
   
         // And El usuario completa el campo 'labels' con etiquetas relevantes
@@ -131,7 +132,6 @@ describe("Como usuario quiero crear miembros para gestionar mi comunidad", funct
         // (Agregar verificaciones para confirmar que la información sigue presente)
   
         // When El usuario completa el campo 'email' con una dirección de correo válida
-        const { name, email } = await getPseudoRamdonMemeber();
         membersPage.getMemberNameInput().type(name);
         membersPage.getMemberEmailInput().type(email);
         // And El usuario hace clic en 'Save'
