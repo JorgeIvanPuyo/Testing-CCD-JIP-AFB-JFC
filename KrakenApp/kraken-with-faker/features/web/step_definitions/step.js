@@ -409,6 +409,17 @@ When('I create a new member', async function () {
   await members.createNewMember(nombre,email,note);
 })
 
+When('I create a new member with apriori data generation', async function () {
+  members = new Members(this.driver);
+  const jsonFilePath = path.join(__dirname, '../../../posts-member.data.json');
+  const randomData = getRandomDataFromJson(jsonFilePath);
+
+  let nombre = randomData.title;
+  let email = randomData.email;
+  let note = randomData.description;
+  await members.createNewMember(nombre,email,note);
+});
+
 //Scenario #16
 When('I create a new member with the email {kraken-string}', async function (wrongEmail) {
   members = new Members(this.driver);
