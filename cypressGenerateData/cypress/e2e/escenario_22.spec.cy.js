@@ -70,7 +70,7 @@ describe("Gestión de miembros en la plataforma", function () {
 
       // Completar texto email
       const memberEmail = faker.internet.email();
-      members.getMemberEmailInput().type(memberEmail);
+      members.getMemberEmailInput().type(email);
 
       // Intentar guardar el miembro
       members.getSaveButton().click();
