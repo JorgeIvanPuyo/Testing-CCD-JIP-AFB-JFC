@@ -5,7 +5,7 @@ import { DeletePostPage } from "../units/deletePost/DeletePostPage";
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
 
 describe("Como usuario quiero eliminar un post en estado 'Draft' para borrar una publicación", function () {
-    it("e2e", function () {
+    it("e2e - datos aleatorios usando 'Faker'", function () {
         cy.visit(`${APP_PAGE}/ghost/#/signin`);
         cy.wait(1000);
 
