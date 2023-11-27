@@ -44,17 +44,16 @@ class Members {
         return await element.getText();
       }
       
-         /**
+      /**
        * Returns the actual registered members.
        * 
        * @returns {string} : The amount of members registered.
        */
-         async getActualMembers() {
-          let element = await this.driver.$(
-            `${this.clickMembersSelector} span.gh-nav-member-count`);
-          
-          return await element.getText();
-        }
+      async getActualMembers() {
+        let element = await this.driver.$('tr[data-test-list="members-list-item"]');
+        
+        return await element.length;
+      }
 
            /**
        * Type all fields and then clicks on Members's option.

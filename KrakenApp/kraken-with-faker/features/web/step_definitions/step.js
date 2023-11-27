@@ -379,6 +379,8 @@ When("I click cancel delete", async function () {
 
 When('I click members', async function () {
   members = new Members(this.driver);
+  actualMembers = members.getActualMembers();
+  
   await members.clickMembers();
 })
 
@@ -393,6 +395,7 @@ Then("the URL should be members {kraken-string}", async function (expectedUrl) {
 
 When('I click new member', async function () {
   members = new Members(this.driver);
+
   await members.clickNewMemberButton();
 })
 
@@ -543,4 +546,3 @@ Then(`The members should'nt increased`, async function() {
 
   assert.equal(actualMembers, members.getActualMembers());
 });
-
