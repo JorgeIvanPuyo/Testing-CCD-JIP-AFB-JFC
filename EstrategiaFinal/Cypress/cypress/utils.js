@@ -91,7 +91,7 @@ export function getAprioriMemberData(position) {
     name: MOCK_DATA[position].name,
     wrongEmail: MOCK_DATA[position].wrongEmail,
     email: MOCK_DATA[position].email,
-    maliciousData,
+    malicious: MOCK_DATA[position].maliciousData,
   };
 }
 
