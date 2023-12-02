@@ -1,6 +1,8 @@
 {
   "USERNAME1": "example@test.com",
   "PASSWORD1": "Test123456",
+  "WRONGNAME": "wrong",
+  "WRONGPASS": "wrong",
   "URL": "http://157.230.86.220:4470/ghost",
   "POST_PAGE_URL": "http://157.230.86.220:4470/ghost/#/posts",
   "EXPECTED_URL_DASHBOARD": "http://157.230.86.220:4470/ghost/#/dashboard",

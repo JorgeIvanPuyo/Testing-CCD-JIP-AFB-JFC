@@ -13,6 +13,8 @@ const scenarios = [
       "step2",
       "step3",
       "step4",
+      "step5",
+      "step6",
     ],
   },
   {
@@ -21,36 +23,39 @@ const scenarios = [
       "step1",
       "step2",
       "step3",
-    ],
-  },
-  {
-    name: "Escenario_3.",
-    steps: [
-      "step1",
-      "step2",
-      "step3",
-      "step4",
-    ],
-  },
-  {
-    name: "Escenario_4.",
-    steps: [
-      "step1",
-      "step2",
-      "step3",
       "step4",
       "step5",
+      "step6",
     ],
   },
-  {
-    name: "Escenario_5.",
-    steps: [
-      "step1",
-      "step2",
-      "step3",
-      "step4",
-    ],
-  },
+  // {
+  //   name: "Escenario_3.",
+  //   steps: [
+  //     "step1",
+  //     "step2",
+  //     "step3",
+  //     "step4",
+  //   ],
+  // },
+  // {
+  //   name: "Escenario_4.",
+  //   steps: [
+  //     "step1",
+  //     "step2",
+  //     "step3",
+  //     "step4",
+  //     "step5",
+  //   ],
+  // },
+  // {
+  //   name: "Escenario_5.",
+  //   steps: [
+  //     "step1",
+  //     "step2",
+  //     "step3",
+  //     "step4",
+  //   ],
+  // },
 ];
 
 async function executeCompare() {
@@ -68,8 +73,9 @@ async function executeCompare() {
     };
 
     for (const step of scenario.steps) {
-      const imagePath1 = `C:/Users/ginav/uniandes/krakenNode16/Kraken/features/web/screenshots/${scenario.name}/${step}_screenshot.png`;
-      const imagePath2 = `C:/Users/ginav/uniandes/krakenNode16/Kraken-4/features/web/screenshots/${scenario.name}/${step}_screenshot.png`;
+      
+      const imagePath1 = `C:/Users/ginav/uniandes/krakenNode16/EstrategiaFinal/KrakenG4.48/features/web/screenshots/${scenario.name}/${step}_screenshot.png`;
+      const imagePath2 = `C:/Users/ginav/uniandes/krakenNode16/EstrategiaFinal/KrakenG5.72/features/web/screenshots/${scenario.name}/${step}_screenshot.png`;
 
       const data = await compareImages(
         fs.readFileSync(imagePath1),
@@ -112,7 +118,9 @@ function createReport(datetime, results) {
         <link href="index.css" type="text/css" rel="stylesheet">
       </head>
       <body>
-        <h1>Reporte ejecutado: ${datetime}</h1>
+        <h1>Pruebas de regresión Visual (VRT) Estrategia Final Grupo 22</h1>
+        <h2>Reporte: ${datetime} </h2>
+        <h2>Versiones de Ghost comparadas: 5.72 vs. 4.48</h2>
         <ul class="accordion">`;
 
   html += `
@@ -134,15 +142,15 @@ function createReport(datetime, results) {
         </div>
           <div class="imgline">
             <div class="imgcontainer">
-              <span class="imgname">Ghost 5.72.2</span>
+              <span class="imgname">Ghost 4.48</span>
               <img class="img2" src="${scenario.name}_${step.step}_before.png" label="Before">
             </div>
             <div class="imgcontainer">
-              <span class="imgname">Ghost 4.48.9</span>
+              <span class="imgname">Ghost 5.72</span>
               <img class="img2" src="${scenario.name}_${step.step}_after.png" label="After">
             </div>
             <div class="imgcontainer">
-              <span class="imgname">Comparison</span>
+              <span class="imgname">Comparasión</span>
               <img class="img2" src="${scenario.name}_${step.step}_compare.png" label="Comparison">
             </div>
           </div>
