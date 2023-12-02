@@ -1,6 +1,6 @@
 import { APP_PAGE, USER, PASSWORD, APP_PAGE_V4 } from "../const";
 import { SigninPage, SigninPageV4 } from "../units/login/SignInPage";
-import { PostPage } from "../units/post/postPage";
+import { PostPage, PostPageV4 } from "../units/post/postPage";
 
 import { getSlug } from "../utils";
 
@@ -88,10 +88,6 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
         .getDescriptionPusblished()
         .should("contain", description);
 
-      cy.screenshot("detailPostPublished-V5", {
-        overwrite: true,
-      });
-
       // Given: el usuario ha creado el post y publicado
       const postPage = new PostPage(cy);
       // When: el usuario haga click sobre el post publicado
@@ -175,23 +171,19 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
         overwrite: true,
       });
 
-      // // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
-      // const postPublishedPage = posts.validatePostPublished();
-      // postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
-      // postPublishedPage.getTitlePublishPage().should("contain", title);
-      // postPublishedPage
-      //   .getDescriptionPusblished()
-      //   .should("contain", description);
-
-      // // Given: el usuario ha creado el post y publicado
-      // const postPage = new PostPage(cy);
-      // // When: el usuario haga click sobre el post publicado
-      // const slug = getSlug(title);
-      // cy.visit(`${APP_PAGE}/${slug}`);
-      // // Then: el usuario podra ver el post publicado
-      // postPage.getTitle().should("contain", title);
-      // postPage.getDescription().should("contain", description);
-      // postPage.getUrl().should("contain", `/${slug}`);
+      // Given: el usuario ha creado el post y publicado
+      const postPage = new PostPageV4(cy);
+      // When: el usuario haga click sobre el post publicado
+      const slug = getSlug(title);
+      cy.visit(`${APP_PAGE}/${slug}`);
+      cy.wait(500);
+      cy.screenshot("postPage-V4", {
+        overwrite: true,
+      });
+      // Then: el usuario podra ver el post publicado
+      postPage.getTitle().should("contain", title);
+      postPage.getDescription().should("contain", description);
+      postPage.getUrl().should("contain", `/${slug}`);
     });
   });
 });
