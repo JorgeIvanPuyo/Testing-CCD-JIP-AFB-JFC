@@ -1,4 +1,4 @@
-import { CreatePostPage } from "../createPost/CreatePostPage";
+import { CreatePostPage, CreatePostPageV4 } from "../createPost/CreatePostPage";
 
 export class PostsListPage {
   $postsListTitle = cy.get("li.gh-list-row");
@@ -84,7 +84,7 @@ export class PostsListPage {
 
 export class PostsListPageV4 {
   $postsListTitle;
-  $addPostButton = cy.get("a[href='#/editor/post/']");
+  $addPostButton = cy.get(".view-actions a[href='#/editor/post/']");
   $postListContainer;
 
   constructor(cy) {
@@ -94,12 +94,14 @@ export class PostsListPageV4 {
     this.cy = cy;
   }
 
+  getUrl() {
+    return this.cy.url();
+  }
+
   getPostByTitle(title) {
     if (!this.$postsListTitle) {
       this.$postsListTitle = cy.get("li.gh-list-row.gh-posts-list-item");
     }
-    console.log("title: ", title);
-    console.log("***", title.length);
     return this.$postsListTitle
       .children("a")
       .first()
@@ -165,6 +167,6 @@ export class PostsListPageV4 {
   goToCreatePost() {
     this.$addPostButton.click();
 
-    return new CreatePostPage(this.cy);
+    return new CreatePostPageV4(this.cy);
   }
 }

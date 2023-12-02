@@ -1,12 +1,7 @@
 import { APP_PAGE, USER, PASSWORD, APP_PAGE_V4 } from "../const";
-import {
-  CreatePostPage,
-  CreatePostPageV4,
-} from "../units/createPost/CreatePostPage";
 import { SigninPage, SigninPageV4 } from "../units/login/SignInPage";
 import { PostPage } from "../units/post/postPage";
 
-import { faker } from "@faker-js/faker";
 import { getSlug } from "../utils";
 
 const TITLE_PUBLISH_PAGE = "Boom. It’s out there";
@@ -56,16 +51,20 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       cy.wait(500);
       // Then: La url debe ser validada
       CreatePostPage.getUrl().should("contain", "/editor/post");
-      cy.screenshot("createPost-V5", {
+      cy.screenshot("createPostPage-V5", {
         overwrite: true,
       });
 
       // Given: datos aleatoreos para generar el post
-      const title = faker.person.jobTitle();
-      const description = faker.lorem.paragraph();
+      const title = "Titulo para un post";
+      const description =
+        "Descripcion para un post, debe ser igual entre las dos versiones para validar tipografia";
       // When: los datos son ingresados en los campos de titulo y descripcion
       CreatePostPage.fillPostTitle(title);
       CreatePostPage.fillPostDescription(description);
+      cy.screenshot("FormFilled-V5", {
+        overwrite: true,
+      });
       // When: El usuario hace click sobre publicar
       CreatePostPage.clickPublishButton();
       cy.wait(400);
@@ -77,7 +76,10 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
       CreatePostPage.clickContinueAndReviewButton();
       cy.wait(400);
       CreatePostPage.clickPublishPostRightNow();
-      cy.wait(200);
+      cy.wait(400);
+      cy.screenshot("postPublished-V5", {
+        overwrite: true,
+      });
       // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
       const postPublishedPage = CreatePostPage.validatePostPublished();
       postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
@@ -107,65 +109,89 @@ describe("Como usuario quiero crear y publicar post desde el listado para tener 
     });
   });
 
-  // it("VRT - Ghost Version 4.4.7 ", function () {
-  //   cy.visit(`${APP_PAGE_V4}/ghost/#/signin`);
-  //   cy.wait(2000);
+  it("VRT - Ghost Version 4.4.7 ", function () {
+    cy.visit(`${APP_PAGE_V4}/ghost/#/signin`);
+    cy.wait(2000);
 
-  //   // Take screenshot
-  //   cy.screenshot("Login-V4", {
-  //     overwrite: true,
-  //   });
+    // Take screenshot
+    cy.screenshot("Login-V4", {
+      overwrite: true,
+    });
 
-  //   cy.window().then((win) => {
-  //     // Give: La pagina de login
-  //     const signinPage = new SigninPageV4(cy);
-  //     // When: digite sus datos y haga click sobre entrar
-  //     const homePage = signinPage.loginValidUser(USER, PASSWORD);
-  //     // Then: el usuario ingresa al dashboard
-  //     homePage.getUrl().should("contain", "/dashboard");
+    cy.window().then((win) => {
+      // Give: La pagina de login
+      const signinPage = new SigninPageV4(cy);
+      // When: digite sus datos y haga click sobre entrar
+      const homePage = signinPage.loginValidUser(USER, PASSWORD);
+      // Then: el usuario ingresa al dashboard
+      homePage.getUrl().should("contain", "/dashboard");
 
-  //     // Take screenshot
-  //     cy.screenshot("Dashboard-V4", {
-  //       overwrite: true,
-  //     });
+      // Take screenshot
+      cy.screenshot("Dashboard-V4", {
+        overwrite: true,
+      });
 
-  //     // Given: El usuario se encuentra en el dashboard
-  //     const posts = new CreatePostPageV4(cy);
-  //     // When: El ususario ingresa a crear un nuevo post
-  //     posts.goToPostsList();
-  //     cy.wait(500);
+      // Given: El usuario se encuentra en el dashboard
+      // When: El ususario clickea sobre el boton de lista de posts
+      const postsListPage = homePage.goToPostsList();
+      cy.wait(500);
+      // Then: La url debe ser validada
+      postsListPage.getUrl().should("contain", "/posts");
+      cy.screenshot("postsList-V4", {
+        overwrite: true,
+      });
 
-  //     // // datos aleatoreos
-  //     // const title = faker.person.jobTitle();
-  //     // const description = faker.lorem.paragraph();
+      // Given la lista de usuarios
+      // When: El usuario clickea sobre el boton de crear un post
+      const CreatePostPage = postsListPage.goToCreatePost();
+      cy.wait(500);
+      // Then: La url debe ser validada
+      CreatePostPage.getUrl().should("contain", "/editor/post");
+      cy.screenshot("createPostPage-V4", {
+        overwrite: true,
+      });
 
-  //     // // When: los datos son validados en los campos
-  //     // posts.fillPostTitle(title);
-  //     // posts.fillPostDescription(description);
-  //     // // When: El usuario hace click sobre publicar
-  //     // posts.clickPublishButton();
-  //     // cy.wait(200);
-  //     // posts.clickContinueAndReviewButton();
-  //     // cy.wait(200);
-  //     // posts.clickPublishPostRightNow();
-  //     // cy.wait(200);
-  //     // // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
-  //     // const postPublishedPage = posts.validatePostPublished();
-  //     // postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
-  //     // postPublishedPage.getTitlePublishPage().should("contain", title);
-  //     // postPublishedPage
-  //     //   .getDescriptionPusblished()
-  //     //   .should("contain", description);
+      // Given: datos aleatoreos para generar el post
+      const title = "Titulo para un post";
+      const description =
+        "Descripcion para un post, debe ser igual entre las dos versiones para validar tipografia";
+      // When: los datos son ingresados en los campos de titulo y descripcion
+      CreatePostPage.fillPostTitle(title);
+      CreatePostPage.fillPostDescription(description);
+      cy.screenshot("FormFilled-V4", {
+        overwrite: true,
+      });
+      // When: El usuario hace click sobre publicar
+      CreatePostPage.clickPublishButton();
+      cy.wait(400);
+      cy.screenshot("createPost-V4", {
+        overwrite: true,
+      });
+      CreatePostPage.clickContinueAndReviewButton();
+      cy.wait(400);
+      CreatePostPage.clickPublishPostRightNow();
+      cy.wait(400);
+      cy.screenshot("postPublished-V4", {
+        overwrite: true,
+      });
 
-  //     // // Given: el usuario ha creado el post y publicado
-  //     // const postPage = new PostPage(cy);
-  //     // // When: el usuario haga click sobre el post publicado
-  //     // const slug = getSlug(title);
-  //     // cy.visit(`${APP_PAGE}/${slug}`);
-  //     // // Then: el usuario podra ver el post publicado
-  //     // postPage.getTitle().should("contain", title);
-  //     // postPage.getDescription().should("contain", description);
-  //     // postPage.getUrl().should("contain", `/${slug}`);
-  //   });
-  // });
+      // // Then: el usuario habra publicado el nuevo post y podra verlo en el listado
+      // const postPublishedPage = posts.validatePostPublished();
+      // postPublishedPage.getTitlePage().should("contain", TITLE_PUBLISH_PAGE);
+      // postPublishedPage.getTitlePublishPage().should("contain", title);
+      // postPublishedPage
+      //   .getDescriptionPusblished()
+      //   .should("contain", description);
+
+      // // Given: el usuario ha creado el post y publicado
+      // const postPage = new PostPage(cy);
+      // // When: el usuario haga click sobre el post publicado
+      // const slug = getSlug(title);
+      // cy.visit(`${APP_PAGE}/${slug}`);
+      // // Then: el usuario podra ver el post publicado
+      // postPage.getTitle().should("contain", title);
+      // postPage.getDescription().should("contain", description);
+      // postPage.getUrl().should("contain", `/${slug}`);
+    });
+  });
 });
