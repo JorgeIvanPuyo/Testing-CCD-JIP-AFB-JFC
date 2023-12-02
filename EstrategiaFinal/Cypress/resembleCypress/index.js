@@ -1,6 +1,7 @@
 const compareImages = require("resemblejs/compareImages");
 const config = require("./config.json");
 const fs = require("fs");
+const path = require("path");
 
 const { viewportHeight, viewportWidth, browsers, options } = config;
 
@@ -10,42 +11,23 @@ async function executeCompare() {
     fs.mkdirSync(`./results/${folderName}`, { recursive: true });
   }
 
-  // folderPath =
-  console.log("folderPath = : ", __dirname);
-}
+  const rootPath = path(__dirname, "..");
+  const screenshotFolder = path.join(rootPath, "cypress", "screenshots");
+  const screenshots = fs.readdirSync(screenshotFolder);
 
-async function executeTest() {
-  if (browsers.length === 0) {
-    return;
-  }
-  let resultInfo = {};
-  let datetime = new Date().toISOString().replace(/:/g, ".");
-  for (b of browsers) {
-    if (!b in ["chromium", "webkit", "firefox"]) {
-      return;
-    }
-    if (!fs.existsSync(`./results/${datetime}`)) {
-      fs.mkdirSync(`./results/${datetime}`, { recursive: true });
-    }
-    //Launch the current browser context
-    const browser = await playwright[b].launch({
-      headless: true,
-      viewport: { width: viewportWidth, height: viewportHeight },
-    });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    await page.goto(config.url);
-    await page.screenshot({ path: `./results/${datetime}/before-${b}.png` });
-    await page.click("#generate");
-    await page.screenshot({ path: `./results/${datetime}/after-${b}.png` });
-    await browser.close();
+  const imagesToCompate = getCoupleFiles(screenshots, screenshotFolder);
 
+  const scenarioResults = [];
+
+  for (const { image1, image2, prefix } of imagesToCompate) {
     const data = await compareImages(
-      fs.readFileSync(`./results/${datetime}/before-${b}.png`),
-      fs.readFileSync(`./results/${datetime}/after-${b}.png`),
+      fs.readFileSync(image1),
+      fs.readFileSync(image2),
       options
     );
-    resultInfo[b] = {
+
+    const resultInfo = {
+      step,
       isSameDimensions: data.isSameDimensions,
       dimensionDifference: data.dimensionDifference,
       rawMisMatchPercentage: data.rawMisMatchPercentage,
@@ -53,23 +35,44 @@ async function executeTest() {
       diffBounds: data.diffBounds,
       analysisTime: data.analysisTime,
     };
-    fs.writeFileSync(
-      `./results/${datetime}/compare-${b}.png`,
-      data.getBuffer()
-    );
-  }
-  fs.writeFileSync(
-    `./results/${datetime}/report.html`,
-    createReport(datetime, resultInfo)
-  );
-  fs.copyFileSync("./index.css", `./results/${datetime}/index.css`);
 
-  console.log(
-    "------------------------------------------------------------------------------------"
-  );
-  console.log("Execution finished. Check the report under the results folder");
-  return resultInfo;
+    fs.writeFileSync(`./${folderName}/${prefix}_compare.png`, data.getBuffer());
+    fs.copyFileSync(image1, `./${folderName}/${prefix}_before.png`);
+    fs.copyFileSync(image2, `./${folderName}/${prefix}_after.png`);
+    scenarioResults.steps.push(resultInfo);
+  }
 }
+
+/**
+ * Generates a list of image pairs for comparison based on the given screenshots and path.
+ *
+ * @param {Array} screenshots - An array of screenshot filenames.
+ * @param {string} path - The path where the screenshots are located.
+ * @return {Array} - An array of image pairs to compare.
+ */
+const getCoupleFiles = (screenshots, path) => {
+  const prefix = screenshots.map((fileName) => fileName.split("-")[0]);
+  const prefixSet = new Set(prefix);
+
+  const imagesToCompate = [];
+
+  prefixSet.forEach((prefix) => {
+    const doExistV5 = fs.existsSync(`${path}/${prefix}-V5.png`);
+    const doExistV4 = fs.existsSync(`${path}/${prefix}-V4.png`);
+    if (doExistV5 && doExistV4) {
+      imagesToCompate.push({
+        image1: `${path}/${prefix}-V4.png`,
+        image2: `${path}/${prefix}-V5.png`,
+        prefix,
+      });
+    }
+  });
+
+  return imagesToCompate;
+};
+
+executeCompare();
+
 // (async ()=>console.log(await executeTest()))();
 
 function browser(b, info) {

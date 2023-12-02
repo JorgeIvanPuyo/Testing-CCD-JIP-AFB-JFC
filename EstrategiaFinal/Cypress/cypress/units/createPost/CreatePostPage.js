@@ -236,6 +236,10 @@ export class CreatePostPageV4 {
   $unpublishButton;
   $unpublishAndRevertToDraftButton;
 
+  getUrl() {
+    return this.cy.url();
+  }
+
   entryToPostListByIcon() {
     if (!this.$addIcon) {
       this.$addIcon = cy.get(".gh-nav-list-new .gh-nav-new-post");
