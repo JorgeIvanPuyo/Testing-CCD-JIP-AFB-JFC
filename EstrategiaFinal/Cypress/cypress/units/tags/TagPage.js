@@ -13,8 +13,9 @@ export class TagPage {
         cy.visit('/ghost/#/tags');
     
     }
+    navigateToCreateTags() { this.cy.visit('/ghost/#/tags/new'); }
     getNewTagButton() {
-        return this.cy.get('a[href="#/tags/new/"]');
+        return cy.get('a[href="#/tags/new/"].ember-view.gh-btn.gh-btn-primary');
     }
     
     getTagNameInput() {

@@ -91,6 +91,7 @@ export function getAprioriMemberData(position) {
     name: MOCK_DATA[position].name,
     wrongEmail: MOCK_DATA[position].wrongEmail,
     email: MOCK_DATA[position].email,
+    malicious: MOCK_DATA[position].maliciousData,
   };
 }
 
@@ -146,7 +147,7 @@ export async function getPseudoRamdonTag() {
 
 export function getBaseUrl(url) {
   // Creamos un elemento de anclaje (a) para aprovechar las propiedades del DOM
-  const anchorElement = document.createElement('a');
+  const anchorElement = document.createElement("a");
   anchorElement.href = url;
 
   // Devolvemos la parte del protocolo y el hostname
