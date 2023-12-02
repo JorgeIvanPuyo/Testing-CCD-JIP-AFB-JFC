@@ -28,6 +28,10 @@ export class CreatePostPage {
   $unpublishButton;
   $unpublishAndRevertToDraftButton;
 
+  getUrl() {
+    return this.cy.url();
+  }
+
   entryToPostListByLabel() {
     if (!this.$addLabel) {
       this.$addLabel = cy.get("a[data-test-nav='posts']");
@@ -78,7 +82,7 @@ export class CreatePostPage {
   clickContinueAndReviewButton() {
     if (!this.$continueAndReviewButton) {
       this.$continueAndReviewButton = cy.get(
-        "button[data-test-button='continue']"
+        ".gh-publish-cta button[data-test-button='continue']"
       );
     }
 
