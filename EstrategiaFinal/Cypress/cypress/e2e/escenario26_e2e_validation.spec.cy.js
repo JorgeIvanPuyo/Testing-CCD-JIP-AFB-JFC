@@ -63,7 +63,6 @@ describe("Gestión de Tags en la Plataforma", function () {
       // Given Un usuario con credenciales válidas
       cy.visit(`${APP_PAGE}/ghost/#/signin`);
       const signinPage = new SigninPage(cy);
-      const modifyPostPage = new ModifyPostPage(cy);
       const tagPage = new TagPage(cy);
   
       // When El usuario inicia sesión con 'user' y 'password' válidos
