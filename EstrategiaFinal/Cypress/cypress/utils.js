@@ -46,6 +46,7 @@ export function getSlug(title) {
  * @return {{title: string, description: string}} - The data for the post at the specified position.
  */
 export function getAprioriPostData(position) {
+
   if (position < 0 || position > 119) {
     return new Error(
       "The post position in 'getAprioriPostData' must be between 0 and 119"
@@ -54,7 +55,7 @@ export function getAprioriPostData(position) {
 
   return {
     title: MOCK_DATA[position].title,
-    description: MOCK_DATA[position].description,
+    description: MOCK_DATA[position].description
   };
 }
 
@@ -91,6 +92,7 @@ export function getAprioriMemberData(position) {
     name: MOCK_DATA[position].name,
     wrongEmail: MOCK_DATA[position].wrongEmail,
     email: MOCK_DATA[position].email,
+    malicious: MOCK_DATA[position].maliciousData,
   };
 }
 
