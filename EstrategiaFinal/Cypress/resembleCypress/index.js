@@ -7,11 +7,14 @@ const { viewportHeight, viewportWidth, browsers, options } = config;
 
 async function executeCompare() {
   const folderName = "report";
-  if (!fs.existsSync(`./results/${folderName}`)) {
-    fs.mkdirSync(`./results/${folderName}`, { recursive: true });
+  if (!fs.existsSync(`./${folderName}`)) {
+    fs.mkdirSync(`./${folderName}`, { recursive: true });
   }
 
-  const rootPath = path(__dirname, "..");
+  let rootPath = __dirname.split("/");
+  rootPath.pop();
+  rootPath = rootPath.join("/");
+
   const screenshotFolder = path.join(rootPath, "cypress", "screenshots");
   const screenshots = fs.readdirSync(screenshotFolder);
 
@@ -27,7 +30,7 @@ async function executeCompare() {
     );
 
     const resultInfo = {
-      step,
+      prefix,
       isSameDimensions: data.isSameDimensions,
       dimensionDifference: data.dimensionDifference,
       rawMisMatchPercentage: data.rawMisMatchPercentage,
@@ -39,8 +42,15 @@ async function executeCompare() {
     fs.writeFileSync(`./${folderName}/${prefix}_compare.png`, data.getBuffer());
     fs.copyFileSync(image1, `./${folderName}/${prefix}_before.png`);
     fs.copyFileSync(image2, `./${folderName}/${prefix}_after.png`);
-    scenarioResults.steps.push(resultInfo);
+    scenarioResults.push(resultInfo);
   }
+
+  fs.writeFileSync(
+    `./${folderName}/report.html`,
+    createReport(new Date().toLocaleString(), scenarioResults)
+  );
+  // Copy styles
+  fs.copyFileSync("./index.css", `./${folderName}/index.css`);
 }
 
 /**
