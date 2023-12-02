@@ -47,7 +47,7 @@ async function executeCompare() {
 
   fs.writeFileSync(
     `./${folderName}/report.html`,
-    createReport(new Date().toLocaleString(), scenarioResults)
+    createReport(new Date().toLocaleString(), imagesToCompate)
   );
   // Copy styles
   fs.copyFileSync("./index.css", `./${folderName}/index.css`);
@@ -85,46 +85,71 @@ executeCompare();
 
 // (async ()=>console.log(await executeTest()))();
 
-function browser(b, info) {
-  return `<div class=" browser" id="test0">
-    <div class=" btitle">
-        <h2>Browser: ${b}</h2>
-        <p>Data: ${JSON.stringify(info)}</p>
-    </div>
-    <div class="imgline">
-      <div class="imgcontainer">
-        <span class="imgname">Reference</span>
-        <img class="img2" src="before-${b}.png" id="refImage" label="Reference">
-      </div>
-      <div class="imgcontainer">
-        <span class="imgname">Test</span>
-        <img class="img2" src="after-${b}.png" id="testImage" label="Test">
-      </div>
-    </div>
-    <div class="imgline">
-      <div class="imgcontainer">
-        <span class="imgname">Diff</span>
-        <img class="imgfull" src="./compare-${b}.png" id="diffImage" label="Diff">
-      </div>
-    </div>
-  </div>`;
-}
-
-function createReport(datetime, resInfo) {
-  return `
+function createReport(datetime, imagesToCompate) {
+  let html = `
     <html>
-        <head>
-            <title> VRT Report </title>
-            <link href="index.css" type="text/css" rel="stylesheet">
-        </head>
-        <body>
-            <h1>Report for 
-                 <a href="${config.url}"> ${config.url}</a>
-            </h1>
-            <p>Executed: ${datetime}</p>
-            <div id="visualizer">
-                ${config.browsers.map((b) => browser(b, resInfo[b]))}
+      <head>
+        <title>VRT Report</title>
+        <link href="index.css" type="text/css" rel="stylesheet">
+      </head>
+      <body>
+        <h1>Reporte ejecutado: ${datetime}</h1>
+        <ul class="accordion">`;
+
+  html += `
+        </ul>`;
+
+  html += `
+      <div class="scenario" id="selector">`;
+
+  for (const step of imagesToCompate) {
+    html += `
+        <li class="step" id="${step.prefix}">
+          <h3>${step.prefix}</h3>
+          <div class="data-section">
+          <p class="data-label">Porcentaje de Desajuste: ${step.rawMisMatchPercentage}%</p>
+          <p class="data-label">Tiempo de Análisis: ${step.analysisTime} ms</p>
+        </div>
+          <div class="imgline">
+            <div class="imgcontainer">
+              <span class="imgname">Ghost 5.72.2</span>
+              <img class="img2" src="${step.prefix}_before.png" label="Before">
             </div>
-        </body>
+            <div class="imgcontainer">
+              <span class="imgname">Ghost 4.48.9</span>
+              <img class="img2" src="${step.prefix}_after.png" label="After">
+            </div>
+            <div class="imgcontainer">
+              <span class="imgname">Comparison</span>
+              <img class="img2" src="${step.prefix}_compare.png" label="Comparison">
+            </div>
+          </div>
+        </li>`;
+  }
+
+  html += `
+        </ul>
+      </div>`;
+
+  html += `
+      <script>
+        const scenarioElements = document.querySelectorAll('.scenario');
+        const stepElements = document.querySelectorAll('.step');
+
+        function toggleList(element) {
+          element.classList.toggle('open');
+        }
+
+        scenarioElements.forEach(element => {
+          element.addEventListener('click', () => toggleList(element));
+        });
+
+        stepElements.forEach(element => {
+          element.addEventListener('click', () => toggleList(element));
+        });
+      </script>
+      </body>
     </html>`;
+
+  return html;
 }
