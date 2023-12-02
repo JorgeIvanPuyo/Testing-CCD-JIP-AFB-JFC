@@ -5,7 +5,7 @@ class Members {
       }
 
       async clickMembers() {
-        let element = await this.driver.$('a[data-test-nav="members"]');
+        let element = await this.driver.$('a[href="#/members/"]');
         return await element.click();
       }
 
@@ -30,7 +30,7 @@ class Members {
       }
 
       async getState() {
-        let element = await this.driver.$('.gh-member-details-attribution');
+        let element = await this.driver.$('.gh-member-details-meta');
         return await element.getText();
       }
       

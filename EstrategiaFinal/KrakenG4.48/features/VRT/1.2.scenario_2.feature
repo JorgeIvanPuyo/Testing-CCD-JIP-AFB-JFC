@@ -15,10 +15,10 @@ Scenario: Escenario 2.
   And I take screenshot   
 
   When I login ghost "<USERNAME1>" and "<PASSWORD1>"
-  And I wait for 4 seconds
-  Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
+  And I wait for 6 seconds
   #Screenshot3
   And I take screenshot   
+  Then the URL should be dashboard "<EXPECTED_URL_DASHBOARD>"
 
   When I click posts icon
   And I wait for 2 seconds 

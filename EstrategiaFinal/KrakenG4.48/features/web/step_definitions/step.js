@@ -5,6 +5,7 @@ const path = require('path');
 const LoginPage = require('../pages/login_page');
 const Dashboard = require('../pages/dashboard_page');
 const Posts = require('../pages/posts_page');
+const Members = require('../pages/members_page');
 const properties = require('../../../properties.json');
 const postsArray = require('../../../ghost-post.json');
 
@@ -370,4 +371,13 @@ Then('I click in back to posts option to return', async function() {
 When('I click posts to see the list', async function(){
   posts = new Posts(this.driver);
   posts = posts.goToPostsList();
+});
+ 
+// Scenario #16
+When('I create a new member with the email {kraken-string}', async function (wrongEmail) {
+  members = new Members(this.driver);
+  await members.createNewMember(
+    "nombre"
+    , wrongEmail
+    , "new member for tests");
 });

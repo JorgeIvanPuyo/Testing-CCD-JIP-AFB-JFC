@@ -28,25 +28,29 @@ const scenarios = [
       "step6",
     ],
   },
-  // {
-  //   name: "Escenario_3.",
-  //   steps: [
-  //     "step1",
-  //     "step2",
-  //     "step3",
-  //     "step4",
-  //   ],
-  // },
-  // {
-  //   name: "Escenario_4.",
-  //   steps: [
-  //     "step1",
-  //     "step2",
-  //     "step3",
-  //     "step4",
-  //     "step5",
-  //   ],
-  // },
+  {
+    name: "Escenario_3.",
+    steps: [
+      "step1",
+      "step2",
+      "step3",
+      "step4",
+      "step5",
+      "step6",
+    ],
+  },
+  {
+    name: "Escenario_4.",
+    steps: [
+      "step1",
+      "step2",
+      "step3",
+      "step4",
+      "step5",
+      "step6",
+      "step7",
+    ],
+  },
   // {
   //   name: "Escenario_5.",
   //   steps: [

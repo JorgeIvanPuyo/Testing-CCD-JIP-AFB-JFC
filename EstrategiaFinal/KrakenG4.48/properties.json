@@ -13,5 +13,6 @@
 
   "EXPECTED_CONFIRM_UNPUBLISH_TEXT": "Unpublish and revert to private draft →",
   "POST_DRAFT_STATUS": "Draft",
-  "POST_PUBLISHED_STATUS" : "Published"
+  "POST_PUBLISHED_STATUS" : "Published",
+  "WRONG_EMAIL" : "lucka.mobile184gmail.com"
 }

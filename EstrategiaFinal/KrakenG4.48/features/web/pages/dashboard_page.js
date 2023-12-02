@@ -9,7 +9,7 @@ class Dashboard {
      * @returns {*} An event that trigger the click action.
      */
     async clickPostsButton() {
-        let element = await this.driver.$('.gh-nav-new-post');
+        let element = await this.driver.$('a[href="#/posts/"]');
         return await element.click();
     }
 
