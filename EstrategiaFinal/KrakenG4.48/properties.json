@@ -1,0 +1,15 @@
+{
+  "USERNAME1": "example@test.com",
+  "PASSWORD1": "Test123456",
+  "URL": "http://157.230.86.220:4470/ghost",
+  "POST_PAGE_URL": "http://157.230.86.220:4470/ghost/#/posts",
+  "EXPECTED_URL_DASHBOARD": "http://157.230.86.220:4470/ghost/#/dashboard",
+  "EXPECTED_URL_POSTS": "http://157.230.86.220:4470/ghost/#/posts",
+  "EXPECTED_URL_MEMBERS": "http://157.230.86.220:4470/ghost/#/members",
+  "EXPECTED_URL_EDITOR_POSTS": "http://157.230.86.220:4470/ghost/#/editor/post",
+  "EXPECTED_TITLE_NEW_POST": "TittleNewPost",
+
+  "EXPECTED_CONFIRM_UNPUBLISH_TEXT": "Unpublish and revert to private draft →",
+  "POST_DRAFT_STATUS": "Draft",
+  "POST_PUBLISHED_STATUS" : "Published"
+}
