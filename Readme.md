@@ -19,7 +19,22 @@
 Para esta semana, se trabajó en 60 escenarios usando kraken y otros 60 usando cypress, donde se aplicarón las tres tecnicas de generaciòn de datos: apriori, pseudo aleatorio y aleatorio. 
 
 * Los escenarios en **Cypress** se encuentran dentro de la carpeta */cypressGenerateData* [Ver Readme](cypressGenerateData/Readme.md)
-*
+* Los escenarios en **Kraken** se encuentran dentro de la carpeta *KrakenApp\kraken-with-faker*. Dentro de la carpeta features se encuentra cada uno de los archivos de cada escenario. Se creó un paso especifico para generar datos aleatorios con faker, otro para obtener datos apriri de un archivo generado con Mockaroo y almacenado en *KrakenApp\kraken-with-faker\posts-member.data.json*, y otro paso especifico para hacer llamados a una API de Mockaroo que entrega datos de un pool pseudo aleatorio.
+* URL de la API para generación de data Pseudo aleatoria alojada en Mockaroo.  
+[https://my.api.mockaroo.com/ghost_mock_data.json](https://my.api.mockaroo.com/ghost_mock_data.json)  
+*key = <4629f080>*
+* Para la generación de datos aleatorios se hizo uso de Faker, mas información en: [@faker-js/faker](https://www.npmjs.com/package/@faker-js/faker)
+
+
+
+
+ ![dataapriori](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/blob/main/public/imgJsonAprioriMokcaroo.png)  
+Img1. Data Apriori generada en Mockaroo y guardada en el proyecto.
+
+![PasosDatoPseudo](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/blob/main/public/PasosModificadosDataRandom.png)  
+Img2. Pasos modificados para consultar datos Pseudo Aleatorios de la API creada en Mockaroo.
+
+
 
 
 ## Semana 6
