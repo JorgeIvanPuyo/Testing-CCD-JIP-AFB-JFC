@@ -30,3 +30,9 @@ Correr las pruebas en orden secuencial, esto con el fin de tener datos para la s
   <br>
 
 - `escenario_n.spec.cy.js`
+
+### Notas:
+
+Ghost: v5.72.0
+Node version: v18.12.1
+Pnpm version: 8.10.0
