@@ -11,7 +11,7 @@
 
 [Correr pruebas en Cypress para](Cypress/Readme.md)
 
-[Correr pruebas en Kraken](Kraken/Readme.md)
+[Correr pruebas en Kraken](https://github.com/JorgeIvanPuyo/Testing-CCD-JIP-AFB-JFC/blob/main/KrakenApp/kraken-with-faker/Readme.md)
 
 ## Entrega Final
 
