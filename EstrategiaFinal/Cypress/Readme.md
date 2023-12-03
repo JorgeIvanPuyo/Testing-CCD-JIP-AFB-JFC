@@ -1,6 +1,8 @@
-## Random testing 
+## Pruebas e2e
 
-Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost que corre de forma local. [Mas sobre ghost](https://ghost.org/)
+Este projecto fue creado para ejecutar pruebas tipo e2e usando diferentes tecnicas de generación de datos y VRT en el aplicativo ghost [Mas sobre ghost](https://ghost.org/).
+
+Las diferentes puebas validan diferentes escenarios sobre el modulo de post, se aplica tecnicas como la generación de datos, apriori, pseudo-aleatorios y aleatorios usando [mockaroo](https://www.mockaroo.com/) y [faker](https://fakerjs.dev/) asi como la toma de screenshots y su respectivo analisis usando [resemble](EstrategiaFinal/Cypress/resembleCypress/Readme.md)
 
 ### Para ejecutar
 
@@ -18,13 +20,13 @@ Este projecto fue creado para ejecutar pruebas tipo e2e en el aplicativo ghost q
 
 Correr las pruebas en orden secuencial, esto con el fin de tener datos para la siguiente prueba, correr en el siguiente orden ascendente:
 
-1. `escenario_1.spec.cy.js`
-2. `escenario_2.spec.cy.js`
-3. `escenario_3.spec.cy.js`
-4. `escenario_4.spec.cy.js`
-   <br>
+- `escenario_1.spec.cy.js`
+- `escenario_2.spec.cy.js`
+- `escenario_3.spec.cy.js`
+- `escenario_4.spec.cy.js`
+  <br>
 
 - ....
   <br>
 
-20. `escenario_20.spec.cy.js`
+- `escenario_n.spec.cy.js`
