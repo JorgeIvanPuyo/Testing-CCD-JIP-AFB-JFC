@@ -23,9 +23,8 @@ Para la entrega final se trabajo sobre el modulo de posts de [Ghost](https://gho
     - /pruebasDeReconocimiento [ver](EstrategiaFinal/Cypress/pruebasDeReconocimiento/Readme.md)
     - /resemble: los archivos necesarios para ejecutar y crear el reporte VRT en html [ver](EstrategiaFinal/Cypress/resembleCypress/Readme.md)
       - /report: dentro de esta carpeta se encuentra el reporte generado, con el nombre de _report.html_
-  - KrakenG4.48
-    - File4.md
-  - KrakenG5.72
+  - KrakenG4.48: Ghost version 4.48 [ver](Kraken/Readme.md)
+  - KrakenG5.72 Ghost version 7.72 [ver](Kraken/Readme.md)
 
 ---
 
