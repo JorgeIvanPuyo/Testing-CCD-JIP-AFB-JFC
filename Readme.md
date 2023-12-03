@@ -15,6 +15,9 @@
 
 ## Entrega Final
 
+[Reporte estrategia](https://uniandes-my.sharepoint.com/:w:/g/personal/ji_puyo_uniandes_edu_co/EdQ75kZz_wNLrVf23BFRnHQBT3jPWruQcuLRr1MoVzoiQw)  
+[Video](https://drive.google.com/file/d/1XepIxpOF_FHH7g2I4QSdEyy4y0JZDANA/view?usp=sharing)  
+
 Para la entrega final se trabajo sobre el modulo de posts de [Ghost](https://ghost.org/) usando diferentes tipos, tecnicas y niveles de pruebas como se especifica en el documento [click aqui](https://uniandes-my.sharepoint.com/:w:/g/personal/ji_puyo_uniandes_edu_co/EdQ75kZz_wNLrVf23BFRnHQBT3jPWruQcuLRr1MoVzoiQw) (importante: usar la cuenta de uniandes) El contenido de la entrega final esta en la carpeta _/EstrategiaFinal_ con la siguiente estructura:
 
 - /EstrategiaFinal
