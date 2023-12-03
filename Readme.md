@@ -23,8 +23,12 @@ Para la entrega final se trabajo sobre el modulo de posts de [Ghost](https://gho
     - /pruebasDeReconocimiento [ver](EstrategiaFinal/Cypress/pruebasDeReconocimiento/Readme.md)
     - /resemble: los archivos necesarios para ejecutar y crear el reporte VRT en html [ver](EstrategiaFinal/Cypress/resembleCypress/Readme.md)
       - /report: dentro de esta carpeta se encuentra el reporte generado, con el nombre de _report.html_
-  - KrakenG4.48: Ghost version 4.48 [ver](Kraken/Readme.md)
-  - KrakenG5.72 Ghost version 7.72 [ver](Kraken/Readme.md)
+  - /KrakenG4.48: Ghost version 4.48. Dentro de la carpeta features/VRT se encuentra el código de los escenarios con screenshots para VRT implementados en Ghost 4.48.
+      - runStrategyVRT.bat archivo batch para ejecución de pruebas y generación de reporte.
+  - /KrakenG5.72 Ghost version 5.72. Dentro de la carpeta features/VRT se encuentra el código de los escenarios con screenshots para VRT implementados en Ghost 5.72.
+  - /resembleKraken:
+      - index.js. archivo que genera el reporte de resemble.
+      - results/report.html. archivo generado automaticamente con el reporte de las pruebas VRT.
 
 ---
 
