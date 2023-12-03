@@ -2,7 +2,7 @@
 
 Este projecto fue creado para ejecutar pruebas tipo e2e usando diferentes tecnicas de generación de datos y VRT en el aplicativo ghost [Mas sobre ghost](https://ghost.org/).
 
-Las diferentes puebas validan diferentes escenarios sobre el modulo de post, se aplica tecnicas como la generación de datos, apriori, pseudo-aleatorios y aleatorios usando [mockaroo](https://www.mockaroo.com/) y [faker](https://fakerjs.dev/) asi como la toma de screenshots y su respectivo analisis usando [resemble](EstrategiaFinal/Cypress/resembleCypress/Readme.md)
+Las diferentes puebas validan diferentes escenarios sobre el modulo de post, se aplica tecnicas como la generación de datos, apriori, pseudo-aleatorios y aleatorios usando [mockaroo](https://www.mockaroo.com/) y [faker](https://fakerjs.dev/) asi como la toma de screenshots y su respectivo analisis usando [resemble](/EstrategiaFinal/Cypress/resembleCypress/Readme.md)
 
 ### Para ejecutar
 
