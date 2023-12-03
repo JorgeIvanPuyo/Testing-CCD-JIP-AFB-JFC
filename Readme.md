@@ -15,7 +15,7 @@
 
 ## Entrega Final
 
-Para la entrega final se trabajo sobre el modulo de posts de [Ghost](https://ghost.org/) usando diferentes tipos, tecnicas y niveles de pruebas como se especifica en el documento [click aqui]() El contenido de la entrega final esta en la carpeta _/EstrategiaFinal_ con la siguiente estructura:
+Para la entrega final se trabajo sobre el modulo de posts de [Ghost](https://ghost.org/) usando diferentes tipos, tecnicas y niveles de pruebas como se especifica en el documento [click aqui](https://uniandes-my.sharepoint.com/:w:/g/personal/ji_puyo_uniandes_edu_co/EdQ75kZz_wNLrVf23BFRnHQB7hzp9jQckcwvorTON7fzYA?e=4%3A8GGntf&fromShare=true&at=9&CID=75db9f0e-890a-ab5d-bd27-4a56eb74dea7) (importante: usar la cuenta de uniandes) El contenido de la entrega final esta en la carpeta _/EstrategiaFinal_ con la siguiente estructura:
 
 - /EstrategiaFinal
   - /Cypress
